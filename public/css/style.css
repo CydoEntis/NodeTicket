@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+    --primary-bg: #1D1E26;
+    --secondary-bg: #181820;
+    --primary-accent: #FD8B8D;
+    --secondary-accent: #FC76A1;
+    --tertirary-accent: #CE6ADD;
+    --primary-text: #FCFCFC;
+    --secondary-text: #B6B6B9;
+    --color-orange: #C58C4C;
+    --color-green: #3AA165;
+    --color-blue: #70C4BF;
+    --color-grey: #95959A;
+    --color-purple: #AE68E5;
+    --color-yellow: #CFB452;
+    --primary-font: 'Prompt', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--primary-bg);
+    color: var(--primary-text);
+    font-family: var(--primary-font);
+}
+/* Navigation */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+
+  /* Main */
+  .cta__wrapper-btns {
+    min-width: 350px;
+    display: flex;
+  }
