@@ -30,6 +30,45 @@ body {
 	font-family: var(--primary-font);
 }
 /* Navigation */
+.nav__main {
+  width: 100%;
+  position: fixed;
+  background: #20212C;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  z-index: 100;
+  height: 60px;
+}
+
+.nav__side {
+  position: fixed;
+  min-width: 250px;
+  background: #20212C;
+  width: 300px;
+  height: 100vh;
+  z-index: 99;
+}
+
+.nav__side-title {
+  padding-bottom: 20px;
+  font-size: 1.25rem;
+}
+
+.nav__side ul {
+  margin-top: 100px;
+  padding: 0 20px;
+}
+
+.nav__side ul li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.nav__side ul li a{
+  text-decoration: none;
+  color: var(--primary-text);
+  font-size: 1rem;
+}
+
 .nav__split {
   width: 75%;
   display: flex;
@@ -193,4 +232,109 @@ body {
 .bubble__pos-4{
   right: 20%;
   top: 25%;
+}
+
+.dashboard__wrapper {
+  padding: 35px;
+  padding-top: 70px;
+  margin-left: 300px;
+  width: calc(100% - 300px);
+  height: 900px;
+}
+
+.dashboard {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.dashboard__title {
+  font-size: 1.75rem;
+  padding: 40px 0;
+  color: var(--secondary-text)
+}
+
+.dashboard__greeting {
+  font-size: 3.25rem;
+  padding-bottom: 20px;
+}
+
+.dashboard__controls {
+
+}
+
+.card__ticket {
+  width: 700px;
+  border-radius: .8rem;
+  background: #20212C;
+  margin-bottom: 25px;
+}
+
+.card__ticket-header {
+  border-radius: .8rem .8rem 0 0;
+  width: 100%;
+  height: 50px;
+  color: var(--primary-text);
+  background: #272833;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+}
+
+.card__tickets {
+  height: calc(100% - 100px);
+}
+
+.card__ticket-footer {
+  border-top: 2px solid #272833;
+  border-radius: 0 0 .8rem .8rem;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__ticket-link {
+  display: block;
+  color: var(--primary-text);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: ease-in-out all 300ms;
+}
+
+.card__ticket-link:hover {
+  color: var(--secondary-text)
+}
+
+.tickets {
+
+}
+
+.ticket {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ticket__status {
+  border-radius: 50%;
+  border: 3px solid var(--secondary-accent);
+  background: #20212C;
+  width: 25px;
+  height: 25px;
+  margin: 10px 20px;
+}
+
+.ticket__info {
+  padding: 10px;
+}
+
+.ticket__info-title {
+  font-size: 1rem;
+}
+
+.ticket__info-date {
+  color: #AD4D50;
+  font-size: .75rem;
 }
