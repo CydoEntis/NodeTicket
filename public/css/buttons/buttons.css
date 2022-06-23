@@ -1,0 +1,55 @@
+@import "../variables.css";
+
+.btn {
+	padding: 15px 25px;
+	color: var(--primary-text);
+	text-decoration: none;
+	border-radius: 0.4rem;
+	box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+		rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+		rgba(0, 0, 0, 0.09) 0px 32px 16px;
+	margin: 0 10px;
+	transition: ease-in-out 300ms all;
+}
+
+.btn:hover {
+	opacity: 0.75;
+}
+
+.btn__cta {
+	background: rgb(253, 139, 141);
+	background: linear-gradient(
+		45deg,
+		rgba(253, 139, 141, 1) 0%,
+		rgba(206, 106, 221, 1) 100%
+	);
+}
+
+.btn__auth {
+  padding: 3px 25px;
+  transition: 300ms all ease-in-out;
+}
+
+.btn__auth:hover {
+  color: var(--secondary-accent);
+}
+
+.btn__bordered {
+  border: 3px solid #30303D;
+  border-radius: .6rem;
+}
+
+.btn__bordered:hover {
+  border-color: var(--secondary-accent)
+}
+
+.btn__alt {
+	background-color: var(--button-alt);
+}
+
+.cta__wrapper-btns {
+	display: inline-block;
+	text-align: center;
+	height: 50px;
+	margin-top: 50px;
+}

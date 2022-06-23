@@ -1,0 +1,6 @@
+@import "./navigation.css";
+
+.nav__centered {
+    width: 75%;
+    margin: 0 auto;
+}

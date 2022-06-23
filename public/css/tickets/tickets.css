@@ -1,0 +1,33 @@
+@import "../variables.css";
+
+.tickets {
+
+}
+
+.ticket {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ticket__status {
+  border-radius: 50%;
+  border: 3px solid var(--secondary-accent);
+  background: #20212C;
+  width: 25px;
+  height: 25px;
+  margin: 10px 20px;
+}
+
+.ticket__info {
+  padding: 10px;
+}
+
+.ticket__info-title {
+  font-size: 1rem;
+}
+
+.ticket__info-date {
+  color: #AD4D50;
+  font-size: .75rem;
+}
