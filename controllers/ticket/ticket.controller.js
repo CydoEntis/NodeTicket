@@ -2,7 +2,7 @@
 
 function getIndex(req, res, next) {
     // TODO: Get all tickets
-    res.render("dashboard")
+    res.render("tickets/all-tickets")
 }
 
 module.exports = {

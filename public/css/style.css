@@ -18,8 +18,15 @@ body {
 	font-family: var(--primary-font);
 }
 
+.wrapper {
+	padding: 35px;
+	padding-top: 70px;
+	margin-left: 300px;
+	width: calc(100% - 300px);
+	height: 900px;
+}
 
-#logo {
+/* #logo {
   color: var(--primary-text);
   font-size: 1.75rem;
   margin-right: 2rem;
@@ -33,11 +40,16 @@ body {
   -webkit-transform: scale(-1, 1);
   -o-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
+} */
+
+.container {
+	width: 85%;
+	margin: 0 auto;
+	padding-top: 50px;
 }
 
-
 /* Main */
-.container {
+/* .container {
 	min-width: 350px;
 	width: 800px;
 	height: 350px;
@@ -65,11 +77,4 @@ body {
 .cta__wrapper-btns {
 	min-width: 350px;
 	display: flex;
-}
-
-
-
-
-
-
-
+} */
