@@ -10,6 +10,7 @@
 		rgba(0, 0, 0, 0.09) 0px 32px 16px;
 	margin: 0 10px;
 	transition: ease-in-out 300ms all;
+	cursor: pointer;
 }
 
 .btn:hover {
@@ -28,6 +29,14 @@
 .btn__auth {
   padding: 3px 25px;
   transition: 300ms all ease-in-out;
+}
+
+.btn__edit {
+	background: var(--color-orange);
+}
+
+.btn__delete {
+	background: #AD4D50;
 }
 
 .btn__auth:hover {
@@ -53,3 +62,4 @@
 	height: 50px;
 	margin-top: 50px;
 }
+

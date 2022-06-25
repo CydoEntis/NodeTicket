@@ -1,0 +1,59 @@
+@import "../variables.css";
+
+form {
+    width: 800px;
+    min-width: 250px;
+    margin: 0 auto;
+}
+
+.form__control {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.form__control label {
+    width: 120px;
+    margin-right: 20px;
+    font-size: 1.25rem;
+}
+
+.form__control select {
+    width: 250px;
+    font-size: 1.25rem;
+    background: #14151a;
+    border: 3px solid #30303D;
+    padding: 5px;
+    border-radius: .8rem;
+    color: var(--primary-text);
+}
+
+.form__control input[type="text"] {
+    border: 3px solid #30303D;;
+    background: #14151a;
+    color: var(--primary-text);
+    outline: none;
+    width: 500px;
+    height: 40px;
+    font-size: 1.25rem;
+    border-radius: .8rem;
+    padding: 10px;
+}
+
+.form__control textarea {
+    border: 3px solid #30303D;;
+    width: 500px;
+    height: 250px;
+    color: var(--primary-text);
+    border-radius: .8rem;
+    padding: 10px;
+    font-size: 1.25rem;
+    background: #14151a;
+    outline: none;
+}
+
+.form__control button {
+    width: 150px;
+    border: none;
+}

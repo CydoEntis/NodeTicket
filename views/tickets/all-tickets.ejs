@@ -1,40 +1,35 @@
 <%- include("../includes/header.ejs")%>
 </head>
+
 <body>
     <%- include("../includes/navigation.ejs")%>
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
             <div class="ticket__controls">
-                <div class="ticket__controls-back"><i class='bx bx-arrow-back' ></i></div> <h3>Urgent Tickets</h3>
+                <div class="ticket__controls-back"><i class='bx bx-arrow-back'></i></div>
+                <h3>Urgent Tickets</h3>
             </div>
-            <div class="ticket__controls ticket__controls-bordered">
-                    <i class='bx bx-plus ticket__controls-add'></i> <p>Add a Ticket</p>
-            </div>
+            <a href="/add-ticket">
+                <div class="ticket__controls ticket__controls-bordered">
+                    <i class='bx bx-plus ticket__controls-add'></i>
+                    <p>Add a Ticket</p>
+                </div>
+            </a>
         </section>
         <section class="container tickets__active">
-            <h3 class="ticket__category">Tickets - <span class="ticket__count">3</span></h3>
-            <div class="ticket ticket__item">
-                <div class="ticket__status"></div>
-                <div class="ticket__info">
-                    <h3 class="ticket__info-title">Finish add ticket form</h3>
-                    <p class="ticket__info-date">Today</p>
+            <h3 class="ticket__category">Tickets - <span class="ticket__count"> <%= tickets.length %></span></h3>
+            <% for(let ticket of tickets ){ %>
+            <a href="/ticket-details/<%= ticket.id %>" class="ticket__link">
+                <div class="ticket ticket__item">
+                    <div class="ticket__status"></div>
+                    <div class="ticket__info">
+                        <h3 class="ticket__info-title"><%= ticket.title %></h3>
+                        <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                    </div>
                 </div>
-            </div>
-            <div class="ticket ticket__item">
-                <div class="ticket__status"></div>
-                <div class="ticket__info">
-                    <h3 class="ticket__info-title">Finish add ticket form</h3>
-                    <p class="ticket__info-date">Today</p>
-                </div>
-            </div>
-            <div class="ticket ticket__item">
-                <div class="ticket__status"></div>
-                <div class="ticket__info">
-                    <h3 class="ticket__info-title">Finish add ticket form</h3>
-                    <p class="ticket__info-date">Today</p>
-                </div>
-            </div>
+            </a>
+            <% } %>
         </section>
         <section class="container tickets__completed">
             <h3 class="ticket__category">Completed - <span class="ticket__count">2</span></h3>
@@ -54,4 +49,4 @@
             </div>
         </section>
     </main>
-<%- include("../includes/footer.ejs")%>
+    <%- include("../includes/footer.ejs")%>
