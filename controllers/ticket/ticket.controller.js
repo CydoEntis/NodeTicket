@@ -41,7 +41,6 @@ async function getTickets(req, res, next) {
 			};
 			formattedTickets.push(formattedTicket);
 		}
-        console.log(formattedTickets)
 	}).then(result => {
         res.render("tickets/all-tickets", {
             tickets: formattedTickets,
@@ -106,7 +105,32 @@ function getEditTicket(req, res, next) {
 }
 
 function postEditTicket(req, res, next) {
-	// TODO
+	const ticketId = req.body.id;
+	const updatedTitle = req.body.title;
+	const updatedSeverity = req.body.severity;
+	const updatedDescription = req.body.description;
+
+	Ticket.findByPk(ticketId).then(ticket => {
+		ticket.title = updatedTitle;
+		ticket.severity = updatedSeverity;
+		ticket.description = updatedDescription;
+		return ticket.save();
+	}).then(result => {
+		res.redirect("/all-tickets");
+	}).catch(err => console.log(err));
+}
+
+function postDeleteTicket(req, res, next) {
+	const ticketId = req.body.id;
+	Ticket.findByPk(ticketId)
+	.then(ticket => {
+		ticket.destroy();
+	})
+	.then(result => {
+		console.log("Ticket deleted");
+		res.redirect("/all-tickets");
+	})
+	.catch(err => console.error(err));
 }
 
 module.exports = {
@@ -117,4 +141,5 @@ module.exports = {
 	postAddTicket,
 	getEditTicket,
 	postEditTicket,
+	postDeleteTicket
 };

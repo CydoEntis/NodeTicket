@@ -7,12 +7,12 @@
         <section class="container">
             <form action="/add-ticket" method="POST">
                 <div class="form__control">
-                    <label for="name">Name</label>
-                    <input type="text" placeholder="Enter name of ticket" id="name" value="<%= ticket.title %>">
+                    <label for="title">NamTitlee</label>
+                    <input type="text" placeholder="Enter name of ticket" id="title" name="title" value="<%= ticket.title %>">
                 </div>
                 <div class="form__control">
-                    <label for="title">Severity</label>
-                    <select>
+                    <label for="severity">Severity</label>
+                    <select name="severity">
                         <option value="urgent" default>Severe</option>
                         <option value="moderate" >Moderate</option>
                         <option value="minor" >Minor</option>
@@ -20,11 +20,12 @@
                 </div>
                 <div class="form__control">
                     <label for="description">Description</label>
-                    <textarea><%= ticket.description %></textarea>
+                    <textarea name="description"><%= ticket.description %></textarea>
                 </div>
                 <div class="form__control">
                     <button type="submit" class="btn btn__cta">Update Ticket</button>
                 </div>
+                <input type="hidden" value="<%= ticket.id %>" name="id">
             </form>
         </section>
     </main>

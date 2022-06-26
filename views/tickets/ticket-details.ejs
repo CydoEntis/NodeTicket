@@ -20,7 +20,10 @@
                 </div>
                 <div class="ticket__detail-btns">
                     <a href="/edit-ticket/<%= ticket.id %>"class="btn btn__edit">Edit</a>
-                    <a href="/edit-delete/<%= ticket.id %>" class="btn btn__delete">Delete</a>
+                    <form action="/delete-ticket" method="POST">
+                        <input type="hidden" value="<%= ticket.id %>" name="id">
+                        <button class="btn btn__delete" type="submit">Delete</button>
+                    </form>
                 </div>
             </div>
         </section>
