@@ -131,7 +131,7 @@ function postDeleteTicket(req, res, next) {
 		res.redirect("/all-tickets");
 	})
 	.catch(err => console.error(err));
-	// Test
+	// Test 2
 }
 
 module.exports = {
