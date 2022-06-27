@@ -54,6 +54,7 @@ function getUrgentTickets(req, res, next) {
 
 function getMyTickets(req, res, next) {
 	//TODO: Get all the tickets for current user
+	// Test
 }
 
 function getTicket(req, res, next) {
