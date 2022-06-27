@@ -25,11 +25,11 @@ function formatDate(date) {
 	return `${month} ${day}, ${year}`;
 }
 
-async function getIndex(req, res, next) {
+function getIndex(req, res, next) {
 	res.render("tickets/all-tickets");
 }
 
-async function getTickets(req, res, next) {
+function getTickets(req, res, next) {
 	const formattedTickets = [];
 
 	Ticket.findAll().then((tickets) => {
@@ -46,8 +46,10 @@ async function getTickets(req, res, next) {
             tickets: formattedTickets,
         });
     });
+}
 
-
+function getUrgentTickets(req, res, next) {
+	//TODO: Get all the urgent tickets
 }
 
 function getTicket(req, res, next) {
