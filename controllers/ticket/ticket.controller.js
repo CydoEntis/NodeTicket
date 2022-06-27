@@ -52,6 +52,10 @@ function getUrgentTickets(req, res, next) {
 	//TODO: Get all the urgent tickets
 }
 
+function getMyTickets(req, res, next) {
+	//TODO: Get all the tickets for current user
+}
+
 function getTicket(req, res, next) {
 	const ticketId = req.params.id;
 
