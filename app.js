@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth.routes');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
+const flash = require('connect-flash');
 
 const User = require("./models/user/user.model");
 const homeRoutes = require('./routes/home.routes');
@@ -41,6 +42,7 @@ app.use(
 );
 
 app.use(csrfProtection);
+app.use(flash())
 
 app.use((req, res, next) => {
 	res.locals.isAuthenticated = req.session.isLoggedIn;

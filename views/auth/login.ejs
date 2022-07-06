@@ -4,6 +4,9 @@
     <%- include("../includes/navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
+            <% if(errorMessage) { %>
+                <div class="validation__error"><%= errorMessage %></div>
+            <% } %>
             <form action="/login" method="POST">
                 <div class="form__control">
                     <label for="email">Email</label>

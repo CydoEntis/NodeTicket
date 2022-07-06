@@ -1,18 +1,52 @@
 const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
+
 const User = require('../../models/user/user.model');
 
 function getLogin(req, res, next) {
-	res.render('auth/login');
+	let message = req.flash('error');
+	if (message.length > 0) {
+		message = message[0];
+	} else {
+		message = null;
+	}
+	res.render('auth/login', {
+		errorMessage: message,
+		oldInput: {
+			email: '',
+			password: '',
+		},
+		errors: [],
+	});
 }
 
 function postLogin(req, res, next) {
 	const email = req.body.email;
 	const password = req.body.password;
 
+	const errors = validationResult(req);
+
+	if(!errors.isEmpty()) {
+		return res.status(422).render('auth/login', {
+			errorMessage: errors.array()[0].msg,
+			oldInput: {
+				email: email,
+				password: password,
+			},
+			errors: errors.array()
+		})
+	}
+
 	User.findOne({ email: email }).then((user) => {
 		if (!user) {
-			return res.status(422).render('auth/login');
-			//TODO add validation.
+			return res.status(422).render('auth/login', {
+				errorMessage: 'Invalid email or password',
+				oldInput: {
+					email: email,
+					password: password,
+				},
+				errors: []
+			})
 		}
 
 		bcrypt.compare(password, user.password).then(doMatch => {
@@ -36,12 +70,40 @@ function postLogout(req, res, next) {
 }
 
 function getSignUp(req, res, next) {
-	res.render('auth/signup');
+	let message = req.flash('error');
+	if (message.length > 0) {
+		message = message[0];
+	} else {
+		message = null;
+	}
+	res.render('auth/signup', {
+		errorMessage: message,
+		oldInput: {
+			email: '',
+			password: '',
+			confirmPassword: '',
+		},
+		errors: [],
+	});
 }
 
 function postSignUp(req, res, next) {
 	const email = req.body.email;
 	const password = req.body.password;
+
+	const errors = validationResult(req);
+
+	if(!errors.isEmpty()) {
+		return res.status(422).render('auth/signup', {
+			errorMessage: errors.array()[0].msg,
+			oldInput: {
+				email: email,
+				password: password,
+				confirmPassword: req.body.comfirmPassword,
+			},
+			errors: errors.array()
+		})
+	}
 
 	bcrypt
 		.hash(password, 12)
