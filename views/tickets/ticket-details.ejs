@@ -7,21 +7,21 @@
     <main class="wrapper">
         <section class="container">
             <div class="ticket__detail">
-                <h1 class="ticket__detail-title"><%= ticket.title %></h1>
+                <h1 class="ticket__detail-title"><%= ticket._doc.title %></h1>
                 <div class="ticket__detail-info">
                     <h3 class="ticket__detail-date"><%= ticket.createdAt %></h3>
                     <div class="ticket__detail-severity">
-                        <p><%= ticket.severity %></p>
+                        <p><%= ticket._doc.severity %></p>
                     </div>
                 </div>
-                <p class="ticket__detail-description"><%= ticket.description %></p>
+                <p class="ticket__detail-description"><%= ticket._doc.description %></p>
                 <div>
                     Photos...
                 </div>
                 <div class="ticket__detail-btns">
-                    <a href="/edit-ticket/<%= ticket.id %>"class="btn btn__edit">Edit</a>
+                    <a href="/edit-ticket/<%= ticket._doc._id %>"class="btn btn__edit">Edit</a>
                     <form action="/delete-ticket" method="POST">
-                        <input type="hidden" value="<%= ticket.id %>" name="id">
+                        <input type="hidden" value="<%= ticket._doc._id %>" name="id">
                         <button class="btn btn__delete" type="submit">Delete</button>
                     </form>
                 </div>

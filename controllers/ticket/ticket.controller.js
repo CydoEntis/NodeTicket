@@ -1,21 +1,21 @@
 // const Ticket = require("../../models");
 
-const Ticket = require("../../models/ticket.model");
+const Ticket = require('../../models/ticket.model');
 
 function formatDate(date) {
 	const months = [
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December",
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
 	];
 
 	const currDate = new Date(date);
@@ -26,26 +26,29 @@ function formatDate(date) {
 }
 
 function getIndex(req, res, next) {
-	res.render("tickets/all-tickets");
+	res.render('tickets/all-tickets');
 }
 
 function getTickets(req, res, next) {
 	const formattedTickets = [];
 
-	Ticket.findAll().then((tickets) => {
-		for (let ticket of tickets) {
-			const formattedDate = formatDate(ticket.createdAt);
-			const formattedTicket = {
-				...ticket.dataValues,
-				createdAt: formattedDate,
-			};
-			formattedTickets.push(formattedTicket);
-		}
-	}).then(result => {
-        res.render("tickets/all-tickets", {
-            tickets: formattedTickets,
-        });
-    });
+	Ticket.find()
+		.then((tickets) => {
+			console.log(tickets);
+			for (let ticket of tickets) {
+				const formattedDate = formatDate(ticket.createdAt);
+				const formattedTicket = {
+					...ticket,
+					createdAt: formattedDate,
+				};
+				formattedTickets.push(formattedTicket);
+			}
+		})
+		.then((result) => {
+			res.render('tickets/all-tickets', {
+				tickets: formattedTickets,
+			});
+		});
 }
 
 function getUrgentTickets(req, res, next) {
@@ -60,15 +63,15 @@ function getMyTickets(req, res, next) {
 function getTicket(req, res, next) {
 	const ticketId = req.params.id;
 
-	Ticket.findByPk(ticketId)
+	Ticket.findById(ticketId)
 		.then((ticket) => {
 			const formattedDate = formatDate(ticket.createdAt);
 			const foundTicket = {
-				...ticket.get({ plain: true }),
+				...ticket,
 				// ...ticket.dataValues,
 				createdAt: formattedDate,
 			};
-			res.render("tickets/ticket-details", {
+			res.render('tickets/ticket-details', {
 				ticket: foundTicket,
 			});
 		})
@@ -76,35 +79,36 @@ function getTicket(req, res, next) {
 }
 
 function getAddTicket(req, res, next) {
-	res.render("tickets/add-ticket");
+	res.render('tickets/add-ticket');
 }
 
-async function postAddTicket(req, res, next) {
+function postAddTicket(req, res, next) {
 	const title = req.body.title;
 	const severity = req.body.severity;
 	const description = req.body.description;
 
-	Ticket.create({
+	const ticket = new Ticket({
 		title: title,
 		severity: severity,
 		description: description,
-	}).then((result) => {
-		res.redirect("/all-tickets");
+	});
+
+	ticket.save().then((result) => {
+		res.redirect('/all-tickets');
 	});
 }
 
 function getEditTicket(req, res, next) {
 	const ticketId = req.params.id;
 
-    Ticket.findByPk(ticketId)
+	Ticket.findById(ticketId)
 		.then((ticket) => {
 			const formattedDate = formatDate(ticket.createdAt);
 			const foundTicket = {
-				...ticket.get({ plain: true }),
-				// ...ticket.dataValues,
+				...ticket,
 				createdAt: formattedDate,
 			};
-			res.render("tickets/edit-ticket", {
+			res.render('tickets/edit-ticket', {
 				ticket: foundTicket,
 			});
 		})
@@ -117,27 +121,27 @@ function postEditTicket(req, res, next) {
 	const updatedSeverity = req.body.severity;
 	const updatedDescription = req.body.description;
 
-	Ticket.findByPk(ticketId).then(ticket => {
-		ticket.title = updatedTitle;
-		ticket.severity = updatedSeverity;
-		ticket.description = updatedDescription;
-		return ticket.save();
-	}).then(result => {
-		res.redirect("/all-tickets");
-	}).catch(err => console.log(err));
+	Ticket.findById(ticketId)
+		.then((ticket) => {
+			ticket.title = updatedTitle;
+			ticket.severity = updatedSeverity;
+			ticket.description = updatedDescription;
+			return ticket.save().then(() => {
+				console.log('Updated ticket');
+				res.redirect('/all-tickets');
+			});
+		})
+		.catch((err) => console.log(err));
 }
 
 function postDeleteTicket(req, res, next) {
 	const ticketId = req.body.id;
-	Ticket.findByPk(ticketId)
-	.then(ticket => {
-		ticket.destroy();
-	})
-	.then(result => {
-		console.log("Ticket deleted");
-		res.redirect("/all-tickets");
-	})
-	.catch(err => console.error(err));
+	Ticket.deleteOne({ _id: ticketId })
+		.then(() => {
+			console.log('Ticket deleted');
+			res.redirect('/all-tickets');
+		})
+		.catch((err) => console.error(err));
 	// Test 2
 }
 
@@ -149,5 +153,5 @@ module.exports = {
 	postAddTicket,
 	getEditTicket,
 	postEditTicket,
-	postDeleteTicket
+	postDeleteTicket,
 };

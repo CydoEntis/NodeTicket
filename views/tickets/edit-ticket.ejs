@@ -5,10 +5,10 @@
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
-            <form action="/add-ticket" method="POST">
+            <form action="/edit-ticket" method="POST">
                 <div class="form__control">
-                    <label for="title">NamTitlee</label>
-                    <input type="text" placeholder="Enter name of ticket" id="title" name="title" value="<%= ticket.title %>">
+                    <label for="title">Title</label>
+                    <input type="text" placeholder="Enter name of ticket" id="title" name="title" value="<%= ticket._doc.title %>">
                 </div>
                 <div class="form__control">
                     <label for="severity">Severity</label>
@@ -20,12 +20,12 @@
                 </div>
                 <div class="form__control">
                     <label for="description">Description</label>
-                    <textarea name="description"><%= ticket.description %></textarea>
+                    <textarea name="description"><%= ticket._doc.description %></textarea>
                 </div>
                 <div class="form__control">
                     <button type="submit" class="btn btn__cta">Update Ticket</button>
                 </div>
-                <input type="hidden" value="<%= ticket.id %>" name="id">
+                <input type="hidden" value="<%= ticket._doc._id %>" name="id">
             </form>
         </section>
     </main>

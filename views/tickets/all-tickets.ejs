@@ -20,11 +20,11 @@
         <section class="container tickets__active">
             <h3 class="ticket__category">Tickets - <span class="ticket__count"> <%= tickets.length %></span></h3>
             <% for(let ticket of tickets ){ %>
-            <a href="/ticket-details/<%= ticket.id %>" class="ticket__link">
+            <a href="/ticket-details/<%= ticket._doc._id %>" class="ticket__link">
                 <div class="ticket ticket__item">
                     <div class="ticket__status"></div>
                     <div class="ticket__info">
-                        <h3 class="ticket__info-title"><%= ticket.title %></h3>
+                        <h3 class="ticket__info-title"><%= ticket._doc.title %></h3>
                         <p class="ticket__info-date"><%= ticket.createdAt %></p>
                     </div>
                 </div>

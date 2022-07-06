@@ -1,29 +1,37 @@
-const Sequelize = require("sequelize");
-const sequelize = require("../database/db");
+const mongoose = require('mongoose');
 
-const Ticket = sequelize.define("ticket", {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
-    title: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    severity: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    description: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    completed: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true
-    }
-})
+const Schema = mongoose.Schema;
 
-module.exports = Ticket;
+const ticketSchema = new Schema(
+	{
+		title: {
+			type: String,
+			required: true,
+		},
+		severity: {
+			type: String,
+			required: true,
+		},
+		description: {
+			type: String,
+			required: true,
+		},
+		completed: {
+			type: Boolean,
+		},
+		createdAt: {
+			type: Date,
+            default: Date.now
+		},
+		//    userId: {
+		//     type: Schema.Types.ObjectId,
+		//     ref: 'User',
+		//     required: true
+		//    }
+	},
+	{
+		timestamps: true,
+	}
+);
+
+module.exports = mongoose.model('Ticket', ticketSchema);
