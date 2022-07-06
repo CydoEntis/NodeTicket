@@ -5,7 +5,10 @@
         <li><a href="#">My Tickets</a></li>
         <li><a href="#">Urgent Tickets</a></li>
         <% if(isAuthenticated) {%>
-            <li><a href="/logout">Logout</a></li>
+            <form action="/logout" method="POST">
+                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                <button type="submit">Logout</button>
+            </form>
         <% }%>
     </ul>
 </nav>

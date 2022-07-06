@@ -28,6 +28,13 @@ function postLogin(req, res, next) {
 	});
 }
 
+function postLogout(req, res, next) {
+	req.session.destroy(err => {
+		console.log(err);
+		res.redirect('/');
+	})
+}
+
 function getSignUp(req, res, next) {
 	res.render('auth/signup');
 }
@@ -56,6 +63,7 @@ function postSignUp(req, res, next) {
 module.exports = {
 	getLogin,
   postLogin,
+	postLogout,
 	getSignUp,
 	postSignUp,
 };
