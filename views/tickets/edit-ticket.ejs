@@ -25,6 +25,7 @@
                 <div class="form__control">
                     <button type="submit" class="btn btn__cta">Update Ticket</button>
                 </div>
+                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                 <input type="hidden" value="<%= ticket._doc._id %>" name="id">
             </form>
         </section>

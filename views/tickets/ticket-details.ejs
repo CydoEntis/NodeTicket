@@ -21,6 +21,7 @@
                 <div class="ticket__detail-btns">
                     <a href="/edit-ticket/<%= ticket._doc._id %>"class="btn btn__edit">Edit</a>
                     <form action="/delete-ticket" method="POST">
+                        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                         <input type="hidden" value="<%= ticket._doc._id %>" name="id">
                         <button class="btn btn__delete" type="submit">Delete</button>
                     </form>

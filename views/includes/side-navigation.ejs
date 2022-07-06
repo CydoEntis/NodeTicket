@@ -4,5 +4,8 @@
         <li><a href="/all-tickets">All Tickets</a></li>
         <li><a href="#">My Tickets</a></li>
         <li><a href="#">Urgent Tickets</a></li>
+        <% if(isAuthenticated) {%>
+            <li><a href="/logout">Logout</a></li>
+        <% }%>
     </ul>
 </nav>

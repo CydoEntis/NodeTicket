@@ -14,7 +14,7 @@ form {
 }
 
 .form__control label {
-    width: 120px;
+    width: 200px;
     margin-right: 20px;
     font-size: 1.25rem;
 }
@@ -29,7 +29,7 @@ form {
     color: var(--primary-text);
 }
 
-.form__control input[type="text"] {
+.form__control input {
     border: 3px solid #30303D;;
     background: #14151a;
     color: var(--primary-text);
