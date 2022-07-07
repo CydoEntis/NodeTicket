@@ -51,13 +51,84 @@ function getTickets(req, res, next) {
 		});
 }
 
-function getUrgentTickets(req, res, next) {
-	//TODO: Get all the urgent tickets
+function getCurrentUsersTickets(req, res, next) {
+	const formattedTickets = [];
+	Ticket.find({ _id: req.user._id })
+		.then((tickets) => {
+			for (let ticket of tickets) {
+				const formattedDate = formatDate(ticket.createdAt);
+				const formattedTicket = {
+					...ticket,
+					createdAt: formattedDate,
+				};
+				formattedTickets.push(formattedTicket);
+			}
+		})
+		.then((result) => {
+			res.render('tickets/all-tickets', {
+				tickets: formattedTickets,
+			});
+		});
 }
 
-function getMyTickets(req, res, next) {
-	//TODO: Get all the tickets for current user
-	// Test
+function getUrgentTickets(req, res, next) {
+	const formattedTickets = [];
+	Ticket.find({ severity: 'urgent' })
+		.then((tickets) => {
+			for (let ticket of tickets) {
+				const formattedDate = formatDate(ticket.createdAt);
+				const formattedTicket = {
+					...ticket,
+					createdAt: formattedDate,
+				};
+				formattedTickets.push(formattedTicket);
+			}
+		})
+		.then((result) => {
+			res.render('tickets/all-tickets', {
+				tickets: formattedTickets,
+			});
+		});
+}
+
+function getModerateTickets(req, res, next) {
+	const formattedTickets = [];
+	Ticket.find({ severity: 'moderate' })
+		.then((tickets) => {
+			for (let ticket of tickets) {
+				const formattedDate = formatDate(ticket.createdAt);
+				const formattedTicket = {
+					...ticket,
+					createdAt: formattedDate,
+				};
+				formattedTickets.push(formattedTicket);
+			}
+		})
+		.then((result) => {
+			res.render('tickets/all-tickets', {
+				tickets: formattedTickets,
+			});
+		});
+}
+
+function getMinorTickets(req, res, next) {
+	const formattedTickets = [];
+	Ticket.find({ severity: 'minor' })
+		.then((tickets) => {
+			for (let ticket of tickets) {
+				const formattedDate = formatDate(ticket.createdAt);
+				const formattedTicket = {
+					...ticket,
+					createdAt: formattedDate,
+				};
+				formattedTickets.push(formattedTicket);
+			}
+		})
+		.then((result) => {
+			res.render('tickets/all-tickets', {
+				tickets: formattedTickets,
+			});
+		});
 }
 
 function getTicket(req, res, next) {
@@ -91,6 +162,7 @@ function postAddTicket(req, res, next) {
 		title: title,
 		severity: severity,
 		description: description,
+		userId: req.user._id,
 	});
 
 	ticket.save().then((result) => {
@@ -148,6 +220,10 @@ function postDeleteTicket(req, res, next) {
 module.exports = {
 	getIndex,
 	getTickets,
+	getCurrentUsersTickets,
+	getUrgentTickets,
+	getModerateTickets,
+	getMinorTickets,
 	getTicket,
 	getAddTicket,
 	postAddTicket,

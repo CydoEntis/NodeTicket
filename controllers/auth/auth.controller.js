@@ -65,7 +65,7 @@ function postLogin(req, res, next) {
 function postLogout(req, res, next) {
 	req.session.destroy(err => {
 		console.log(err);
-		res.redirect('/');
+		res.redirect('/login');
 	})
 }
 

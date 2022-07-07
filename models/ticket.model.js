@@ -21,13 +21,13 @@ const ticketSchema = new Schema(
 		},
 		createdAt: {
 			type: Date,
-            default: Date.now
+			default: Date.now,
 		},
-		//    userId: {
-		//     type: Schema.Types.ObjectId,
-		//     ref: 'User',
-		//     required: true
-		//    }
+		userId: {
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+			required: true,
+		},
 	},
 	{
 		timestamps: true,
