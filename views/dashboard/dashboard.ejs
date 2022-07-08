@@ -7,7 +7,7 @@
 
         <section class="dashboard">
             <h2 class="dashboard__title">Dashboard</h2>
-            <h1 class="dashboard__greeting">Hello, John Doe</h1>
+            <h1 class="dashboard__greeting">Hello, <%= user.username %></h1>
             <div class="dashboard__feed">
                 <div class="card__ticket">
                     <div class="card__ticket-header">
@@ -15,31 +15,23 @@
                     </div>
                     <div class="card__tickets">
                         <ul class="tickets">
-                            <li class="ticket">
-                                <div class="ticket__status"></div>
-                                <div class="ticket__info">
-                                    <h4 class="ticket__info-title">Implement Dashboard</h4>
-                                    <p class="ticket__info-date">Today: 1:34pm</p>
-                                </div>
-                            </li>
-                            <li class="ticket">
-                                <div class="ticket__status"></div>
-                                <div class="ticket__info">
-                                    <h4 class="ticket__info-title">Add authentication</h4>
-                                    <p class="ticket__info-date">Today: 3:34pm</p>
-                                </div>
-                            </li>
-                            <li class="ticket">
-                                <div class="ticket__status"></div>
-                                <div class="ticket__info">
-                                    <h4 class="ticket__info-title">Finish TrackR</h4>
-                                    <p class="ticket__info-date">6/23/2022</p>
-                                </div>
-                            </li>
+                        <% for(let ticket of tickets) {%>
+                            <% if(ticket.userId === user._id) { %>
+                                    <li class="ticket">
+                                        <div class="ticket__status"></div>
+                                        <div class="ticket__info">
+                                            <h4 class="ticket__info-title"><%= ticket._doc.title %></h4>
+                                            <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                                        </div>
+                                    </li>
+                                <% } else { %>
+                                    <h4>No Tickets Available</h4>
+                                <% } %>
+                            <% } %>
                         </ul>
                     </div>
                     <div class="card__ticket-footer">
-                        <a href="#" class="card__ticket-link">Go to tickets</a>
+                        <a href="/my-tickets" class="card__ticket-link">View My Tickets</a>
                     </div>
                 </div>
 
@@ -49,31 +41,19 @@
                     </div>
                     <div class="card__tickets">
                         <ul class="tickets">
-                            <li class="ticket">
-                                <div class="ticket__status"></div>
-                                <div class="ticket__info">
-                                    <h4 class="ticket__info-title">Implement Dashboard</h4>
-                                    <p class="ticket__info-date">Today: 1:34pm</p>
-                                </div>
-                            </li>
-                            <li class="ticket">
-                                <div class="ticket__status"></div>
-                                <div class="ticket__info">
-                                    <h4 class="ticket__info-title">Add authentication</h4>
-                                    <p class="ticket__info-date">Today: 3:34pm</p>
-                                </div>
-                            </li>
-                            <li class="ticket">
-                                <div class="ticket__status"></div>
-                                <div class="ticket__info">
-                                    <h4 class="ticket__info-title">Finish TrackR</h4>
-                                    <p class="ticket__info-date">6/23/2022</p>
-                                </div>
-                            </li>
+                            <% for(let ticket of tickets) {%>
+                                <li class="ticket">
+                                    <div class="ticket__status"></div>
+                                    <div class="ticket__info">
+                                        <h4 class="ticket__info-title"><%= ticket._doc.title %></h4>
+                                        <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                                    </div>
+                                </li>
+                            <% } %>
                         </ul>
                     </div>
                     <div class="card__ticket-footer">
-                        <a href="#" class="card__ticket-link">Go to tickets</a>
+                        <a href="/all-tickets" class="card__ticket-link">View All Recent Tickets</a>
                     </div>
                 </div>
             </div>

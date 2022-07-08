@@ -1,29 +1,5 @@
-// const Ticket = require("../../models");
-
 const Ticket = require('../../models/ticket.model');
-
-function formatDate(date) {
-	const months = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December',
-	];
-
-	const currDate = new Date(date);
-	let month = months[currDate.getMonth()];
-	let year = currDate.getFullYear();
-	let day = currDate.getDate();
-	return `${month} ${day}, ${year}`;
-}
+const { formatDate } = require("../../utils/util");
 
 function getIndex(req, res, next) {
 	res.render('tickets/all-tickets');
@@ -53,8 +29,9 @@ function getTickets(req, res, next) {
 
 function getCurrentUsersTickets(req, res, next) {
 	const formattedTickets = [];
-	Ticket.find({ _id: req.user._id })
+	Ticket.find({ userId: req.user._id })
 		.then((tickets) => {
+			console.log(tickets);
 			for (let ticket of tickets) {
 				const formattedDate = formatDate(ticket.createdAt);
 				const formattedTicket = {

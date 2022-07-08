@@ -12,6 +12,7 @@
 .dashboard__greeting {
 	font-size: 3.25rem;
 	padding-bottom: 20px;
+	text-transform: capitalize;
 }
 
 .dashboard__controls {

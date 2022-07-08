@@ -89,6 +89,7 @@ function getSignUp(req, res, next) {
 
 function postSignUp(req, res, next) {
 	const email = req.body.email;
+	const username = req.body.username;
 	const password = req.body.password;
 
 	const errors = validationResult(req);
@@ -98,6 +99,7 @@ function postSignUp(req, res, next) {
 			errorMessage: errors.array()[0].msg,
 			oldInput: {
 				email: email,
+				username: username,
 				password: password,
 				confirmPassword: req.body.comfirmPassword,
 			},
@@ -110,6 +112,7 @@ function postSignUp(req, res, next) {
 		.then((hashedPassword) => {
 			const user = new User({
 				email: email,
+				username: username,
 				password: hashedPassword,
 			});
 			return user.save();
