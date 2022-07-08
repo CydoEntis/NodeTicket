@@ -1,12 +1,13 @@
 const Ticket = require('../../models/ticket.model');
 
-const { formatDate } = require("../../utils/util");
+const { formatDate } = require('../../utils/util');
 
 function getDashboard(req, res, next) {
-    const user = req.user;
-    console.log(user);
-    const formattedTickets = [];
+	const user = req.user;
+	console.log(user);
+	const formattedTickets = [];
 	Ticket.find()
+		.limit(5)
 		.then((tickets) => {
 			console.log(tickets);
 			for (let ticket of tickets) {
@@ -17,12 +18,12 @@ function getDashboard(req, res, next) {
 				};
 				formattedTickets.push(formattedTicket);
 			}
-            console.log(formattedTickets)
+			console.log(formattedTickets);
 		})
 		.then((result) => {
 			res.render('dashboard/dashboard', {
 				tickets: formattedTickets,
-                user: user
+				user: user,
 			});
 		});
 }

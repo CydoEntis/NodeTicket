@@ -9,7 +9,7 @@
         <% if(isAuthenticated) {%>
             <form action="/logout" method="POST">
                 <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                <button type="submit">Logout</button>
+                <button class="btn btn__cta" type="submit">Logout</button>
             </form>
         <% }%>
     </ul>

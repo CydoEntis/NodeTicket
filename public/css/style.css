@@ -8,6 +8,7 @@
 @import "./forms/form.css";
 @import "./buttons/buttons.css";
 @import "./controls.css";
+@import "./errors/error.css";
 
 * {
 	margin: 0;

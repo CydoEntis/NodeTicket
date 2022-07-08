@@ -1,0 +1,8 @@
+@import "../variables.css";
+
+.error__not-found {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--secondary-text);
+  padding: 15px 5px;
+}
