@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const userModel = require('./user/user.model');
 
 const Schema = mongoose.Schema;
 
@@ -10,7 +11,6 @@ const ticketSchema = new Schema(
 		},
 		severity: {
 			type: String,
-			required: true,
 		},
 		description: {
 			type: String,
@@ -18,16 +18,25 @@ const ticketSchema = new Schema(
 		},
 		completed: {
 			type: Boolean,
+			default: false,
 		},
 		createdAt: {
 			type: Date,
 			default: Date.now,
 		},
-		userId: {
+		createdBy: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
 			required: true,
 		},
+		pending: {
+			type: Boolean,
+			default: true,
+		},
+		assignedTo: {
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+		}
 	},
 	{
 		timestamps: true,

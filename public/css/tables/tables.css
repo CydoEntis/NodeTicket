@@ -1,0 +1,28 @@
+.admin__table {
+  width: 950px;
+  border-collapse: collapse;
+  margin-top: 50px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+  rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+  rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.admin__table th {
+  text-align: left;
+}
+
+.admin__table th:first-child {
+  padding: 10px;
+}
+
+.admin__table tr td {
+  padding: 10px;
+}
+
+.admin__table tr {
+  background: #20212C;
+}
+
+.admin__table tr:nth-child(even) {
+  background: #191921;
+}

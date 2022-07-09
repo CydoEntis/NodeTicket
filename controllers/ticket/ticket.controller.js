@@ -1,5 +1,6 @@
 const Ticket = require('../../models/ticket.model');
-const { formatDate } = require("../../utils/util");
+const User = require('../../models/user/user.model');
+const { formatDate, getCompletedTickets } = require('../../utils/util');
 
 function getIndex(req, res, next) {
 	res.render('tickets/all-tickets');
@@ -7,11 +8,12 @@ function getIndex(req, res, next) {
 
 function getTickets(req, res, next) {
 	const formattedTickets = [];
-
-	Ticket.find()
+	let completedTickets = 0;
+	Ticket.find({ pending: false })
+		.sort({ createdAt: -1 })
 		.then((tickets) => {
-			console.log(tickets);
 			for (let ticket of tickets) {
+				completedTickets = getCompletedTickets(tickets);
 				const formattedDate = formatDate(ticket.createdAt);
 				const formattedTicket = {
 					...ticket,
@@ -21,18 +23,22 @@ function getTickets(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tickets/all-tickets', {
+			res.render('tickets/tickets', {
 				tickets: formattedTickets,
+				ticketCount: completedTickets,
+				title: 'All Tickets',
 			});
 		});
 }
 
 function getCurrentUsersTickets(req, res, next) {
 	const formattedTickets = [];
-	Ticket.find({ userId: req.user._id })
+	let completedTickets = 0;
+	Ticket.find({ assingedTo: req.user._id, pending: false  })
+		.sort({ createdAt: -1 })
 		.then((tickets) => {
-			console.log(tickets);
 			for (let ticket of tickets) {
+				completedTickets = getCompletedTickets(tickets);
 				const formattedDate = formatDate(ticket.createdAt);
 				const formattedTicket = {
 					...ticket,
@@ -42,17 +48,22 @@ function getCurrentUsersTickets(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tickets/all-tickets', {
+			res.render('tickets/tickets', {
 				tickets: formattedTickets,
+				ticketCount: completedTickets,
+				title: 'My Tickets',
 			});
 		});
 }
 
 function getUrgentTickets(req, res, next) {
 	const formattedTickets = [];
-	Ticket.find({ severity: 'urgent' })
+	let completedTickets = 0;
+	Ticket.find({ severity: 'urgent', pending: false  })
+		.sort({ createdAt: -1 })
 		.then((tickets) => {
 			for (let ticket of tickets) {
+				completedTickets = getCompletedTickets(tickets);
 				const formattedDate = formatDate(ticket.createdAt);
 				const formattedTicket = {
 					...ticket,
@@ -62,17 +73,22 @@ function getUrgentTickets(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tickets/all-tickets', {
+			res.render('tickets/tickets', {
 				tickets: formattedTickets,
+				ticketCount: completedTickets,
+				title: 'Urgent Tickets',
 			});
 		});
 }
 
 function getModerateTickets(req, res, next) {
 	const formattedTickets = [];
-	Ticket.find({ severity: 'moderate' })
+	let completedTickets = 0;
+	Ticket.find({ severity: 'moderate', pending: false  })
+		.sort({ createdAt: -1 })
 		.then((tickets) => {
 			for (let ticket of tickets) {
+				completedTickets = getCompletedTickets(tickets);
 				const formattedDate = formatDate(ticket.createdAt);
 				const formattedTicket = {
 					...ticket,
@@ -82,17 +98,22 @@ function getModerateTickets(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tickets/all-tickets', {
+			res.render('tickets/tickets', {
 				tickets: formattedTickets,
+				ticketCount: completedTickets,
+				title: 'Moderate Tickets',
 			});
 		});
 }
 
 function getMinorTickets(req, res, next) {
 	const formattedTickets = [];
-	Ticket.find({ severity: 'minor' })
+	let completedTickets = 0;
+	Ticket.find({ severity: 'minor', pending: false  })
+		.sort({ createdAt: -1 })
 		.then((tickets) => {
 			for (let ticket of tickets) {
+				completedTickets = getCompletedTickets(tickets);
 				const formattedDate = formatDate(ticket.createdAt);
 				const formattedTicket = {
 					...ticket,
@@ -102,8 +123,10 @@ function getMinorTickets(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tickets/all-tickets', {
+			res.render('tickets/tickets', {
 				tickets: formattedTickets,
+				ticketCount: completedTickets,
+				title: 'Minor Tickets',
 			});
 		});
 }
@@ -132,14 +155,13 @@ function getAddTicket(req, res, next) {
 
 function postAddTicket(req, res, next) {
 	const title = req.body.title;
-	const severity = req.body.severity;
 	const description = req.body.description;
 
 	const ticket = new Ticket({
 		title: title,
-		severity: severity,
+		severity: undefined,
 		description: description,
-		userId: req.user._id,
+		createdBy: req.user,
 	});
 
 	ticket.save().then((result) => {
@@ -149,6 +171,7 @@ function postAddTicket(req, res, next) {
 
 function getEditTicket(req, res, next) {
 	const ticketId = req.params.id;
+	let foundTicket = {};
 
 	Ticket.findById(ticketId)
 		.then((ticket) => {
@@ -157,30 +180,49 @@ function getEditTicket(req, res, next) {
 				...ticket,
 				createdAt: formattedDate,
 			};
-			res.render('tickets/edit-ticket', {
-				ticket: foundTicket,
+			User.find({ role: 'user' }).then((users) => {
+				console.log(users);
+				res.render('tickets/edit-ticket', {
+					ticket: foundTicket,
+					users: users,
+				});
 			});
 		})
 		.catch((err) => console.error(err));
 }
 
-function postEditTicket(req, res, next) {
+async function postEditTicket(req, res, next) {
 	const ticketId = req.body.id;
 	const updatedTitle = req.body.title;
-	const updatedSeverity = req.body.severity;
 	const updatedDescription = req.body.description;
+	const severity = req.body.severity;
+	const assignedTo = req.body.user;
 
-	Ticket.findById(ticketId)
-		.then((ticket) => {
-			ticket.title = updatedTitle;
-			ticket.severity = updatedSeverity;
-			ticket.description = updatedDescription;
-			return ticket.save().then(() => {
-				console.log('Updated ticket');
-				res.redirect('/all-tickets');
-			});
-		})
-		.catch((err) => console.log(err));
+	const ticket = await Ticket.findById(ticketId);
+
+	ticket.title = updatedTitle;
+	ticket.description = updatedDescription;
+	ticket.severity = severity;
+	ticket.assignedTo = assignedTo;
+	ticket.pending = false;
+
+	await ticket.save();
+
+	res.redirect('/admin');
+	// Ticket.findById(ticketId)
+	// 	.then((ticket) => {
+	// 		ticket.title = updatedTitle;
+	// 		ticket.description = updatedDescription;
+	// 		ticket.severity = severity;
+	// 		ticket.assignedTo = user._id;
+	// 		console.log(ticket.assignedTo);
+
+	// 		return ticket.save().then(() => {
+	// 			console.log('Updated ticket');
+	// 			res.redirect('/all-tickets');
+	// 		});
+	// 	})
+	// 	.catch((err) => console.log(err));
 }
 
 function postDeleteTicket(req, res, next) {
@@ -192,6 +234,17 @@ function postDeleteTicket(req, res, next) {
 		})
 		.catch((err) => console.error(err));
 	// Test 2
+}
+
+async function postCompleteTicket(req, res, next) {
+	const ticketId = req.body.id;
+	const ticket = await Ticket.findById(ticketId);
+
+	ticket.completed = true;
+
+	await ticket.save();
+
+	res.redirect('/admin');
 }
 
 module.exports = {
@@ -207,4 +260,5 @@ module.exports = {
 	getEditTicket,
 	postEditTicket,
 	postDeleteTicket,
+	postCompleteTicket,
 };

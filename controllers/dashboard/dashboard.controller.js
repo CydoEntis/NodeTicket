@@ -4,12 +4,10 @@ const { formatDate } = require('../../utils/util');
 
 function getDashboard(req, res, next) {
 	const user = req.user;
-	console.log(user);
 	const formattedTickets = [];
 	Ticket.find()
 		.limit(5)
 		.then((tickets) => {
-			console.log(tickets);
 			for (let ticket of tickets) {
 				const formattedDate = formatDate(ticket.createdAt);
 				const formattedTicket = {
@@ -18,7 +16,6 @@ function getDashboard(req, res, next) {
 				};
 				formattedTickets.push(formattedTicket);
 			}
-			console.log(formattedTickets);
 		})
 		.then((result) => {
 			res.render('dashboard/dashboard', {

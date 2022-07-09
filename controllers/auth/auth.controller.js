@@ -53,6 +53,11 @@ function postLogin(req, res, next) {
       if(doMatch) {
         req.session.isLoggedIn = true;
         req.session.user = user;
+				if(user.role === "admin") {
+					req.session.isAdmin = true;
+				} else {
+					req.session.isAdmin = false;
+				}
         return req.session.save((err) => {
           console.log(err);
           res.redirect("/dashboard");

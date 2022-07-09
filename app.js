@@ -13,6 +13,7 @@ const flash = require('connect-flash');
 
 const User = require("./models/user/user.model");
 const homeRoutes = require('./routes/home.routes');
+const adminRoutes = require('./routes/admin.routes');
 
 const MONGODB_URI =
 	'mongodb+srv://admin:Gt6MNcd63yKs4HTr@trackr.senitct.mongodb.net/tickets';
@@ -46,6 +47,7 @@ app.use(flash())
 
 app.use((req, res, next) => {
 	res.locals.isAuthenticated = req.session.isLoggedIn;
+	res.locals.isAdmin = req.session.isAdmin;
 	res.locals.csrfToken = req.csrfToken();
 	next();
 });
@@ -57,7 +59,6 @@ app.use((req, res, next) => {
 
 	User.findById(req.session.user._id)
 		.then((user) => {
-			console.log(user);
 			if (!user) {
 				return next();
 			}
@@ -72,8 +73,10 @@ app.use((req, res, next) => {
 
 app.use('/', authRoutes);
 app.use('/', homeRoutes);
+app.use('/', adminRoutes);
 app.use('/', dashboardRoutes);
 app.use('/', ticketRoutes);
+
 
 mongoose
 	.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })

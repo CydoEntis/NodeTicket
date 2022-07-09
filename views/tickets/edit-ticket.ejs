@@ -13,9 +13,19 @@
                 <div class="form__control">
                     <label for="severity">Severity</label>
                     <select name="severity">
-                        <option value="urgent" default>Severe</option>
+                        <option value="urgent" default>Assign severity</option>
+                        <option value="urgent">Severe</option>
                         <option value="moderate" >Moderate</option>
                         <option value="minor" >Minor</option>
+                    </select>
+                </div>
+                <div class="form__control">
+                    <label for="user">Assign to</label>
+                    <select name="user">
+                        <option>Select A User</option>
+                        <% for(let user of users) {%>
+                            <option value="<%= user._id %>"><%= user.username %></option>
+                        <% } %>
                     </select>
                 </div>
                 <div class="form__control">
@@ -25,8 +35,11 @@
                 <div class="form__control">
                     <button type="submit" class="btn btn__cta">Update Ticket</button>
                 </div>
-                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                <input type="hidden" value="<%= ticket._doc._id %>" name="id">
+                <form action="/delete-ticket" method="POST">
+                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                    <input type="hidden" value="<%= ticket._doc._id %>" name="id">
+                    <button class="btn btn__delete" type="submit">Delete</button>
+                </form>
             </form>
         </section>
     </main>

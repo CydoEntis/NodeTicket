@@ -9,6 +9,7 @@
 @import "./buttons/buttons.css";
 @import "./controls.css";
 @import "./errors/error.css";
+@import "./tables/tables.css";
 
 * {
 	margin: 0;
