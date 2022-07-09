@@ -5,33 +5,93 @@ const { formatDate } = require('../../utils/util');
 
 async function getAdminPanel(req, res, next) {
 	const formattedTickets = [];
-	const tickets = await Ticket.find();
+	const tickets = await Ticket.find().sort({createdAt: -1}).limit(20);
 	for (let ticket of tickets) {
-    const user = await User.find({_id: ticket.createdBy})
-    // console.log(user);
-    // const user = await User.find({_id: ticket.createdBy});
 
 		const formattedDate = formatDate(ticket.createdAt);
 
 		const formattedTicket = {
 			...ticket,
 			createdAt: formattedDate,
-      createdBy: user[0].username,
+		};
+		formattedTickets.push(formattedTicket);
+	}
+	console.log(formattedTickets.length)
+	res.render('admin/admin-panel', {
+		tickets: formattedTickets,
+	});
+}
+
+async function getPendingTickets(req, res, next) {
+	const formattedTickets = [];
+	const tickets = await Ticket.find({pending: true}).sort({createdAt: -1});
+	for (let ticket of tickets) {
+		const user = await User.find({ _id: ticket.createdBy });
+
+		const formattedDate = formatDate(ticket.createdAt);
+
+		const formattedTicket = {
+			...ticket,
+			createdAt: formattedDate,
+			createdBy: user[0].username,
 		};
 		formattedTickets.push(formattedTicket);
 	}
 
-	if (req.user.role === 'admin') {
-		res.render('admin/admin-panel', {
-			tickets: formattedTickets,
-		});
-	} else {
-		// TODO Add actual route protection.
-		res.redirect('/dashboard');
-		console.log('Access denied');
+	res.render('admin/admin-ticket-review', {
+		tickets: formattedTickets,
+	});
+}
+
+async function getAssignedTickets(req, res, next) {
+	const formattedTickets = [];
+	const tickets = await Ticket.find({pending: false}).sort({createdAt: -1});
+	for (let ticket of tickets) {
+		const createdBy = await User.find({ _id: ticket.createdBy });
+		const assignedTo = await User.find({ _id: ticket.assignedTo });
+
+		const formattedDate = formatDate(ticket.createdAt);
+
+		const formattedTicket = {
+			...ticket,
+			createdAt: formattedDate,
+			createdBy: createdBy[0].username,
+			assingedTo: assignedTo[0].username,
+		};
+		formattedTickets.push(formattedTicket);
 	}
+
+	res.render('admin/admin-ticket-review', {
+		tickets: formattedTickets,
+	});
+}
+
+async function getCompletedTickets(req, res, next) {
+	const formattedTickets = [];
+	const tickets = await Ticket.find({completed: true}).sort({createdAt: -1});
+	for (let ticket of tickets) {
+		const createdBy = await User.find({ _id: ticket.createdBy });
+		const assignedTo = await User.find({ _id: ticket.assignedTo });
+
+		const formattedDate = formatDate(ticket.createdAt);
+
+		const formattedTicket = {
+			...ticket,
+			createdAt: formattedDate,
+			createdBy: createdBy[0].username,
+			assingedTo: assignedTo[0].username,
+		};
+		formattedTickets.push(formattedTicket);
+	}
+
+	res.render('admin/admin-ticket-review', {
+		tickets: formattedTickets,
+	});
 }
 
 module.exports = {
 	getAdminPanel,
+	getPendingTickets,
+	getAssignedTickets,
+	getCompletedTickets
 };

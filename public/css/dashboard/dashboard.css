@@ -1,6 +1,14 @@
 .dashboard {
-	width: 800px;
+	min-width: 800px;
 	margin: 0 auto;
+}
+
+.dashboard__admin {
+	margin: 0 auto;
+}
+
+.dashboard-small {
+	width: 800px;
 }
 
 .dashboard__title {
@@ -15,5 +23,8 @@
 	text-transform: capitalize;
 }
 
-.dashboard__controls {
+.dashboard__panel {
+	min-height: 500px;
+	width: 450px;
+	margin: 10px;
 }

@@ -33,6 +33,14 @@ body {
 	height: 900px;
 }
 
+.container__flex {
+	display: flex;
+}
+
+.container__flex-center {
+	justify-content: center;
+	align-items: center;
+}
 /* #logo {
   color: var(--primary-text);
   font-size: 1.75rem;

@@ -4,26 +4,67 @@
     <%- include("../includes/navigation.ejs")%>
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
-        <section class="dashboard">
+        <section class="dashboard dashboard__admin">
             <h1>Admin Panel</h1>
-            <table class="admin__table">
-                <tr>
-                    <th>Date</th>
-                    <th>Title</th>
-                    <th>User</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                <% for(let ticket of tickets) {%>
-                <tr>
-                    <td><%= ticket.createdAt %></td>
-                    <td><%= ticket._doc.title %></td>
-                    <td><%= ticket.createdBy %></td>
-                    <td>pending</td>
-                    <td><a href="/edit-ticket/<%= ticket._doc._id %>">Review</a></td>
-                </tr>
-                <% } %>
-            </table>
+            <div class="admin__container container__flex container__flex-center">
+                <div class="dashboard__panel">
+                    <h3>Submitted Tickets</h3>
+                    <% for(let ticket of tickets ) { %>
+                        <% if(ticket._doc.pending) {%>
+                            <a href="/ticket-details/<%= ticket._doc._id %>" class="ticket__link">
+                                <div class="ticket ticket__item">
+                                    <div class="ticket__status"></div>
+                                    <div class="ticket__info">
+                                        <h3 class="ticket__info-title"><%= ticket._doc.title %></h3>
+                                        <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        <% } %>
+                    <% } %>
+                    <div class="card__ticket-footer">
+                        <a href="/submitted-tickets" class="card__ticket-link">View Submitted Tickets</a>
+                    </div>
+                </div>
+                <div class="dashboard__panel">
+                    <h3>Assigned Tickets</h3>
+                    <% for(let ticket of tickets ) { %>
+                        <% if(!ticket._doc.pending) {%>
+                            <a href="/ticket-details/<%= ticket._doc._id %>" class="ticket__link">
+                                <div class="ticket ticket__item">
+                                    <div class="ticket__status"></div>
+                                    <div class="ticket__info">
+                                        <h3 class="ticket__info-title"><%= ticket._doc.title %></h3>
+                                        <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        <% } %>
+                    <% } %>
+                    <div class="card__ticket-footer">
+                        <a href="/assigned-tickets" class="card__ticket-link">View Accepted Tickets</a>
+                    </div>
+                </div>
+                <div class="dashboard__panel">
+                    <h3>Completed Tickets</h3>
+                    <% for(let ticket of tickets ) { %>
+                        <% if(ticket._doc.completed) {%>
+                            <a href="/ticket-details/<%= ticket._doc._id %>" class="ticket__link">
+                                <div class="ticket ticket__item">
+                                    <div class="ticket__status"></div>
+                                    <div class="ticket__info">
+                                        <h3 class="ticket__info-title"><%= ticket._doc.title %></h3>
+                                        <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        <% } %>
+                    <% } %>
+                    <div class="card__ticket-footer">
+                        <a href="/completed-tickets" class="card__ticket-link">View Completed Tickets</a>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 <%- include("../includes/footer.ejs")%>`

@@ -5,7 +5,7 @@
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
 
-        <section class="dashboard">
+        <section class="dashboard dashboard-small">
             <h2 class="dashboard__title">Dashboard</h2>
             <h1 class="dashboard__greeting">Hello, <%= user.username %></h1>
             <div class="dashboard__feed">
@@ -15,15 +15,19 @@
                     </div>
                     <div class="card__tickets">
                         <ul class="tickets">
-                        <% for(let ticket of tickets) {%>
-                            <% if(ticket.userId === user._id) { %>
-                                    <li class="ticket">
-                                        <div class="ticket__status"></div>
-                                        <div class="ticket__info">
-                                            <h4 class="ticket__info-title"><%= ticket._doc.title %></h4>
-                                            <p class="ticket__info-date"><%= ticket.createdAt %></p>
-                                        </div>
-                                    </li>
+                            <% if(myTicketCount <= 0) {%>
+                                <p class="error__not-found">You currently have no tickets</p>
+                            <% }  else { %>
+                                <% for(let ticket of tickets) {%>
+                                    <% if(ticket.userId === user._id) { %>
+                                        <li class="ticket">
+                                            <div class="ticket__status"></div>
+                                            <div class="ticket__info">
+                                                <h4 class="ticket__info-title"><%= ticket._doc.title %></h4>
+                                                <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                                            </div>
+                                        </li>
+                                    <% } %>
                                 <% } %>
                             <% } %>
                         </ul>
@@ -39,14 +43,18 @@
                     </div>
                     <div class="card__tickets">
                         <ul class="tickets">
-                            <% for(let ticket of tickets) {%>
-                                <li class="ticket">
-                                    <div class="ticket__status"></div>
-                                    <div class="ticket__info">
-                                        <h4 class="ticket__info-title"><%= ticket._doc.title %></h4>
-                                        <p class="ticket__info-date"><%= ticket.createdAt %></p>
-                                    </div>
-                                </li>
+                            <% if(tickets.length <= 0) { %>
+                                <p class="error__not-found">There are currently no tickets</p>
+                            <% } else { %>
+                                <% for(let ticket of tickets) {%>
+                                    <li class="ticket">
+                                        <div class="ticket__status"></div>
+                                        <div class="ticket__info">
+                                            <h4 class="ticket__info-title"><%= ticket._doc.title %></h4>
+                                            <p class="ticket__info-date"><%= ticket.createdAt %></p>
+                                        </div>
+                                    </li>
+                                <% } %>
                             <% } %>
                         </ul>
                     </div>
