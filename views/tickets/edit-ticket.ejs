@@ -11,9 +11,8 @@
                     <input type="text" placeholder="Enter name of ticket" id="title" name="title" value="<%= ticket._doc.title %>">
                 </div>
                 <div class="form__control">
-                    <label for="severity">Severity</label>
+                    <label for="severity">Assign Severity</label>
                     <select name="severity">
-                        <option value="urgent" default>Assign severity</option>
                         <option value="urgent">Severe</option>
                         <option value="moderate" >Moderate</option>
                         <option value="minor" >Minor</option>
@@ -34,12 +33,13 @@
                 </div>
                 <div class="form__control">
                     <button type="submit" class="btn btn__cta">Update Ticket</button>
+                    <form action="/delete-ticket" method="POST">
+                        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                        <input type="hidden" value="<%= ticket._doc._id %>" name="id">
+                        <button class="btn btn__delete" type="submit">Delete</button>
+                    </form>
                 </div>
-                <form action="/delete-ticket" method="POST">
-                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                    <input type="hidden" value="<%= ticket._doc._id %>" name="id">
-                    <button class="btn btn__delete" type="submit">Delete</button>
-                </form>
+   
             </form>
         </section>
     </main>

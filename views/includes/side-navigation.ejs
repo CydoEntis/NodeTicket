@@ -1,20 +1,27 @@
 <nav class="nav__side">
-    <ul>
-        <h3 class="nav__side-title">Collections</h3>
-        <li><a href="/all-tickets">All Tickets</a></li>
-        <li><a href="/my-tickets">My Tickets</a></li>
-        <li><a href="/urgent-tickets">Urgent Tickets</a></li>
-        <li><a href="/moderate-tickets">Moderate Tickets</a></li>
-        <li><a href="/minor-tickets">Minor Tickets</a></li>
-        <% if(isAdmin) {%>
-            <li><a href="/admin">Admin Panel</a></li>    
-        <% } %>
-        <% if(isAuthenticated) {%>
-            <form action="/logout" method="POST">
-                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                <button class="btn btn__cta" type="submit">Logout</button>
-            </form>
-        <% }%>
-    </ul>
+	<% if(isAdmin) {%>
+	<ul class="nav__admin">
+		<h3 class="nav__side-title">Admin</h3>
+		<li><a href="/admin">Admin Panel</a></li>
+	</ul>
+	<% } %>
+	<ul class="nav__collections">
+		<h3 class="nav__side-title">Collections</h3>
+		<li><a href="/all-tickets">All Tickets</a></li>
+		<li><a href="/my-tickets">My Tickets</a></li>
+		<li><a href="/urgent-tickets">Urgent Tickets</a></li>
+		<li><a href="/moderate-tickets">Moderate Tickets</a></li>
+		<li><a href="/minor-tickets">Minor Tickets</a></li>
+	</ul>
 
+	<% if(isAuthenticated) {%>
+	<div class="auth__controls">
+		<form action="/logout" method="POST">
+			<input type="hidden" value="<%= csrfToken %>" name="_csrf" />
+			<button id="btnLogout" class="btn btn__cta" type="submit">
+				Logout
+			</button>
+		</form>
+	</div>
+	<% }%>
 </nav>

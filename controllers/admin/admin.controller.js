@@ -16,7 +16,6 @@ async function getAdminPanel(req, res, next) {
 		};
 		formattedTickets.push(formattedTicket);
 	}
-	console.log(formattedTickets.length)
 	res.render('admin/admin-panel', {
 		tickets: formattedTickets,
 	});
@@ -40,6 +39,7 @@ async function getPendingTickets(req, res, next) {
 
 	res.render('admin/admin-ticket-review', {
 		tickets: formattedTickets,
+		title: "Pending"
 	});
 }
 
@@ -63,6 +63,7 @@ async function getAssignedTickets(req, res, next) {
 
 	res.render('admin/admin-ticket-review', {
 		tickets: formattedTickets,
+		title: "Assigned"
 	});
 }
 
@@ -86,6 +87,7 @@ async function getCompletedTickets(req, res, next) {
 
 	res.render('admin/admin-ticket-review', {
 		tickets: formattedTickets,
+		title: "Completed"
 	});
 }
 

@@ -41,6 +41,21 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
+#btnLogout {
+	margin: 0 auto;
+	display: block;
+}
+
+.auth__controls {
+	width: 100%;
+}
+
+.auth__controls form {
+	position: relative;
+	width: 300px;
+}
+
 /* #logo {
   color: var(--primary-text);
   font-size: 1.75rem;

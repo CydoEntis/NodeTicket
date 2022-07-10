@@ -181,7 +181,6 @@ function getEditTicket(req, res, next) {
 				createdAt: formattedDate,
 			};
 			User.find({ role: 'user' }).then((users) => {
-				console.log(users);
 				res.render('tickets/edit-ticket', {
 					ticket: foundTicket,
 					users: users,
@@ -209,20 +208,7 @@ async function postEditTicket(req, res, next) {
 	await ticket.save();
 
 	res.redirect('/admin');
-	// Ticket.findById(ticketId)
-	// 	.then((ticket) => {
-	// 		ticket.title = updatedTitle;
-	// 		ticket.description = updatedDescription;
-	// 		ticket.severity = severity;
-	// 		ticket.assignedTo = user._id;
-	// 		console.log(ticket.assignedTo);
 
-	// 		return ticket.save().then(() => {
-	// 			console.log('Updated ticket');
-	// 			res.redirect('/all-tickets');
-	// 		});
-	// 	})
-	// 	.catch((err) => console.log(err));
 }
 
 function postDeleteTicket(req, res, next) {

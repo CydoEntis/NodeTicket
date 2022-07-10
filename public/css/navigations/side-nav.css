@@ -14,8 +14,11 @@
     font-size: 1.25rem;
   }
   
-  .nav__side ul {
+  .nav__side ul:first-of-type {
     margin-top: 100px;
+  }
+
+  .nav__side ul {
     padding: 0 20px;
   }
   
@@ -33,4 +36,12 @@
   
   .nav__side ul li a:hover {
     color: var(--secondary-accent);
+  }
+
+  .nav__collections {
+    height: 75%;
+  }
+
+  .nav__admin {
+    height: 10%;
   }

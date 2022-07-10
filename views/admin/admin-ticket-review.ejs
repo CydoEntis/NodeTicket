@@ -4,7 +4,13 @@
     <%- include("../includes/navigation.ejs")%>
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
-        <section class="dashboard">
+        <section class="container">
+            <div class="ticket__controls">
+                <a href="/admin"><div class="ticket__controls-back"><i class='bx bx-arrow-back'></i></div></a>
+                <h3><%= title %></h3>
+            </div>
+        </section>
+        <section class="container dashboard">
             <h1>Admin Panel</h1>
             <table class="admin__table">
                 <tr>
