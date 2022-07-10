@@ -6,8 +6,7 @@ function getDashboard(req, res, next) {
 	const user = req.user;
 	const formattedTickets = [];
 	let myTicketCount = 0;
-	Ticket.find()
-		.limit(5)
+	Ticket.find({ assingedTo: req.user._id })
 		.then((tickets) => {
 			for (let ticket of tickets) {
 				if(ticket._doc._id === user._id) {
@@ -20,6 +19,7 @@ function getDashboard(req, res, next) {
 				};
 				formattedTickets.push(formattedTicket);
 			}
+			console.log("Ticket Count", myTicketCount)
 		})
 		.then((result) => {
 			res.render('dashboard/dashboard', {

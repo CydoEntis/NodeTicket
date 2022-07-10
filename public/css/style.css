@@ -33,6 +33,10 @@ body {
 	height: 900px;
 }
 
+.centered {
+	margin: 0 auto;
+}
+
 .container__flex {
 	display: flex;
 }
@@ -52,7 +56,8 @@ body {
 }
 
 .auth__controls form {
-	position: relative;
+	position: absolute;
+	bottom: 10%;
 	width: 300px;
 }
 

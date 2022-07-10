@@ -46,6 +46,7 @@ function getCurrentUsersTickets(req, res, next) {
 				};
 				formattedTickets.push(formattedTicket);
 			}
+			console.log("Ticket Count", tickets.length)
 		})
 		.then((result) => {
 			res.render('tickets/tickets', {
