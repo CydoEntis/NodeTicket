@@ -16,10 +16,6 @@ const ticketSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		completed: {
-			type: Boolean,
-			default: false,
-		},
 		createdAt: {
 			type: Date,
 			default: Date.now,
@@ -29,18 +25,25 @@ const ticketSchema = new Schema(
 			ref: 'User',
 			required: true,
 		},
+		assignedTo: {
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+		},
 		pending: {
 			type: Boolean,
 			default: true,
 		},
-		assignedTo: {
-			type: Schema.Types.ObjectId,
-			ref: 'User',
+		completed: {
+			type: Boolean,
+			default: false,
+		},
+		isReviewing: {
+			type: Boolean
 		}
 	},
-	{
-		timestamps: true,
-	}
+	// {
+	// 	timestamps: true,
+	// }
 );
 
 module.exports = mongoose.model('Ticket', ticketSchema);

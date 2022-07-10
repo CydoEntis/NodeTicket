@@ -17,6 +17,7 @@ ticketRoutes.get("/edit-ticket/:id", ticketController.getEditTicket);
 ticketRoutes.post("/edit-ticket", ticketController.postEditTicket)
 ticketRoutes.post("/delete-ticket", ticketController.postDeleteTicket);
 ticketRoutes.post("/complete-ticket", ticketController.postCompleteTicket);
+ticketRoutes.post("/submit-for-review", ticketController.postTicketForReview);
 
 module.exports = ticketRoutes;
 

@@ -22,11 +22,18 @@
                     <% if(isAdmin) { %>
                         <a href="/edit-ticket/<%= ticket._doc._id %>"class="btn btn__edit">Edit</a>
                     <% } %>
-                    <% if(!ticket._doc.completed) {%>
+                    <% if(!ticket._doc.completed && ticket._doc.completed) {%>
                         <form action="/complete-ticket" method="POST">
                             <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                             <input type="hidden" value="<%= ticket._doc._id %>" name="id">
-                            <button class="btn btn__complete" type="submit">Complete</button>
+                            <button class="btn btn__complete" type="submit">Submit For Review</button>
+                        </form>
+                    <% } %>
+                    <% if(!ticket._doc.isReviewing) {%>
+                        <form action="/submit-for-review" method="POST">
+                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                            <input type="hidden" value="<%= ticket._doc._id %>" name="id">
+                            <button class="btn btn__complete" type="submit">Submit For Review</button>
                         </form>
                     <% } %>
                 </div>

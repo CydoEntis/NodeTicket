@@ -234,6 +234,17 @@ async function postCompleteTicket(req, res, next) {
 	res.redirect('/admin');
 }
 
+async function postTicketForReview(req, res, next) {
+	const ticketId = req.body.id;
+	const ticket = await Ticket.findById(ticketId);
+
+	ticket.isReviewing = true;
+
+	await ticket.save();
+
+	res.redirect('/admin');
+}
+
 module.exports = {
 	getIndex,
 	getTickets,
@@ -248,4 +259,5 @@ module.exports = {
 	postEditTicket,
 	postDeleteTicket,
 	postCompleteTicket,
+	postTicketForReview
 };

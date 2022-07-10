@@ -13,12 +13,12 @@
             </div>
         </section>
         <section class="container tickets__active">
-            <h3 class="ticket__category">Tickets - <span class="ticket__count"> <%= tickets.length %></span></h3>
+            <h3 class="ticket__category">Tickets - <span class="ticket__count"> <%= tickets.length - ticketCount %></span></h3>
             <% if(tickets.length <= 0) { %>
                 <p class="error__not-found">No <%= title %> Available</p>
             <% } else { %>
                 <% for(let ticket of tickets ){ %>
-                    <% if(!ticket._doc.completed) {%>
+                    <% if(!ticket._doc.completed && !ticket._doc.isReviewing) {%>
                         <a href="/ticket-details/<%= ticket._doc._id %>" class="ticket__link">
                             <div class="ticket ticket__item">
                                 <div class="ticket__status"></div>

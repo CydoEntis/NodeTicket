@@ -38,6 +38,10 @@
 	background: #AD4D50;
 }
 
+.btn__complete {
+	background-color: var(--color-green);
+}
+
 .btn__auth:hover {
   color: var(--secondary-accent);
 }
