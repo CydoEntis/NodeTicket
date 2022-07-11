@@ -11,8 +11,8 @@ taskRoutes.get("/urgent-tasks", taskController.getUrgentTasks);
 taskRoutes.get("/moderate-tasks", taskController.getModerateTasks);
 taskRoutes.get("/minor-tasks", taskController.getMinorTasks);
 taskRoutes.get("/task-details/:id", taskController.getTask);
-taskRoutes.get("/create-task", taskController.getAddTask);
-taskRoutes.post("/create-task", taskController.postAddTask);
+taskRoutes.get("/create-task", taskController.getCreateTask);
+taskRoutes.post("/create-task", taskController.postCreateTask);
 taskRoutes.get("/edit-task/:id", taskController.getEditTask);
 taskRoutes.post("/edit-task", taskController.postEditTask)
 taskRoutes.post("/delete-task", taskController.postDeleteTask);

@@ -11,6 +11,7 @@
 @import "./errors/error.css";
 @import "./tables/tables.css";
 @import "./badges/badge.css";
+@import "./tasks/tasks.css";
 
 * {
 	margin: 0;
@@ -61,7 +62,7 @@ body {
 }
 
 .wrapper {
-	padding: 100px 250px;
+	padding: 50px 100px;
 	margin-left: 300px;
 	width: calc(100% - 300px);
 	height: 900px;
@@ -73,6 +74,10 @@ body {
 
 .page-title {
 	font-size: 3rem;
+}
+
+.page-description {
+	font-size: 1.15rem;
 }
 
 .centered {

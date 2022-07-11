@@ -152,11 +152,11 @@ function getTask(req, res, next) {
 		.catch((err) => console.error(err));
 }
 
-function getAddTask(req, res, next) {
-	res.render('tasks/add-task');
+function getCreateTask(req, res, next) {
+	res.render('tasks/create-task');
 }
 
-function postAddTask(req, res, next) {
+function postCreateTask(req, res, next) {
 	const title = req.body.title;
 	const description = req.body.description;
 
@@ -168,7 +168,7 @@ function postAddTask(req, res, next) {
 	});
 
 	task.save().then((result) => {
-		res.redirect('/all-tasks');
+		res.redirect('/tasks');
 	});
 }
 
@@ -255,8 +255,8 @@ module.exports = {
 	getModerateTasks,
 	getMinorTasks,
 	getTask,
-	getAddTask,
-	postAddTask,
+	getCreateTask,
+	postCreateTask,
 	getEditTask,
 	postEditTask,
 	postDeleteTask,

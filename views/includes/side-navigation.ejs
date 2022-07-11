@@ -1,14 +1,14 @@
 <nav class="nav__side">
     <div class="nav__controls">
-        <% if(isAdmin) {%>
-            <ul class="nav__admin">
-                <h3 class="nav__side-title">Admin</h3>
-                <li><a href="/admin">Admin Panel</a></li>
-            </ul>
+        <h2 class="logo"><a href="/">Tasketeer</a></h2>
+        <ul class="nav__admin">
+            <% if(isAdmin) {%>
+                <li><a href="/admin"><i class='bx bx-shield-alt-2' ></i> Admin</a></li>
             <% } %>
-            <ul class="nav__collections">
                 <li><a href="/dashboard"><i class='bx bxs-dashboard' ></i> Dashboard</a></li>
                 <li><a href="/tasks"><i class='bx bx-task' ></i> Tasks</a></li>
+                <li><a href="/profile"><i class='bx bx-user' ></i> Profile</a></li>
+                <li><a href="/settings"><i class='bx bx-cog' ></i> Settings</a></li>
             </ul>
         
             <% if(isAuthenticated) {%>
