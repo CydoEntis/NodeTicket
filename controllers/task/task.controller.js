@@ -145,7 +145,7 @@ function getTask(req, res, next) {
 				// ...task.dataValues,
 				createdAt: formattedDate,
 			};
-			res.render('tasks/task-details', {
+			res.render('tasks/task', {
 				task: foundTask,
 			});
 		})

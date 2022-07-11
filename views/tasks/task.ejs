@@ -2,37 +2,36 @@
 </head>
 
 <body>
-    <%- include("../includes/navigation.ejs")%>
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
-            <div class="ticket__detail">
-                <h1 class="ticket__detail-title"><%= ticket._doc.title %></h1>
-                <div class="ticket__detail-info">
-                    <h3 class="ticket__detail-date"><%= ticket.createdAt %></h3>
-                    <div class="ticket__detail-severity">
-                        <p><%= ticket._doc.severity %></p>
+            <div class="task__detail">
+                <h1 class="task__detail-title"><%= task._doc.title %></h1>
+                <div class="task__detail-info">
+                    <h3 class="task__detail-date"><%= task.createdAt %></h3>
+                    <div class="task__detail-severity">
+                        <p><%= task._doc.severity %></p>
                     </div>
                 </div>
-                <p class="ticket__detail-description"><%= ticket._doc.description %></p>
+                <p class="task__detail-description"><%= task._doc.description %></p>
                 <div>
                     Photos...
                 </div>
-                <div class="ticket__detail-btns">
+                <div class="task__detail-btns">
                     <% if(isAdmin) { %>
-                        <a href="/edit-ticket/<%= ticket._doc._id %>"class="btn btn__edit">Edit</a>
+                        <a href="/edit-task/<%= task._doc._id %>"class="btn btn__edit">Edit</a>
                     <% } %>
-                    <% if(!ticket._doc.completed && ticket._doc.completed) {%>
-                        <form action="/complete-ticket" method="POST">
+                    <% if(!task._doc.completed && task._doc.completed) {%>
+                        <form action="/complete-task" method="POST">
                             <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                            <input type="hidden" value="<%= ticket._doc._id %>" name="id">
+                            <input type="hidden" value="<%= task._doc._id %>" name="id">
                             <button class="btn btn__complete" type="submit">Submit For Review</button>
                         </form>
                     <% } %>
-                    <% if(!ticket._doc.isReviewing) {%>
+                    <% if(!task._doc.isReviewing) {%>
                         <form action="/submit-for-review" method="POST">
                             <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                            <input type="hidden" value="<%= ticket._doc._id %>" name="id">
+                            <input type="hidden" value="<%= task._doc._id %>" name="id">
                             <button class="btn btn__complete" type="submit">Submit For Review</button>
                         </form>
                     <% } %>

@@ -1,22 +1,38 @@
 @import "../variables.css";
 
-/* form {
-    width: 800px;
-    min-width: 250px;
+form {
+    max-width: 800px;
     margin: 0 auto;
-} */
-
-.form__control {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 10px 20px;
 }
 
-.form__control label {
+.form-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control label {
     width: 200px;
     margin-right: 20px;
     font-size: 1.25rem;
+}
+
+.form-control input[type="text"] {
+    height: 50px;
+    font-size: 1.25rem;
+    padding-left: 15px;
+}
+
+.form-control textarea {
+    height: 200px;
+    padding: 15px;
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+}
+
+.form-control input[type="text"]:focus,
+.form-control textarea:focus {
+    outline: var(--accent);
+    border: 2px solid var(--accent);
 }
 
 .search-bar {
@@ -29,15 +45,13 @@
     outline: none;
 }
 
-.form-control {
+.search-control {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50px;
     border-bottom: 1px solid var(--txt-primary);
 }
-
-
 
 .bx-search {
     margin: 5px;
