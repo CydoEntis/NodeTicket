@@ -1,0 +1,33 @@
+@import "../variables.css";
+
+.circle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: transparent;
+  margin-left: 1rem;
+}
+
+.tasks-all {
+  border-color: var(--color-blue);
+}
+
+.tasks-progress {
+  border-color: var(--color-orange);
+
+}
+
+.tasks-hold {
+  border-color: var(--color-red);
+
+}
+
+.tasks-done {
+  border-color: var(--color-green);
+
+}
+
+
+

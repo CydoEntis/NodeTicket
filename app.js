@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const ticketRoutes = require('./routes/ticket.routes');
 const dashboardRoutes = require('./routes/dashboard.routes');
 
 const mongoose = require('mongoose');
@@ -12,6 +11,7 @@ const csurf = require('csurf');
 const flash = require('connect-flash');
 
 const User = require("./models/user/user.model");
+const taskRoutes = require('./routes/task.routes');
 const homeRoutes = require('./routes/home.routes');
 const adminRoutes = require('./routes/admin.routes');
 
@@ -75,7 +75,7 @@ app.use('/', authRoutes);
 app.use('/', homeRoutes);
 app.use('/', adminRoutes);
 app.use('/', dashboardRoutes);
-app.use('/', ticketRoutes);
+app.use('/', taskRoutes);
 
 
 mongoose

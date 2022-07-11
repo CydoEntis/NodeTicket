@@ -1,0 +1,26 @@
+@import "../variables.css";
+
+.badge {
+  text-align: center;
+  text-transform: capitalize;
+  min-width: 80px;
+  padding: 3px 8px;
+  background-color: var(--color-grey);
+  color: var(--txt-secondary);
+  display: inline-block;
+  font-size: .75rem;
+  color: var(--bg-light);
+  margin: 1rem 0;
+}
+
+.badge-minor {
+  background-color: var(--color-blue);
+}
+
+.badge-moderate {
+  background-color: var(--color-orange);
+}
+
+.badge-urgent {
+  background-color: var(--color-red);
+}

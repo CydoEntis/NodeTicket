@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const userModel = require('./user/user.model');
 
 const Schema = mongoose.Schema;
 
-const ticketSchema = new Schema(
+const taskSchema = new Schema(
 	{
 		title: {
 			type: String,
@@ -46,4 +45,4 @@ const ticketSchema = new Schema(
 	// }
 );
 
-module.exports = mongoose.model('Ticket', ticketSchema);
+module.exports = mongoose.model('Task', taskSchema);

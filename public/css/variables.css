@@ -2,19 +2,18 @@
 
 
 :root {
-	--primary-bg: #1d1e26;
-	--secondary-bg: #181820;
-	--primary-accent: #fd8b8d;
-	--secondary-accent: #fc76a1;
-	--tertirary-accent: #ce6add;
-	--button-alt: #30303d;
-	--primary-text: #fcfcfc;
-	--secondary-text: #b6b6b9;
-	--color-orange: #c58c4c;
-	--color-green: #3aa165;
-	--color-blue: #70c4bf;
-	--color-grey: #95959a;
+	--bg-light: #f8f8f7;
+	--txt-primary: #181817;
+	--txt-secondary: #666565;
+	--highlight: #F0EFEB;
+	--accent: #E85a1e;
+	--primary-font: "Poppins", sans-serif;
+	--color-red: #cc3022;
+	--color-orange: #E8A742;
+	--color-green: #2AA25F;
+	--color-blue: #2281CC;
+	--color-grey: #E5E5E5;
 	--color-purple: #ae68e5;
 	--color-yellow: #cfb452;
-	--primary-font: "Poppins", sans-serif;
+	--border-grey: #E1E1E1;
 }

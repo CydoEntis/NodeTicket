@@ -1,4 +1,4 @@
-const Ticket = require('../../models/ticket.model');
+const Ticket = require('../../models/task/task.model');
 
 const { formatDate } = require('../../utils/util');
 

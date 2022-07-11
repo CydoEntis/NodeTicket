@@ -1,6 +1,43 @@
 @import "../variables.css";
 
-.card__ticket {
+.card {
+  max-width: 400px;
+  min-height: 200px;
+  color: var(--txt-secondary);
+  padding: 1.5rem 2rem;
+  border-top: 2px solid var(--txt-primary);
+  /* margin: 10px 0; */
+
+  transition: all ease-in-out 350ms;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: var(--highlight);
+  border-color: var(--accent);
+}
+
+.card:hover .card-title {
+  color: var(--accent);
+}
+
+.card-title {
+  color: var(--txt-primary);
+  text-transform: capitalize;
+  transition: all ease-in-out 350ms;
+  margin-bottom: .75rem;
+}
+
+.card-description {
+
+}
+
+.card-date {
+  font-size: .85rem;
+  font-style: italic;
+}
+
+/* .card__ticket {
     width: 700px;
     border-radius: .8rem;
     background: #20212C;
@@ -44,4 +81,4 @@
   
   .card__ticket-link:hover {
     color: var(--secondary-text)
-  }
+  } */

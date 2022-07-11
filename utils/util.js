@@ -21,17 +21,17 @@ function formatDate(date) {
 	return `${month} ${day}, ${year}`;
 }
 
-function getCompletedTickets(tickets) {
-	let completedTickets = 0;
-	for(let ticket of tickets) {
-		if(ticket._doc.completed) {
-			completedTickets += 1;
+function getCompletedTasks(tasks) {
+	let completedTasks = 0;
+	for(let task of tasks) {
+		if(task._doc.completed) {
+			completedTasks += 1;
 		}
 	}
-	return completedTickets;
+	return completedTasks;
 }
 
 module.exports = {
   formatDate,
-	getCompletedTickets,
+	getCompletedTasks,
 }

@@ -1,10 +1,10 @@
 @import "../variables.css";
 
-form {
+/* form {
     width: 800px;
     min-width: 250px;
     margin: 0 auto;
-}
+} */
 
 .form__control {
     display: flex;
@@ -19,41 +19,28 @@ form {
     font-size: 1.25rem;
 }
 
-.form__control select {
-    width: 250px;
-    font-size: 1.25rem;
-    background: #14151a;
-    border: 3px solid #30303D;
-    padding: 5px;
-    border-radius: .8rem;
-    color: var(--primary-text);
-}
-
-.form__control input {
-    border: 3px solid #30303D;;
-    background: #14151a;
-    color: var(--primary-text);
-    outline: none;
-    width: 500px;
-    height: 40px;
-    font-size: 1.25rem;
-    border-radius: .8rem;
-    padding: 10px;
-}
-
-.form__control textarea {
-    border: 3px solid #30303D;;
-    width: 500px;
-    height: 250px;
-    color: var(--primary-text);
-    border-radius: .8rem;
-    padding: 10px;
-    font-size: 1.25rem;
-    background: #14151a;
-    outline: none;
-}
-
-.form__control button {
-    width: 150px;
+.search-bar {
     border: none;
+    width: 200px;
+    height: 50px;
+    background-color: transparent;
+    color: var(--txt-primary);
+    font-size: 1.25rem;
+    outline: none;
+}
+
+.form-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid var(--txt-primary);
+}
+
+
+
+.bx-search {
+    margin: 5px;
+    font-size: 1.25rem;
+
 }
