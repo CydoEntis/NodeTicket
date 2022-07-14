@@ -22,6 +22,19 @@
   color: var(--accent);
 }
 
+.card-completed {
+  background: #D1E7DD;
+}
+
+.card-completed:hover {
+  border-top: 2px solid var(--color-green);
+  background: #dff7ec;
+}
+
+.card-completed:hover .card-title {
+  color: var(--color-green);
+}
+
 .card-title {
   color: var(--txt-primary);
   text-transform: capitalize;
