@@ -14,8 +14,8 @@ function isAdmin(req, res, next) {
 }
 
 adminRoutes.get('/admin', isAdmin, adminController.getAdminPanel);
-adminRoutes.get('/submitted-tickets', isAdmin, adminController.getPendingTickets);
-adminRoutes.get('/assigned-tickets', isAdmin, adminController.getAssignedTickets);
-adminRoutes.get('/completed-tickets', isAdmin, adminController.getCompletedTickets);
+adminRoutes.get('/submitted-tasks', isAdmin, adminController.getPendingTasks);
+adminRoutes.get('/assigned-tasks', isAdmin, adminController.getAssignedTasks);
+adminRoutes.get('/completed-tasks', isAdmin, adminController.getCompletedTasks);
 
 module.exports = adminRoutes;

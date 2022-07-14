@@ -23,14 +23,27 @@
                         <th>Status</th>
                         <th></th>
                     </tr>
-                    <% for(let ticket of tickets) {%>
+                    <% for(let task of tasks) {%>
                     <tr>
-                        <td><%= ticket.createdAt %></td>
-                        <td><%= ticket._doc.title %></td>
-                        <td><%= ticket.createdBy %></td>
-                        <td><%= ticket._doc.pending ? 'Pending' : ticket.assingedTo %></td>
-                        <td><%= ticket._doc.completed ? 'Completed' : 'In Progress' %></td>
-                        <td><a href="/edit-task/<%= ticket._doc._id %>">Review</a></td>
+                        <td><%= task.createdAt %></td>
+                        <td><%= task._doc.title %></td>
+                        <td><%= task.createdBy %></td>
+                        <% if(!task._doc.assignedTo) { %>
+                            <td class="indicator indicator-warning">Pending</td>
+                        <% } else { %>
+                            <td class="indicator indicator-ok"><%= task.assignedTo %></td>
+                        <% } %>
+
+                        <% if(!task._doc.assignedTo) { %>
+                            <td class="indicator indicator-warning">Not Assigned</td>
+                        <% } else if(task._doc.completed && task._doc.assignedTo) { %>
+                            <td class="indicator indicator-success">Completed</td>
+                        <% } else if(task._doc.isOnHold) { %>
+                            <td class="indicator indicator-error">On Hold</td>
+                        <% } else if(task._doc.assignedTo && !task._doc.compelted) { %>
+                            <td class="indicator indicator-ok">In Progress</td>
+                        <% } %>
+                        <td><a class="admin-link" href="/edit-task/<%= task._doc._id %>">Review</a></td>
                     </tr>
                     <% } %>
                 </table>

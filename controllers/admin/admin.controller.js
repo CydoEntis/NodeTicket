@@ -1,99 +1,100 @@
-const Ticket = require('../../models/task/task.model');
+const Task = require('../../models/task/task.model');
 const User = require('../../models/user/user.model');
 
 const { formatDate } = require('../../utils/util');
 
 async function getAdminPanel(req, res, next) {
-	const formattedTickets = [];
-	const tickets = await Ticket.find().sort({createdAt: -1}).limit(20);
-	for (let ticket of tickets) {
+	const formattedTasks = [];
+	const tasks = await Task.find().sort({createdAt: -1}).limit(20);
+	for (let task of tasks) {
+		const user = await User.find({ _id: task.createdBy });
+		const formattedDate = formatDate(task.createdAt);
 
-		const formattedDate = formatDate(ticket.createdAt);
-
-		const formattedTicket = {
-			...ticket,
-			createdAt: formattedDate,
-		};
-		formattedTickets.push(formattedTicket);
-	}
-	res.render('admin/admin-panel', {
-		tickets: formattedTickets,
-	});
-}
-
-async function getPendingTickets(req, res, next) {
-	const formattedTickets = [];
-	const tickets = await Ticket.find({pending: true}).sort({createdAt: -1});
-	for (let ticket of tickets) {
-		const user = await User.find({ _id: ticket.createdBy });
-
-		const formattedDate = formatDate(ticket.createdAt);
-
-		const formattedTicket = {
-			...ticket,
+		const formattedTask = {
+			...task,
 			createdAt: formattedDate,
 			createdBy: user[0].username,
 		};
-		formattedTickets.push(formattedTicket);
+		formattedTasks.push(formattedTask);
+	}
+	res.render('admin/admin-panel', {
+		tasks: formattedTasks,
+	});
+}
+
+async function getPendingTasks(req, res, next) {
+	const formattedTasks = [];
+	const tasks = await Task.find({pending: true}).sort({createdAt: -1});
+	for (let task of tasks) {
+		const user = await User.find({ _id: task.createdBy });
+
+		const formattedDate = formatDate(task.createdAt);
+
+		const formattedTask = {
+			...task,
+			createdAt: formattedDate,
+			createdBy: user[0].username,
+		};
+		formattedTasks.push(formattedTask);
 	}
 
-	res.render('admin/admin-ticket-review', {
-		tickets: formattedTickets,
+	res.render('admin/admin-task-review', {
+		tasks: formattedTasks,
 		title: "Pending"
 	});
 }
 
-async function getAssignedTickets(req, res, next) {
-	const formattedTickets = [];
-	const tickets = await Ticket.find({pending: false}).sort({createdAt: -1});
-	for (let ticket of tickets) {
-		const createdBy = await User.find({ _id: ticket.createdBy });
-		const assignedTo = await User.find({ _id: ticket.assignedTo });
+async function getAssignedTasks(req, res, next) {
+	const formattedTasks = [];
+	const tasks = await Task.find({pending: false}).sort({createdAt: -1});
+	for (let task of tasks) {
+		const createdBy = await User.find({ _id: task.createdBy });
+		const assignedTo = await User.find({ _id: task.assignedTo });
 
-		const formattedDate = formatDate(ticket.createdAt);
+		const formattedDate = formatDate(task.createdAt);
 
-		const formattedTicket = {
-			...ticket,
+		const formattedTask = {
+			...task,
 			createdAt: formattedDate,
 			createdBy: createdBy[0].username,
 			assingedTo: assignedTo[0].username,
 		};
-		formattedTickets.push(formattedTicket);
+		formattedTasks.push(formattedTask);
 	}
 
-	res.render('admin/admin-ticket-review', {
-		tickets: formattedTickets,
+	res.render('admin/admin-task-review', {
+		tasks: formattedTasks,
 		title: "Assigned"
 	});
 }
 
-async function getCompletedTickets(req, res, next) {
-	const formattedTickets = [];
-	const tickets = await Ticket.find({completed: true}).sort({createdAt: -1});
-	for (let ticket of tickets) {
-		const createdBy = await User.find({ _id: ticket.createdBy });
-		const assignedTo = await User.find({ _id: ticket.assignedTo });
+async function getCompletedTasks(req, res, next) {
+	const formattedTasks = [];
+	const tasks = await Task.find({completed: true}).sort({createdAt: -1});
+	for (let task of tasks) {
+		const createdBy = await User.find({ _id: task.createdBy });
+		const assignedTo = await User.find({ _id: task.assignedTo });
 
-		const formattedDate = formatDate(ticket.createdAt);
+		const formattedDate = formatDate(task.createdAt);
 
-		const formattedTicket = {
-			...ticket,
+		const formattedTask = {
+			...task,
 			createdAt: formattedDate,
 			createdBy: createdBy[0].username,
 			assingedTo: assignedTo[0].username,
 		};
-		formattedTickets.push(formattedTicket);
+		formattedTasks.push(formattedTask);
 	}
 
-	res.render('admin/admin-ticket-review', {
-		tickets: formattedTickets,
+	res.render('admin/admin-task-review', {
+		tasks: formattedTasks,
 		title: "Completed"
 	});
 }
 
 module.exports = {
 	getAdminPanel,
-	getPendingTickets,
-	getAssignedTickets,
-	getCompletedTickets
+	getPendingTasks,
+	getAssignedTasks,
+	getCompletedTasks
 };

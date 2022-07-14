@@ -110,3 +110,24 @@ body {
 	bottom: 10%;
 	width: 300px;
 }
+
+
+.indicator {
+
+}
+
+.indicator-success {
+	color: var(--color-green);
+}
+
+.indicator-warning {
+	color: var(--color-orange);
+}
+
+.indicator-ok {
+	color: var(--color-blue);
+}
+
+.indicator-error {
+	color: var(--color-red);
+}

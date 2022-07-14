@@ -23,3 +23,11 @@
 	padding: 5px 10px;
 	margin-right: 10px;
 }
+
+.admin-link {
+	color: var(--color-blue);
+}
+
+.admin-link:hover {
+	opacity: .85;
+}

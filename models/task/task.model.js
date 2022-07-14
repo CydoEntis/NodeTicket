@@ -40,7 +40,8 @@ const taskSchema = new Schema(
 			type: Boolean
 		},
 		isOnHold: {
-			type: Boolean
+			type: Boolean,
+			default: false,
 		}
 	},
 	// {

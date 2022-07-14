@@ -42,10 +42,21 @@
                             </form>
                         </div>
                         <div class="task-submit">
-                            <form action="">
-                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                                <button type="submit" class="btn btn__cta">Submit Ticket</button>
-                            </form>
+                            <% if(isAdmin) {%>
+                                <form action="">
+                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                    <% if(!task._doc.isOnHold && task.isAssigned) {%>
+                                        <button type="submit" class="btn btn__cta">Set On Hold</button>
+                                    <% } else { %>
+                                        <button type="submit" class="btn btn__cta">Process Ticket</button>
+                                    <% } %>
+                                </form>
+                            <% } else { %>
+                                <form action="">
+                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                    <button type="submit" class="btn btn__cta">Submit Ticket</button>
+                                </form>
+                            <% } %>
                         </div>
                     <% } %>
                 </div>
