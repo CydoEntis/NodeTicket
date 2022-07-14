@@ -4,7 +4,7 @@
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
-            <h2 class="page-title"><a class="btn" href="/task/<%= task._doc._id %>"><i class='bx bx-arrow-back'></i></a> Edit Task</h2>
+            <h2 class="page-title"><a class="btn btn-back" href="/task/<%= task._doc._id %>"><i class='bx bx-arrow-back'></i></a> Edit Task</h2>
             <form action="/edit-task" method="POST">
                 <div class="form-control">
                     <label for="title">Title</label>
@@ -35,6 +35,7 @@
                     <% if(isAdmin || isAuthenticated) { %>
                         <div class="task-uploads">
                             <form action="">
+                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                                 <input type="file" id="imgUpload" name="img" accept="image/*" hidden>
                                 <label class="btn" for="imgUpload">Select image:</label>
                                 <input class="btn" type="submit" value="Upload">

@@ -26,7 +26,7 @@
                 <div class="column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">All Tasks <span class="circle tasks-all"></span></h3><a class="badge badge-minor" href="/tasks">View All Tasks</a>
+                            <h3 class="column-title flex align-center">All Tasks <span class="circle tasks-all"></span></h3><a class="badge badge-minor" href="/tasks/all">View All Tasks</a>
                         </div>
                         <p class="count"><%= tasks.length %> tasks</p>
                     </div>
@@ -58,31 +58,33 @@
                 <div class="column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">In Progress <span class="circle tasks-progress"></span></h3><a class="badge badge-moderate" href="/tasks">View All In Progress</a>
+                            <h3 class="column-title flex align-center">In Progress <span class="circle tasks-progress"></span></h3><a class="badge badge-moderate" href="/tasks/in-progress">View All In Progress</a>
                         </div>
                         <p class="count"><%= tasks.length %> tasks</p>
                     </div>
                 </div>
                 <% for(let task of tasks) {%>
-                    <a href="/task/<%= task._doc._id %>">
-                        <div class="card">
-                            <h4 class="card-title"><%= task._doc.title %></h4>
-                            <p class="card-description"><%= task.description %></p>
-                            <div class="card-badges">
-                                <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
-                                <% if(task._doc.severity === 'urgent') { %>
-                                    <span class="badge badge-urgent"><%= task._doc.severity %></span>
-                                <% } else if(task._doc.severity === 'moderate') { %>
-                                    <span class="badge badge-moderate"><%= task._doc.severity %></span>
-                                <% } else if (task._doc.severity === 'minor') { %>
-                                    <span class="badge badge-minor"><%= task._doc.severity %></span>
-                                <% } else { %>
-                                    <span class="badge"><%= task._doc.severity %></span>
-                                <% } %>
+                    <% if(task._doc.isActive) { %>
+                        <a href="/task/<%= task._doc._id %>">
+                            <div class="card">
+                                <h4 class="card-title"><%= task._doc.title %></h4>
+                                <p class="card-description"><%= task.description %></p>
+                                <div class="card-badges">
+                                    <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                    <% if(task._doc.severity === 'urgent') { %>
+                                        <span class="badge badge-urgent"><%= task._doc.severity %></span>
+                                    <% } else if(task._doc.severity === 'moderate') { %>
+                                        <span class="badge badge-moderate"><%= task._doc.severity %></span>
+                                    <% } else if (task._doc.severity === 'minor') { %>
+                                        <span class="badge badge-minor"><%= task._doc.severity %></span>
+                                    <% } else { %>
+                                        <span class="badge"><%= task._doc.severity %></span>
+                                    <% } %>
+                                </div>
+                                <p class="card-date"><%= task.createdAt %></p>
                             </div>
-                            <p class="card-date"><%= task.createdAt %></p>
-                        </div>
-                    </a>
+                        </a>
+                    <% } %>    
                 <% } %>
             </div>
 
@@ -90,31 +92,33 @@
                 <div class="column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">On Hold <span class="circle tasks-hold"></span></h3><a class="badge badge-urgent" href="/tasks">View All On Hold</a>
+                            <h3 class="column-title flex align-center">On Hold <span class="circle tasks-hold"></span></h3><a class="badge badge-urgent" href="/tasks/on-hold">View All On Hold</a>
                         </div>
                         <p class="count"><%= tasks.length %> tasks</p>
                     </div>
                 </div>
                 <% for(let task of tasks) {%>
-                    <a href="/task/<%= task._doc._id %>">
-                        <div class="card">
-                            <h4 class="card-title"><%= task._doc.title %></h4>
-                            <p class="card-description"><%= task.description %></p>
-                            <div class="card-badges">
-                                <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
-                                <% if(task._doc.severity === 'urgent') { %>
-                                    <span class="badge badge-urgent"><%= task._doc.severity %></span>
-                                <% } else if(task._doc.severity === 'moderate') { %>
-                                    <span class="badge badge-moderate"><%= task._doc.severity %></span>
-                                <% } else if (task._doc.severity === 'minor') { %>
-                                    <span class="badge badge-minor"><%= task._doc.severity %></span>
-                                <% } else { %>
-                                    <span class="badge"><%= task._doc.severity %></span>
-                                <% } %>
+                    <% if(task._doc.onHold) { %>
+                        <a href="/task/<%= task._doc._id %>">
+                            <div class="card">
+                                <h4 class="card-title"><%= task._doc.title %></h4>
+                                <p class="card-description"><%= task.description %></p>
+                                <div class="card-badges">
+                                    <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                    <% if(task._doc.severity === 'urgent') { %>
+                                        <span class="badge badge-urgent"><%= task._doc.severity %></span>
+                                    <% } else if(task._doc.severity === 'moderate') { %>
+                                        <span class="badge badge-moderate"><%= task._doc.severity %></span>
+                                    <% } else if (task._doc.severity === 'minor') { %>
+                                        <span class="badge badge-minor"><%= task._doc.severity %></span>
+                                    <% } else { %>
+                                        <span class="badge"><%= task._doc.severity %></span>
+                                    <% } %>
+                                </div>
+                                <p class="card-date"><%= task.createdAt %></p>
                             </div>
-                            <p class="card-date"><%= task.createdAt %></p>
-                        </div>
-                    </a>
+                        </a>
+                    <% } %>
                 <% } %>
             </div>
 
@@ -122,31 +126,33 @@
                 <div class="column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">Complete<span class="circle tasks-complete"></span></h3><a class="badge badge-complete" href="/tasks">View All Completed</a>
+                            <h3 class="column-title flex align-center">Complete<span class="circle tasks-complete"></span></h3><a class="badge badge-complete" href="/tasks/complete">View All Completed</a>
                         </div>
                         <p class="count"><%= tasks.length %> tasks</p>
                     </div>
                 </div>
                 <% for(let task of tasks) {%>
-                    <a href="/task/<%= task._doc._id %>">
-                        <div class="card">
-                            <h4 class="card-title"><%= task._doc.title %></h4>
-                            <p class="card-description"><%= task.description %></p>
-                            <div class="card-badges">
-                                <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
-                                <% if(task._doc.severity === 'urgent') { %>
-                                    <span class="badge badge-urgent"><%= task._doc.severity %></span>
-                                <% } else if(task._doc.severity === 'moderate') { %>
-                                    <span class="badge badge-moderate"><%= task._doc.severity %></span>
-                                <% } else if (task._doc.severity === 'minor') { %>
-                                    <span class="badge badge-minor"><%= task._doc.severity %></span>
-                                <% } else { %>
-                                    <span class="badge"><%= task._doc.severity %></span>
-                                <% } %>
+                    <% if(task._doc.isCompleted) { %>
+                        <a href="/task/<%= task._doc._id %>">
+                            <div class="card">
+                                <h4 class="card-title"><%= task._doc.title %></h4>
+                                <p class="card-description"><%= task.description %></p>
+                                <div class="card-badges">
+                                    <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                    <% if(task._doc.severity === 'urgent') { %>
+                                        <span class="badge badge-urgent"><%= task._doc.severity %></span>
+                                    <% } else if(task._doc.severity === 'moderate') { %>
+                                        <span class="badge badge-moderate"><%= task._doc.severity %></span>
+                                    <% } else if (task._doc.severity === 'minor') { %>
+                                        <span class="badge badge-minor"><%= task._doc.severity %></span>
+                                    <% } else { %>
+                                        <span class="badge"><%= task._doc.severity %></span>
+                                    <% } %>
+                                </div>
+                                <p class="card-date"><%= task.createdAt %></p>
                             </div>
-                            <p class="card-date"><%= task.createdAt %></p>
-                        </div>
-                    </a>
+                        </a>
+                    <% } %>
                 <% } %>
             </div>
         </section>

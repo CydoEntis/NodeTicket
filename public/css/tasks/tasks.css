@@ -1,7 +1,12 @@
 @import "../variables.css";
 
-.page-title {
-  
+.tasks {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tasks .card {
+  margin: 10px;
 }
 
 .task-detail {
@@ -73,6 +78,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.task-btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .task-btns .btn {

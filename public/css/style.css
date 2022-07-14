@@ -12,6 +12,7 @@
 @import "./tables/tables.css";
 @import "./badges/badge.css";
 @import "./tasks/tasks.css";
+@import "./panels/panels.css";
 
 * {
 	margin: 0;
@@ -73,7 +74,9 @@ body {
 }
 
 .page-title {
-	font-size: 3rem;
+	font-size: 2.5rem;
+	display: flex;
+	align-items: center;
 }
 
 .page-description {
@@ -107,65 +110,3 @@ body {
 	bottom: 10%;
 	width: 300px;
 }
-
-/* #logo {
-  color: var(--primary-text);
-  font-size: 1.75rem;
-  margin-right: 2rem;
-}
-
-.flipped {
-  display: inline-block;
-  transform: scale(-1, 1);
-  color: var(--secondary-accent);
-  -moz-transform: scale(-1, 1);
-  -webkit-transform: scale(-1, 1);
-  -o-transform: scale(-1, 1);
-  -ms-transform: scale(-1, 1);
-} */
-
-.container {
-	width: 85%;
-	margin: 0 auto;
-	padding-top: 50px;
-}
-
-.landing__cta {
-	width: 800px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
-}
-
-/* Main */
-/* .container {
-	min-width: 350px;
-	width: 800px;
-	height: 350px;
-	text-align: center;
-}
-
-.centered {
-	position: absolute;
-	top: 25%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.app__title {
-  font-size: 4rem;
-  letter-spacing: .35rem;
-}
-
-.app__desc {
-  color: var(--color-grey);
-  font-size: 1.2rem;
-}
-
-
-.cta__wrapper-btns {
-	min-width: 350px;
-	display: flex;
-} */

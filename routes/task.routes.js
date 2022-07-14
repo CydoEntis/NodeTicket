@@ -4,12 +4,12 @@ const taskController = require("../controllers/task/task.controller")
 
 const taskRoutes = express.Router();
 
-taskRoutes.get("/", taskController.getIndex);
-taskRoutes.get("/tasks", taskController.getTasks);
-taskRoutes.get("/my-tasks", taskController.getCurrentUsersTasks);
-taskRoutes.get("/urgent-tasks", taskController.getUrgentTasks);
-taskRoutes.get("/moderate-tasks", taskController.getModerateTasks);
-taskRoutes.get("/minor-tasks", taskController.getMinorTasks);
+taskRoutes.get("/tasks", taskController.getIndex);
+taskRoutes.get("/tasks/all", taskController.getTasks);
+taskRoutes.get("/tasks/mine", taskController.getCurrentUsersTasks);
+taskRoutes.get("/tasks/in-progress", taskController.getInProgressTasks);
+taskRoutes.get("/tasks/on-hold", taskController.getOnHoldTasks);
+taskRoutes.get("/tasks/complete", taskController.getCompletedTasks);
 taskRoutes.get("/task/:id", taskController.getTask);
 taskRoutes.get("/create-task", taskController.getCreateTask);
 taskRoutes.post("/create-task", taskController.postCreateTask);

@@ -2,6 +2,7 @@
 
 .card {
   max-width: 400px;
+  min-width: 400px;
   min-height: 200px;
   color: var(--txt-secondary);
   padding: 1.5rem 2rem;

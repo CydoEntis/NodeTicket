@@ -32,11 +32,14 @@ const taskSchema = new Schema(
 			type: Boolean,
 			default: true,
 		},
-		completed: {
+		isCompleted: {
 			type: Boolean,
 			default: false,
 		},
 		isReviewing: {
+			type: Boolean
+		},
+		isOnHold: {
 			type: Boolean
 		}
 	},

@@ -17,3 +17,9 @@
 	display: block;
 	margin: 0 auto;
 }
+
+.btn-back {
+	font-size: 1.25rem;
+	padding: 5px 10px;
+	margin-right: 10px;
+}

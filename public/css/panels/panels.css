@@ -1,0 +1,10 @@
+@import "../variables.css";
+
+.panel {
+
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+}

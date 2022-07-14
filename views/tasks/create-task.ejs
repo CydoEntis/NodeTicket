@@ -4,7 +4,7 @@
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
-            <form action="/add-ticket" method="POST">
+            <form action="/create-task" method="POST">
                 <div class="form-control">
                     <label for="title">Title</label>
                     <input type="text" placeholder="Enter the tasks title" id="title" name="title">
@@ -13,9 +13,19 @@
                     <label for="description">Description</label>
                     <textarea name="description"></textarea>
                 </div>
-                <div class="form-control">
-                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                    <button type="submit" class="btn btn__cta">Submit Ticket</button>
+                <div class="task-controls">
+                    <% if(isAdmin || isAuthenticated) { %>
+                        <div class="task-uploads">
+                            <form action="">
+                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                <input type="file" id="imgUpload" name="img" accept="image/*" hidden>
+                                <label class="btn" for="imgUpload">Select image:</label>
+                                <input class="btn" type="submit" value="Upload">
+                            </form>
+                        </div>
+                                <button type="submit" class="btn btn__cta">Submit Ticket</button>
+                        </div>
+                    <% } %>
                 </div>
             </form>
         </section>

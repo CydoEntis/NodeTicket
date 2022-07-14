@@ -1,19 +1,13 @@
 const Task = require('../../models/task/task.model');
 const User = require('../../models/user/user.model');
-const { formatDate, getCompletedTasks } = require('../../utils/util');
+const { formatDate } = require('../../utils/util');
 
 function getIndex(req, res, next) {
-	res.render('tasks/tasks');
-}
-
-function getTasks(req, res, next) {
 	const formattedTasks = [];
-	let completedTasks = 0;
 	Task.find({ pending: false })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
-				completedTasks = getCompletedTasks(tasks);
 				const formattedDate = formatDate(task.createdAt);
 				let formattedDesc = task.description.substring(0, 50);
 				if(formattedDesc.length >= 50) {
@@ -25,26 +19,53 @@ function getTasks(req, res, next) {
 					description: formattedDesc
 				};
 				formattedTasks.push(formattedTask);
-				console.log(formattedTasks)
 			}
+			console.log(formattedTasks);
+			console.log(req.user._id);
 		})
 		.then((result) => {
 			res.render('tasks/tasks', {
 				tasks: formattedTasks,
-				taskCount: completedTasks,
+				title: 'Tasks',
+				userId: req.user._id,
+			});
+		});
+}
+
+function getTasks(req, res, next) {
+	const formattedTasks = [];
+	Task.find({ pending: false })
+		.sort({ createdAt: -1 })
+		.then((tasks) => {
+			for (let task of tasks) {
+				const formattedDate = formatDate(task.createdAt);
+				let formattedDesc = task.description.substring(0, 50);
+				if(formattedDesc.length >= 50) {
+					formattedDesc += "...";
+				}
+				const formattedTask = {
+					...task,
+					createdAt: formattedDate,
+					description: formattedDesc
+				};
+				formattedTasks.push(formattedTask);
+			}
+		})
+		.then((result) => {
+			res.render('tasks/tasks-view', {
+				tasks: formattedTasks,
 				title: 'All Tasks',
+				userId: req.user._id,
 			});
 		});
 }
 
 function getCurrentUsersTasks(req, res, next) {
 	const formattedTasks = [];
-	let completedTasks = 0;
 	Task.find({ assingedTo: req.user._id, pending: false  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
-				completedTasks = getCompletedTasks(tasks);
 				const formattedDate = formatDate(task.createdAt);
 				const formattedTask = {
 					...task,
@@ -55,22 +76,20 @@ function getCurrentUsersTasks(req, res, next) {
 			console.log("Task Count", tasks.length)
 		})
 		.then((result) => {
-			res.render('tasks/tasks', {
+			res.render('tasks/tasks-view', {
 				tasks: formattedTasks,
-				taskCount: completedTasks,
 				title: 'My Tasks',
+				userId: req.user._id,
 			});
 		});
 }
 
-function getUrgentTasks(req, res, next) {
+function getInProgressTasks(req, res, next) {
 	const formattedTasks = [];
-	let completedTasks = 0;
 	Task.find({ severity: 'urgent', pending: false  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
-				completedTasks = getCompletedTasks(tasks);
 				const formattedDate = formatDate(task.createdAt);
 				const formattedTask = {
 					...task,
@@ -80,22 +99,20 @@ function getUrgentTasks(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tasks/tasks', {
+			res.render('tasks/tasks-view', {
 				tasks: formattedTasks,
-				taskCount: completedTasks,
-				title: 'Urgent Tasks',
+				title: 'In Progress',
+				userId: req.user._id,
 			});
 		});
 }
 
-function getModerateTasks(req, res, next) {
+function getOnHoldTasks(req, res, next) {
 	const formattedTasks = [];
-	let completedTasks = 0;
 	Task.find({ severity: 'moderate', pending: false  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
-				completedTasks = getCompletedTasks(tasks);
 				const formattedDate = formatDate(task.createdAt);
 				const formattedTask = {
 					...task,
@@ -105,22 +122,20 @@ function getModerateTasks(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tasks/tasks', {
+			res.render('tasks/tasks-view', {
 				tasks: formattedTasks,
-				taskCount: completedTasks,
-				title: 'Moderate Tasks',
+				title: 'On Hold',
+				userId: req.user._id,
 			});
 		});
 }
 
-function getMinorTasks(req, res, next) {
+function getCompletedTasks(req, res, next) {
 	const formattedTasks = [];
-	let completedTasks = 0;
 	Task.find({ severity: 'minor', pending: false  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
-				completedTasks = getCompletedTasks(tasks);
 				const formattedDate = formatDate(task.createdAt);
 				const formattedTask = {
 					...task,
@@ -130,10 +145,10 @@ function getMinorTasks(req, res, next) {
 			}
 		})
 		.then((result) => {
-			res.render('tasks/tasks', {
+			res.render('tasks/tasks-view', {
 				tasks: formattedTasks,
-				taskCount: completedTasks,
-				title: 'Minor Tasks',
+				title: 'Completed',
+				userId: req.user._id,
 			});
 		});
 }
@@ -256,9 +271,9 @@ module.exports = {
 	getIndex,
 	getTasks,
 	getCurrentUsersTasks,
-	getUrgentTasks,
-	getModerateTasks,
-	getMinorTasks,
+	getInProgressTasks,
+	getOnHoldTasks,
+	getCompletedTasks,
 	getTask,
 	getCreateTask,
 	postCreateTask,

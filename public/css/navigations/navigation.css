@@ -1,6 +1,11 @@
 @import "../variables.css";
 
-.nav__split {
+.logo {
+	color: var(--accent);
+	font-size: 2rem;
+}
+
+.nav-links {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -8,30 +13,30 @@
 	padding: 1rem 1.5rem;
 }
 
-.nav__section {
+.nav-section {
 	display: flex;
 	align-items: center;
 }
 
-.nav__section li {
+.nav-section li {
 	margin: 0 0.8rem;
 	list-style: none;
 }
 
-.nav__section li a {
+.nav-section li a {
 	text-decoration: none;
-	color: #c6c6c8;
+	color: var(--txt-primary);
 	font-size: 1.2rem;
 	display: flex;
 	align-items: center;
     transition: ease-in-out all 300ms;
 }
 
-.nav__section li a:hover {
-	color: var(--secondary-accent);
+.nav-section li a:hover {
+	color: var(--accent);
 }
 
-.nav__section i {
+.nav-section i {
 	font-size: 1.5rem;
 	margin: 0 5px;
 }
