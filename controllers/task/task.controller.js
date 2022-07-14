@@ -86,7 +86,7 @@ function getCurrentUsersTasks(req, res, next) {
 
 function getInProgressTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ severity: 'urgent', pending: false  })
+	Task.find({ inProgress: true, pending: false  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -107,9 +107,20 @@ function getInProgressTasks(req, res, next) {
 		});
 }
 
+async function postSetTaskInProgress(req, res, next) {
+	const taskId = req.body.id;
+	const task = await Task.findById(taskId);
+	
+	task.isOnHold = false;
+
+	await task.save();
+
+	res.redirect('/tasks');
+}
+
 function getOnHoldTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ severity: 'moderate', pending: false  })
+	Task.find({ isOnHold: true, pending: false  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -130,9 +141,20 @@ function getOnHoldTasks(req, res, next) {
 		});
 }
 
+async function postSetTaskOnHold(req, res, next) {
+	const taskId = req.body.id;
+	const task = await Task.findById(taskId);
+	
+	task.isOnHold = true;
+
+	await task.save();
+
+	res.redirect('/tasks');
+}
+
 function getCompletedTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ severity: 'minor', pending: false  })
+	Task.find({ isComplete: true, pending: false  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -194,7 +216,6 @@ function postCreateTask(req, res, next) {
 
 function getEditTask(req, res, next) {
 	const taskId = req.params.id;
-	let foundTask = {};
 
 	Task.findById(taskId)
 		.then((task) => {
@@ -222,11 +243,13 @@ async function postEditTask(req, res, next) {
 
 	const task = await Task.findById(taskId);
 
+
 	task.title = updatedTitle;
 	task.description = updatedDescription;
 	task.severity = severity;
 	task.assignedTo = assignedTo;
 	task.pending = false;
+	task.inProgress = true;
 
 	await task.save();
 
@@ -249,7 +272,7 @@ async function postCompleteTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 
-	task.completed = true;
+	task.isCompleted = true;
 
 	await task.save();
 
@@ -272,7 +295,9 @@ module.exports = {
 	getTasks,
 	getCurrentUsersTasks,
 	getInProgressTasks,
+	postSetTaskInProgress,
 	getOnHoldTasks,
+	postSetTaskOnHold,
 	getCompletedTasks,
 	getTask,
 	getCreateTask,

@@ -31,11 +31,28 @@
                 </div>
                 <div class="task-btns">
                     <% if(isAdmin || isAuthenticated) { %>
-                        <a href="/edit-task/<%= task._doc._id %>"class="btn">Edit</a>
-                        <% if(task._doc.isActive) { %>
-                            <a href="/set-on-hold"class="btn">Put On Hold</a>
-                        <% } else {%>
-                            <a href="/set-in-progress"class="btn">Set In Progress</a>
+                            <% if(!task._doc.isCompleted) { %>
+                                <a href="/edit-task/<%= task._doc._id %>"class="btn">Edit</a>
+                            <% if(task._doc.assignedTo && !task._doc.isOnHold) { %>
+                                <form action="/task/set-on-hold" method="POST">
+                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                    <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                    <button type="submit" class="btn">Put On Hold</button>
+                                </form>
+                            <% } else {%>
+                                <form action="/task/set-in-progress" method="POST">
+                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                    <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                    <button type="submit" class="btn">Set In Progress</button>
+                                </form>
+                            <% } %>
+                            <% if(!task._doc.isOnHold) {%>
+                                <form action="/task/complete-task" method="POST">
+                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                    <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                    <button type="submit" class="btn">Complete</button>
+                                </form>
+                            <% } %>
                         <% } %>
                     <% } %>
                 </div>

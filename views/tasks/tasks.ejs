@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <% for(let task of tasks) {%>
-                    <% if(task._doc.isActive) { %>
+                    <% if(task._doc.assignedTo && !task._doc.isOnHold && !task._doc.isCompleted) { %>
                         <a href="/task/<%= task._doc._id %>">
                             <div class="card">
                                 <h4 class="card-title"><%= task._doc.title %></h4>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <% for(let task of tasks) {%>
-                    <% if(task._doc.onHold) { %>
+                    <% if(task._doc.isOnHold) { %>
                         <a href="/task/<%= task._doc._id %>">
                             <div class="card">
                                 <h4 class="card-title"><%= task._doc.title %></h4>
@@ -134,7 +134,7 @@
                 <% for(let task of tasks) {%>
                     <% if(task._doc.isCompleted) { %>
                         <a href="/task/<%= task._doc._id %>">
-                            <div class="card">
+                            <div class="card card-completed">
                                 <h4 class="card-title"><%= task._doc.title %></h4>
                                 <p class="card-description"><%= task.description %></p>
                                 <div class="card-badges">
