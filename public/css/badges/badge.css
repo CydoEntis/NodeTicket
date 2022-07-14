@@ -11,6 +11,11 @@
   font-size: .75rem;
   color: var(--bg-light);
   margin: 1rem 0;
+  transition: all 250ms ease-in-out;
+}
+
+.badge:hover {
+  opacity: .85;
 }
 
 .badge-minor {
@@ -23,4 +28,8 @@
 
 .badge-urgent {
   background-color: var(--color-red);
+}
+
+.badge-complete {
+  background-color: var(--color-green);
 }

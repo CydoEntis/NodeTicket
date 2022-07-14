@@ -1,5 +1,84 @@
 @import "../variables.css";
 
+.page-title {
+  
+}
+
+.task-detail {
+  max-width: 950px;
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.task-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-title {
+  font-size: 2rem;
+}
+
+.task-date {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--txt-secondary);
+}
+
+.task-severity .badge {
+  font-size: .95rem;
+  padding: 3px 15px;
+}
+
+.task-description {
+  margin: 10px 0;
+  font-size: 1.15rem;
+  min-height: 75px;
+  max-width: 950px;
+  overflow-wrap: break-word;
+}
+
+.task-images {
+  max-width: 950px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.task-images img {
+  max-width: 30%;
+  min-width: 250px;
+}
+
+.task-btns {
+  height: 75px;
+  max-width: 950px
+}
+
+.task-uploads {
+  font-size: .85rem;
+  margin: 10px 0;
+}
+
+.task-uploads form {
+  margin: 0;
+  padding: 0;
+}
+
+.task-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-btns .btn {
+  display: inline-block;
+}
+
 .circle {
   display: inline-block;
   width: 10px;
@@ -7,7 +86,7 @@
   border-radius: 50%;
   border: 2px solid transparent;
   background: transparent;
-  margin-left: 1rem;
+  margin: 0 1rem;
 }
 
 .tasks-all {
@@ -24,7 +103,7 @@
 
 }
 
-.tasks-done {
+.tasks-complete {
   border-color: var(--color-green);
 
 }

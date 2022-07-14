@@ -5,35 +5,32 @@
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
-            <div class="task__detail">
-                <h1 class="task__detail-title"><%= task._doc.title %></h1>
-                <div class="task__detail-info">
-                    <h3 class="task__detail-date"><%= task.createdAt %></h3>
-                    <div class="task__detail-severity">
-                        <p><%= task._doc.severity %></p>
+            <div class="task-detail">
+                <div class="task-header">
+                    <h1 class="task-title"><%= task._doc.title %></h1>
+                    <div class="task-severity">
+                        <% if(task._doc.severity === 'urgent') { %>
+                            <span class="badge badge-urgent"><%= task._doc.severity %></span>
+                        <% } else if(task._doc.severity === 'moderate') { %>
+                                <span class="badge badge-moderate"><%= task._doc.severity %></span>
+                        <% } else if (task._doc.severity === 'minor') { %>
+                            <span class="badge badge-minor"><%= task._doc.severity %></span>
+                        <% } else { %>
+                            <span class="badge"><%= task._doc.severity %></span>
+                        <% } %>
                     </div>
                 </div>
-                <p class="task__detail-description"><%= task._doc.description %></p>
-                <div>
-                    Photos...
+                <h3 class="task-date"><%= task.createdAt %></h3>
+
+                <p class="task-description"><%= task._doc.description %></p>
+                <div class="task-images">
+                    <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
+                    <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
+                    <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
                 </div>
-                <div class="task__detail-btns">
-                    <% if(isAdmin) { %>
-                        <a href="/edit-task/<%= task._doc._id %>"class="btn btn__edit">Edit</a>
-                    <% } %>
-                    <% if(!task._doc.completed && task._doc.completed) {%>
-                        <form action="/complete-task" method="POST">
-                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                            <input type="hidden" value="<%= task._doc._id %>" name="id">
-                            <button class="btn btn__complete" type="submit">Submit For Review</button>
-                        </form>
-                    <% } %>
-                    <% if(!task._doc.isReviewing) {%>
-                        <form action="/submit-for-review" method="POST">
-                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                            <input type="hidden" value="<%= task._doc._id %>" name="id">
-                            <button class="btn btn__complete" type="submit">Submit For Review</button>
-                        </form>
+                <div class="task-btns">
+                    <% if(isAdmin || isAuthenticated) { %>
+                        <a href="/edit-task/<%= task._doc._id %>"class="btn">Edit</a>
                     <% } %>
                 </div>
             </div>

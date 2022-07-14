@@ -12,13 +12,17 @@ function getTasks(req, res, next) {
 	Task.find({ pending: false })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
-			console.log(tasks);
 			for (let task of tasks) {
 				completedTasks = getCompletedTasks(tasks);
 				const formattedDate = formatDate(task.createdAt);
+				let formattedDesc = task.description.substring(0, 50);
+				if(formattedDesc.length >= 50) {
+					formattedDesc += "...";
+				}
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
+					description: formattedDesc
 				};
 				formattedTasks.push(formattedTask);
 				console.log(formattedTasks)
@@ -147,6 +151,7 @@ function getTask(req, res, next) {
 			};
 			res.render('tasks/task', {
 				task: foundTask,
+				user: req.user,
 			});
 		})
 		.catch((err) => console.error(err));

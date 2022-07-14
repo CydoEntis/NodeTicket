@@ -29,7 +29,7 @@
 }
 
 .card-description {
-
+  overflow-wrap: break-word;
 }
 
 .card-date {

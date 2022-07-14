@@ -1,16 +1,16 @@
 <%- include("../includes/header.ejs")%>
 </head>
 <body>
-    <%- include("../includes/navigation.ejs")%>
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
-            <form action="/edit-ticket" method="POST">
-                <div class="form__control">
+            <h2 class="page-title"><a class="btn" href="/task/<%= task._doc._id %>"><i class='bx bx-arrow-back'></i></a> Edit Task</h2>
+            <form action="/edit-task" method="POST">
+                <div class="form-control">
                     <label for="title">Title</label>
-                    <input type="text" placeholder="Enter name of ticket" id="title" name="title" value="<%= ticket._doc.title %>">
+                    <input type="text" value="<%= task._doc.title %>" id="title" name="title">
                 </div>
-                <div class="form__control">
+                <div class="form-control">
                     <label for="severity">Assign Severity</label>
                     <select name="severity">
                         <option value="urgent">Severe</option>
@@ -18,7 +18,7 @@
                         <option value="minor" >Minor</option>
                     </select>
                 </div>
-                <div class="form__control">
+                <div class="form-control">
                     <label for="user">Assign to</label>
                     <select name="user">
                         <option>Select A User</option>
@@ -27,19 +27,27 @@
                         <% } %>
                     </select>
                 </div>
-                <div class="form__control">
+                <div class="form-control">
                     <label for="description">Description</label>
-                    <textarea name="description"><%= ticket._doc.description %></textarea>
+                    <textarea name="description"><%= task._doc.description %></textarea>
                 </div>
-                <div class="form__control">
-                    <button type="submit" class="btn btn__cta">Update Ticket</button>
-                    <form action="/delete-ticket" method="POST">
-                        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                        <input type="hidden" value="<%= ticket._doc._id %>" name="id">
-                        <button class="btn btn__delete" type="submit">Delete</button>
-                    </form>
+                <div class="task-controls">
+                    <% if(isAdmin || isAuthenticated) { %>
+                        <div class="task-uploads">
+                            <form action="">
+                                <input type="file" id="imgUpload" name="img" accept="image/*" hidden>
+                                <label class="btn" for="imgUpload">Select image:</label>
+                                <input class="btn" type="submit" value="Upload">
+                            </form>
+                        </div>
+                        <div class="task-submit">
+                            <form action="">
+                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                <button type="submit" class="btn btn__cta">Submit Ticket</button>
+                            </form>
+                        </div>
+                    <% } %>
                 </div>
-   
             </form>
         </section>
     </main>
