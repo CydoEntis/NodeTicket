@@ -32,25 +32,27 @@
                     </div>
                 </div>
                 <% for(let task of tasks) {%>
-                    <a href="/task/<%= task._doc._id %>">
-                        <div class="card">
-                            <h4 class="card-title"><%= task._doc.title %></h4>
-                            <p class="card-description"><%= task.description %></p>
-                            <div class="card-badges">
-                                <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
-                                <% if(task._doc.severity === 'urgent') { %>
-                                    <span class="badge badge-urgent"><%= task._doc.severity %></span>
-                                <% } else if(task._doc.severity === 'moderate') { %>
-                                    <span class="badge badge-moderate"><%= task._doc.severity %></span>
-                                <% } else if (task._doc.severity === 'minor') { %>
-                                    <span class="badge badge-minor"><%= task._doc.severity %></span>
-                                <% } else { %>
-                                    <span class="badge"><%= task._doc.severity %></span>
-                                <% } %>
+                    <% if(!task._doc.isOnHold && !task._doc.isCompleted && !task._doc.isReviewing) { %>
+                        <a href="/task/<%= task._doc._id %>">
+                            <div class="card">
+                                <h4 class="card-title"><%= task._doc.title %></h4>
+                                <p class="card-description"><%= task.description %></p>
+                                <div class="card-badges">
+                                    <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                    <% if(task._doc.severity === 'urgent') { %>
+                                        <span class="badge badge-urgent"><%= task._doc.severity %></span>
+                                    <% } else if(task._doc.severity === 'moderate') { %>
+                                        <span class="badge badge-moderate"><%= task._doc.severity %></span>
+                                    <% } else if (task._doc.severity === 'minor') { %>
+                                        <span class="badge badge-minor"><%= task._doc.severity %></span>
+                                    <% } else { %>
+                                        <span class="badge"><%= task._doc.severity %></span>
+                                    <% } %>
+                                </div>
+                                <p class="card-date"><%= task.createdAt %></p>
                             </div>
-                            <p class="card-date"><%= task.createdAt %></p>
-                        </div>
-                    </a>
+                        </a>
+                    <% } %>
                 <% } %>
             </div>
 
@@ -64,7 +66,7 @@
                     </div>
                 </div>
                 <% for(let task of tasks) {%>
-                    <% if(task._doc.assignedTo && !task._doc.isOnHold && !task._doc.isCompleted) { %>
+                    <% if(task._doc.assignedTo && !task._doc.isOnHold && !task._doc.isCompleted && !task._doc.isReviewing) { %>
                         <a href="/task/<%= task._doc._id %>">
                             <div class="card">
                                 <h4 class="card-title"><%= task._doc.title %></h4>

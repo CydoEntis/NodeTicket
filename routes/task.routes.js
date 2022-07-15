@@ -19,7 +19,7 @@ taskRoutes.get("/edit-task/:id", taskController.getEditTask);
 taskRoutes.post("/edit-task", taskController.postEditTask)
 taskRoutes.post("/delete-task", taskController.postDeleteTask);
 taskRoutes.post("/task/complete-task", taskController.postCompleteTask);
-taskRoutes.post("/submit-for-review", taskController.postTaskForReview);
+taskRoutes.post("/task/submit-for-review", taskController.postTaskForReview);
 
 module.exports = taskRoutes;
 

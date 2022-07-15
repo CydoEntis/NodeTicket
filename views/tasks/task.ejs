@@ -47,10 +47,10 @@
                                 </form>
                             <% } %>
                             <% if(!task._doc.isOnHold) {%>
-                                <form action="/task/complete-task" method="POST">
+                                <form action="/task/submit-for-review" method="POST">
                                     <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                                     <input type="hidden" value="<%= task._doc._id %>" name="id">
-                                    <button type="submit" class="btn">Complete</button>
+                                    <button type="submit" class="btn">Submit For Review</button>
                                 </form>
                             <% } %>
                         <% } %>

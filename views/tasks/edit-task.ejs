@@ -21,10 +21,10 @@
                 </div>
                 <div class="form-control">
                     <label for="user">Assign to</label>
-                    <select name="user">
+                    <select name="userInfo">
                         <option>Select A User</option>
                         <% for(let user of users) {%>
-                            <option value="<%= user._id %>"><%= user.username %></option>
+                            <option value="<%= user.username %>+<%= user._id %>" for="userInfo"><%= user.username %></option>
                         <% } %>
                     </select>
                 </div>
@@ -44,7 +44,7 @@
                         </div> -->
                         <div class="task-submit">
                             <% if(isAdmin) {%>
-                                    <% if(!task._doc.isOnHold && task.assignedTo) {%>
+                                    <% if(!task._doc.isOnHold && task._doc.assignedTo.userId) {%>
                                         <button type="submit" class="btn btn__cta">Set On Hold</button>
                                     <% } else { %>
                                         <button type="submit" class="btn btn__cta">Process Ticket</button>

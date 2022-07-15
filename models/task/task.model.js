@@ -20,13 +20,24 @@ const taskSchema = new Schema(
 			default: Date.now,
 		},
 		createdBy: {
-			type: Schema.Types.ObjectId,
-			ref: 'User',
-			required: true,
+			username: {
+				type: String,
+				required: true,
+			},
+			userId: {
+				type: Schema.Types.ObjectId,
+				required: true,
+				ref: 'User'
+			}
 		},
 		assignedTo: {
-			type: Schema.Types.ObjectId,
-			ref: 'User',
+			username: {
+				type: String,
+			},
+			userId: {
+				type: Schema.Types.ObjectId,
+				ref: 'User'
+			}
 		},
 		pending: {
 			type: Boolean,

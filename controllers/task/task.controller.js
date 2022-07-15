@@ -201,12 +201,15 @@ function getCreateTask(req, res, next) {
 function postCreateTask(req, res, next) {
 	const title = req.body.title;
 	const description = req.body.description;
-
+	console.log(req.user);
 	const task = new Task({
 		title: title,
 		severity: undefined,
 		description: description,
-		createdBy: req.user,
+		createdBy: {
+			username: req.user.username,
+			userId: req.user
+		}
 	});
 
 	task.save().then((result) => {
@@ -239,10 +242,14 @@ async function postEditTask(req, res, next) {
 	const updatedTitle = req.body.title;
 	const updatedDescription = req.body.description;
 	const severity = req.body.severity;
-	const assignedTo = req.body.user;
+
+	const userData = req.body.userInfo.split("+");
+	const assignedTo = {
+		username: userData[0],
+		userId: userData[1]
+	}
 
 	const task = await Task.findById(taskId);
-
 
 	task.title = updatedTitle;
 	task.description = updatedDescription;
@@ -283,11 +290,17 @@ async function postTaskForReview(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 
-	task.isReviewing = true;
+	console.log(req.body);
 
-	await task.save();
+	// task.isReviewing = true;
+	// task.assignedTo = {
+	// 	username: req.body.user.username,
+	// 	userId: req.body.user._id
+	// }
 
-	res.redirect('/admin');
+	// await task.save();
+
+	// res.redirect('/tasks');
 }
 
 module.exports = {

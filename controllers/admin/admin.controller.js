@@ -7,13 +7,11 @@ async function getAdminPanel(req, res, next) {
 	const formattedTasks = [];
 	const tasks = await Task.find().sort({createdAt: -1}).limit(20);
 	for (let task of tasks) {
-		const user = await User.find({ _id: task.createdBy });
+		console.log(task);
 		const formattedDate = formatDate(task.createdAt);
-
 		const formattedTask = {
 			...task,
 			createdAt: formattedDate,
-			createdBy: user[0].username,
 		};
 		formattedTasks.push(formattedTask);
 	}
@@ -50,7 +48,6 @@ async function getAssignedTasks(req, res, next) {
 	for (let task of tasks) {
 		const createdBy = await User.find({ _id: task.createdBy });
 		const assignedTo = await User.find({ _id: task.assignedTo });
-
 		const formattedDate = formatDate(task.createdAt);
 
 		const formattedTask = {
