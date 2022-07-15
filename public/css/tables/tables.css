@@ -14,8 +14,7 @@
 }
 
 .admin-table tr td {
-  margin: 10px;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 .admin-table tr:first-of-type {

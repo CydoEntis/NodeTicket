@@ -10,10 +10,10 @@
             <section class="">
                 <table class="admin-table">
                     <div class="admin-controls">
-                        <a class="badge badge-minor"href="">All Tasks</a>
-                        <a class="badge badge-moderate"href="">In Progress</a>
-                        <a class="badge badge-urgent"href="">On Hold</a>
-                        <a class="badge badge-complete"href="">Completed</a>
+                        <a class="badge badge-blue"href="">All Tasks</a>
+                        <a class="badge badge-orange"href="">In Progress</a>
+                        <a class="badge badge-red"href="">On Hold</a>
+                        <a class="badge badge-green"href="">Completed</a>
                     </div>
                     <tr>
                         <th>Date</th>
@@ -29,21 +29,23 @@
                         <td><%= task._doc.title %></td>
                         <td><%= task._doc.createdBy.username %></td>
                         <% if(!task._doc.assignedTo.userId) { %>
-                            <td class="indicator indicator-warning">Pending</td>
+                            <td><span class="badge badge-grey">Not Assigned</span></td>
                         <% } else { %>
-                            <td class="indicator indicator-ok"><%= task._doc.assignedTo.username %></td>
+                            <td><%= task._doc.assignedTo.username %></td>
                         <% } %>
 
-                        <% if(!task._doc.assignedTo.userId) { %>
-                            <td class="indicator indicator-warning">Not Assigned</td>
-                        <% } else if(task._doc.completed && task._doc.assignedTo.userId) { %>
-                            <td class="indicator indicator-success">Completed</td>
-                        <% } else if(task._doc.isOnHold) { %>
-                            <td class="indicator indicator-error">On Hold</td>
-                        <% } else if(task._doc.assignedTo.userId && !task._doc.completed) { %>
-                            <td class="indicator indicator-ok">In Progress</td>
+                        <% if(task._doc.status === "pending") { %>
+                            <td><span class="badge badge-grey">Pending</span></td>
+                        <% } else if(task._doc.status === "active") { %>
+                            <td><span class="badge badge-orange">Active</span></td>
+                        <% } else if(task._doc.status === "hold") { %>
+                            <td><span class="badge badge-red">On Hold</span></td>
+                        <% } else if(task._doc.status === "complete") { %>
+                            <td><span class="badge badge-green">Complete</span></td>
+                        <% } else if(task._doc.status === "reviewing") {%>
+                            <td><span class="badge badge-blue">Needs Review</span></td>
                         <% } %>
-                        <td><a class="admin-link" href="/edit-task/<%= task._doc._id %>">Review</a></td>
+                        <td><a class="admin-link" href="/edit-task/<%= task._doc._id %>">View</a></td>
                     </tr>
                     <% } %>
                 </table>

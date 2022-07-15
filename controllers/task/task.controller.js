@@ -78,28 +78,6 @@ function getTasks(req, res, next) {
 		});
 }
 
-function getCurrentUsersTasks(req, res, next) {
-	const formattedTasks = [];
-	Task.find({ assingedTo: req.user._id  })
-		.sort({ createdAt: -1 })
-		.then((tasks) => {
-			for (let task of tasks) {
-				const formattedDate = formatDate(task.createdAt);
-				const formattedTask = {
-					...task,
-					createdAt: formattedDate,
-				};
-				formattedTasks.push(formattedTask);
-			}
-		})
-		.then((result) => {
-			res.render('tasks/tasks-view', {
-				tasks: formattedTasks,
-				title: 'My Tasks',
-				userId: req.user._id,
-			});
-		});
-}
 
 function getActiveTasks(req, res, next) {
 	const formattedTasks = [];
@@ -171,7 +149,7 @@ async function postHoldTask(req, res, next) {
 
 function getCompletedTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ isComplete: true, pending: false  })
+	Task.find({ status: "complete"  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -337,7 +315,6 @@ async function postTaskForReview(req, res, next) {
 module.exports = {
 	getIndex,
 	getTasks,
-	getCurrentUsersTasks,
 	getActiveTasks,
 	postActiveTask,
 	getHoldTasks,

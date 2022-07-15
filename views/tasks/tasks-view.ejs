@@ -30,23 +30,87 @@
                 <div class="tasks">
                     <% for(let task of tasks) {%>
                         <a href="/task/<%= task._doc._id %>">
-                            <div class="card">
-                                <h4 class="card-title"><%= task._doc.title %></h4>
-                                <p class="card-description"><%= task.description %></p>
-                                <div class="card-badges">
-                                    <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
-                                    <% if(task._doc.severity === 'urgent') { %>
-                                        <span class="badge badge-urgent"><%= task._doc.severity %></span>
-                                    <% } else if(task._doc.severity === 'moderate') { %>
-                                        <span class="badge badge-moderate"><%= task._doc.severity %></span>
-                                    <% } else if (task._doc.severity === 'minor') { %>
-                                        <span class="badge badge-minor"><%= task._doc.severity %></span>
-                                    <% } else { %>
-                                        <span class="badge"><%= task._doc.severity %></span>
-                                    <% } %>
+                            <% if(task._doc.status === "active" ) { %>
+                                <div class="card card-active">
+                                    <h4 class="card-title"><%= task._doc.title %></h4>
+                                    <p class="card-description"><%= task.description %></p>
+                                    <div class="card-badges">
+                                        <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                        <% if(task._doc.priority === 'critical') { %>
+                                            <span class="badge badge-red"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'important') { %>
+                                            <span class="badge badge-orange"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'normal') { %>
+                                            <span class="badge badge-green"><%= task._doc.priority %></span>
+                                        <% } else if (task._doc.priority === 'low') { %>
+                                            <span class="badge badge-blue"><%= task._doc.priority %></span>
+                                        <% } else { %>
+                                            <span class="badge"><%= task._doc.priority %></span>
+                                        <% } %>
+                                    </div>
+                                    <p class="card-date"><%= task.createdAt %></p>
                                 </div>
-                                <p class="card-date"><%= task.createdAt %></p>
-                            </div>
+                            <% } else if(task._doc.status === "hold" ) { %>
+                                <div class="card card-hold">
+                                    <h4 class="card-title"><%= task._doc.title %></h4>
+                                    <p class="card-description"><%= task.description %></p>
+                                    <div class="card-badges">
+                                        <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                        <% if(task._doc.priority === 'critical') { %>
+                                            <span class="badge badge-red"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'important') { %>
+                                            <span class="badge badge-orange"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'important') { %>
+                                            <span class="badge badge-green"><%= task._doc.priority %></span>
+                                        <% } else if (task._doc.priority === 'low') { %>
+                                            <span class="badge badge-blue"><%= task._doc.priority %></span>
+                                        <% } else { %>
+                                            <span class="badge"><%= task._doc.priority %></span>
+                                        <% } %>
+                                    </div>
+                                    <p class="card-date"><%= task.createdAt %></p>
+                                </div>
+                            <% } else if(task._doc.status === "complete" ) { %>
+                                <div class="card card-completed">
+                                    <h4 class="card-title"><%= task._doc.title %></h4>
+                                    <p class="card-description"><%= task.description %></p>
+                                    <div class="card-badges">
+                                        <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                        <% if(task._doc.priority === 'critical') { %>
+                                            <span class="badge badge-red"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'important') { %>
+                                            <span class="badge badge-orange"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'important') { %>
+                                            <span class="badge badge-green"><%= task._doc.priority %></span>
+                                        <% } else if (task._doc.priority === 'low') { %>
+                                            <span class="badge badge-blue"><%= task._doc.priority %></span>
+                                        <% } else { %>
+                                            <span class="badge"><%= task._doc.priority %></span>
+                                        <% } %>
+                                    </div>
+                                    <p class="card-date"><%= task.createdAt %></p>
+                                </div>
+                            <% } else if(task._doc.status === "reviewing" ) { %>
+                                <div class="card card-reviewing">
+                                    <h4 class="card-title"><%= task._doc.title %></h4>
+                                    <p class="card-description"><%= task.description %></p>
+                                    <div class="card-badges">
+                                        <!-- TODO: Add a check for if task is less then a day old add a new badge. -->
+                                        <% if(task._doc.priority === 'critical') { %>
+                                            <span class="badge badge-red"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'important') { %>
+                                            <span class="badge badge-orange"><%= task._doc.priority %></span>
+                                        <% } else if(task._doc.priority === 'normal') { %>
+                                            <span class="badge badge-green"><%= task._doc.priority %></span>
+                                        <% } else if (task._doc.priority === 'low') { %>
+                                            <span class="badge badge-blue"><%= task._doc.priority %></span>
+                                        <% } else { %>
+                                            <span class="badge"><%= task._doc.priority %></span>
+                                        <% } %>
+                                    </div>
+                                    <p class="card-date"><%= task.createdAt %></p>
+                                </div>
+                            <% } %>
                         </a>
                     <% } %>
                 </div>
