@@ -66,14 +66,47 @@
                             </div> -->
                             <div class="task-submit">
                                 <% if(isAdmin) {%>
-                                        <% if(!task._doc.isOnHold && task._doc.assignedTo.userId) {%>
-                                            <button type="submit" class="btn btn__cta">Set On Hold</button>
-                                        <% } else { %>
-                                            <button type="submit" class="btn btn__cta">Process Ticket</button>
-                                        <% } %>
+                                    <% if(task._doc.status === "active") { %>
+                                        <form action="/task/set-on-hold" method="POST">
+                                            <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                            <button class="btn" type="submit">Set To Hold</button>
+                                        </form>
+                                    <% } else if (task._doc.status === "hold") {%>
+                                        <form action="/task/set-active" method="POST">
+                                            <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                            <button class="btn" type="submit">Set To Active</button>
+                                        </form>
+                                    <% } else if(task._doc.status === "reviewing") { %>
+                                        <form action="/task/task-complete" method="POST">
+                                            <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                            <button class="btn" type="submit">Mark Complete</button>
+                                        </form>
+                                    <% } %>
                                 <% } else { %>
-                                        <button type="submit" class="btn btn__cta">Submit Ticket</button>
-                                <% } %>
+                                    <% if(task._doc.status === "active") { %>
+                                        <form action="/task/set-on-hold" method="POST">
+                                            <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                            <button class="btn" type="submit">Set To Hold</button>
+                                        </form>
+                                        <% if(task._doc.status !== "reviewing") { %>
+                                            <form action="/task/submit-for-review" method="POST">
+                                                <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                                <button class="btn" type="submit">Submit For Review</button>
+                                            </form>
+                                        <% } %>
+                                    <% } else if (task._doc.status === "hold") {%>
+                                        <form action="/task/set-active" method="POST">
+                                            <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                            <button class="btn" type="submit">Set To Active</button>
+                                        </form>
+                                    <% } %>
+                                <% } %>    
                             </div>
                         <% } %>
                     </div>
