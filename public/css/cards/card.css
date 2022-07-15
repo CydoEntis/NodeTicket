@@ -7,6 +7,7 @@
   color: var(--txt-secondary);
   padding: 1.5rem 2rem;
   border-top: 2px solid var(--txt-primary);
+  margin: 1rem 0;
   /* margin: 10px 0; */
 
   transition: all ease-in-out 350ms;
@@ -33,6 +34,45 @@
 
 .card-completed:hover .card-title {
   color: var(--color-green);
+}
+
+.card-active {
+  background: #fff1e1;
+}
+
+.card-active:hover {
+  border-top: 2px solid var(--color-orange);
+  background: #fff1e1
+}
+
+.card-active:hover .card-title {
+  color: var(--color-orange);
+}
+
+.card-hold {
+  background: #F8D7DA;
+}
+
+.card-hold:hover {
+  border-top: 2px solid var(--color-red);
+  background: #ffebed;
+}
+
+.card-hold:hover .card-title {
+  color: var(--color-red);
+}
+
+.card-reviewing {
+  background: #eeeeee;
+}
+
+.card-reviewing:hover {
+  border-top: 2px solid var(--color-grey);
+  background: #eeeeee
+}
+
+.card-reviewing:hover .card-title {
+  color: var(--color-grey)
 }
 
 .card-title {

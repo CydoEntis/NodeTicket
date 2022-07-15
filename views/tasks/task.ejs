@@ -14,8 +14,8 @@
                             <span class="badge badge-red"><%= task._doc.priority %></span>
                         <% } else if(task._doc.priority === 'important') { %>
                             <span class="badge badge-orange"><%= task._doc.priority %></span>
-                        <% } else if(task._doc.priority === 'important') { %>
-                            <span class="badge badge-yellow"><%= task._doc.priority %></span>
+                        <% } else if(task._doc.priority === 'normal') { %>
+                            <span class="badge badge-green"><%= task._doc.priority %></span>
                         <% } else if (task._doc.priority === 'low') { %>
                             <span class="badge badge-blue"><%= task._doc.priority %></span>
                         <% } else { %>
@@ -32,29 +32,27 @@
                     <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
                 </div>
                 <div class="task-btns">
-                    <% if(isAdmin || isAuthenticated) { %>
-                            <% if(!task._doc.isCompleted) { %>
-                                <a href="/edit-task/<%= task._doc._id %>"class="btn">Edit</a>
-                            <% if(task._doc.assignedTo && !task._doc.isOnHold) { %>
-                                <form action="/task/set-on-hold" method="POST">
-                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                                    <input type="hidden" value="<%= task._doc._id %>" name="id">
-                                    <button type="submit" class="btn">Put On Hold</button>
-                                </form>
-                            <% } else {%>
-                                <form action="/task/set-active" method="POST">
-                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                                    <input type="hidden" value="<%= task._doc._id %>" name="id">
-                                    <button type="submit" class="btn">Set In Progress</button>
-                                </form>
-                            <% } %>
-                            <% if(!task._doc.isOnHold) {%>
+                    <% if(isAuthenticated) { %>
+
+                        <% if(task._doc.status === "active") { %>
+                            <form action="/task/set-on-hold" method="POST">
+                                <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                <button class="btn" type="submit">Set To Hold</button>
+                            </form>
+                            <% if(task._doc.status !== "reviewing") { %>
                                 <form action="/task/submit-for-review" method="POST">
-                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                                     <input type="hidden" value="<%= task._doc._id %>" name="id">
-                                    <button type="submit" class="btn">Submit For Review</button>
+                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                    <button class="btn" type="submit">Submit For Review</button>
                                 </form>
                             <% } %>
+                        <% } else if (task._doc.status === "hold") {%>
+                            <form action="/task/set-active" method="POST">
+                                <input type="hidden" value="<%= task._doc._id %>" name="id">
+                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                                <button class="btn" type="submit">Set To Active</button>
+                            </form>
                         <% } %>
                     <% } %>
                 </div>

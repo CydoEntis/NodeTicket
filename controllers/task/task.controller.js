@@ -29,7 +29,6 @@ function getIndex(req, res, next) {
 				} else if (task.status === "complete") {
 					completedTasks += 1;
 				}
-
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
@@ -129,7 +128,7 @@ async function postActiveTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 	
-	task.isOnHold = false;
+	task.status = "active"
 
 	await task.save();
 
