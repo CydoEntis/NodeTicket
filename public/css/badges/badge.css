@@ -18,18 +18,22 @@
   opacity: .85;
 }
 
-.badge-minor {
+.badge-yellow {
+  background-color: var(--color-yellow);
+}
+
+.badge-blue {
   background-color: var(--color-blue);
 }
 
-.badge-moderate {
+.badge-orange {
   background-color: var(--color-orange);
 }
 
-.badge-urgent {
+.badge-red {
   background-color: var(--color-red);
 }
 
-.badge-complete {
+.badge-green {
   background-color: var(--color-green);
 }

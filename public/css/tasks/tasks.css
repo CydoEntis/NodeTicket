@@ -23,8 +23,15 @@
   align-items: center;
 }
 
+.task-submission {
+  color: var(--txt-secondary);
+  font-style: italic;
+}
+
 .task-title {
-  font-size: 2rem;
+  font-size: 3.25rem;
+  text-transform: capitalize;
+  margin: 10px 0;
 }
 
 .task-date {
@@ -33,25 +40,28 @@
   color: var(--txt-secondary);
 }
 
-.task-severity .badge {
+.task-priority .badge {
   font-size: .95rem;
   padding: 3px 15px;
 }
 
 .task-description {
-  margin: 10px 0;
-  font-size: 1.15rem;
-  min-height: 75px;
+  margin: 2rem 0;
+  font-size: 1.25rem;
+  /* min-height: 200px; */
   max-width: 950px;
   overflow-wrap: break-word;
+
 }
 
 .task-images {
+  border-top: 1px solid var(--txt-secondary);
   max-width: 950px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;
+  padding: 25px 0;
 }
 
 .task-images img {

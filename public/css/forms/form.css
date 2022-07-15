@@ -1,10 +1,5 @@
 @import "../variables.css";
 
-form {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
 .form-title {
     font-size: 1.85rem;
     margin: 10px 0;
@@ -13,6 +8,7 @@ form {
 .form-control {
     display: flex;
     flex-direction: column;
+    margin: 1rem 0;
 }
 
 .form-control label {
@@ -72,3 +68,4 @@ select {
     display: inline-block;
     width: 150px;
 }
+

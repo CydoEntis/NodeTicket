@@ -1,40 +1,59 @@
+const ObjectId = require('mongodb').ObjectId; 
+
+const taskModel = require('../../models/task/task.model');
 const Task = require('../../models/task/task.model');
 const User = require('../../models/user/user.model');
 const { formatDate } = require('../../utils/util');
 
 function getIndex(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ pending: false })
+	let activeTasks = 0;
+	let holdTasks = 0;
+	let completedTasks = 0;
+	// Task.find({ 'assignedTo.userId': ObjectId(req.user._id) } )
+	Task.find()
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
+			console.log(tasks);
 			for (let task of tasks) {
 				const formattedDate = formatDate(task.createdAt);
 				let formattedDesc = task.description.substring(0, 50);
 				if(formattedDesc.length >= 50) {
 					formattedDesc += "...";
 				}
+
+				if(task.status === "active") {
+					activeTasks += 1;
+				} else if (task.status === "hold") {
+					holdTasks += 1;
+				} else if (task.status === "complete") {
+					completedTasks += 1;
+				}
+
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
 					description: formattedDesc
 				};
+
 				formattedTasks.push(formattedTask);
 			}
-			console.log(formattedTasks);
-			console.log(req.user._id);
 		})
 		.then((result) => {
 			res.render('tasks/tasks', {
 				tasks: formattedTasks,
 				title: 'Tasks',
 				userId: req.user._id,
+				activeTasks: activeTasks,
+				holdTasks: holdTasks,
+				completedTasks: completedTasks,
 			});
 		});
 }
 
 function getTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ pending: false })
+	Task.find({ status: "active" })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -62,7 +81,7 @@ function getTasks(req, res, next) {
 
 function getCurrentUsersTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ assingedTo: req.user._id, pending: false  })
+	Task.find({ assingedTo: req.user._id  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -73,7 +92,6 @@ function getCurrentUsersTasks(req, res, next) {
 				};
 				formattedTasks.push(formattedTask);
 			}
-			console.log("Task Count", tasks.length)
 		})
 		.then((result) => {
 			res.render('tasks/tasks-view', {
@@ -84,9 +102,9 @@ function getCurrentUsersTasks(req, res, next) {
 		});
 }
 
-function getInProgressTasks(req, res, next) {
+function getActiveTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ inProgress: true, pending: false  })
+	Task.find({ status: "active"  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -102,12 +120,12 @@ function getInProgressTasks(req, res, next) {
 			res.render('tasks/tasks-view', {
 				tasks: formattedTasks,
 				title: 'In Progress',
-				userId: req.user._id,
+				userId: req.user.userId,
 			});
 		});
 }
 
-async function postSetTaskInProgress(req, res, next) {
+async function postActiveTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 	
@@ -118,9 +136,9 @@ async function postSetTaskInProgress(req, res, next) {
 	res.redirect('/tasks');
 }
 
-function getOnHoldTasks(req, res, next) {
+function getHoldTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ isOnHold: true, pending: false  })
+	Task.find({ status: "hold"  })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -141,11 +159,11 @@ function getOnHoldTasks(req, res, next) {
 		});
 }
 
-async function postSetTaskOnHold(req, res, next) {
+async function postHoldTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 	
-	task.isOnHold = true;
+	task.status = "hold"
 
 	await task.save();
 
@@ -201,7 +219,6 @@ function getCreateTask(req, res, next) {
 function postCreateTask(req, res, next) {
 	const title = req.body.title;
 	const description = req.body.description;
-	console.log(req.user);
 	const task = new Task({
 		title: title,
 		severity: undefined,
@@ -209,12 +226,34 @@ function postCreateTask(req, res, next) {
 		createdBy: {
 			username: req.user.username,
 			userId: req.user
-		}
+		},
+		status: "pending"
 	});
 
 	task.save().then((result) => {
 		res.redirect('/tasks');
 	});
+}
+
+async function postAssignTask(req, res, next) {
+	const taskId = req.body.id;
+	const priority = req.body.priority;
+
+	const userData = req.body.userInfo.split("+");
+	const assignedTo = {
+		username: userData[0],
+		userId: userData[1]
+	}
+
+	const task = await Task.findById(taskId);
+
+	task.priority = priority;
+	task.assignedTo = assignedTo;
+	task.status = "active";
+
+	await task.save();
+
+	res.redirect('/admin');
 }
 
 function getEditTask(req, res, next) {
@@ -243,20 +282,19 @@ async function postEditTask(req, res, next) {
 	const updatedDescription = req.body.description;
 	const severity = req.body.severity;
 
-	const userData = req.body.userInfo.split("+");
-	const assignedTo = {
-		username: userData[0],
-		userId: userData[1]
-	}
+	// const userData = req.body.userInfo.split("+");
+	// const assignedTo = {
+	// 	username: userData[0],
+	// 	userId: userData[1]
+	// }
 
 	const task = await Task.findById(taskId);
 
 	task.title = updatedTitle;
 	task.description = updatedDescription;
 	task.severity = severity;
-	task.assignedTo = assignedTo;
-	task.pending = false;
-	task.inProgress = true;
+	// task.assignedTo = assignedTo;
+
 
 	await task.save();
 
@@ -279,7 +317,7 @@ async function postCompleteTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 
-	task.isCompleted = true;
+	task.status = "completed"
 
 	await task.save();
 
@@ -290,31 +328,26 @@ async function postTaskForReview(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 
-	console.log(req.body);
+	task.status = "reviewing"
 
-	// task.isReviewing = true;
-	// task.assignedTo = {
-	// 	username: req.body.user.username,
-	// 	userId: req.body.user._id
-	// }
+	await task.save();
 
-	// await task.save();
-
-	// res.redirect('/tasks');
+	res.redirect('/tasks');
 }
 
 module.exports = {
 	getIndex,
 	getTasks,
 	getCurrentUsersTasks,
-	getInProgressTasks,
-	postSetTaskInProgress,
-	getOnHoldTasks,
-	postSetTaskOnHold,
+	getActiveTasks,
+	postActiveTask,
+	getHoldTasks,
+	postHoldTask,
 	getCompletedTasks,
 	getTask,
 	getCreateTask,
 	postCreateTask,
+	postAssignTask,
 	getEditTask,
 	postEditTask,
 	postDeleteTask,

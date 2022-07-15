@@ -8,7 +8,7 @@ const taskSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		severity: {
+		priority: {
 			type: String,
 		},
 		description: {
@@ -39,20 +39,8 @@ const taskSchema = new Schema(
 				ref: 'User'
 			}
 		},
-		pending: {
-			type: Boolean,
-			default: true,
-		},
-		isCompleted: {
-			type: Boolean,
-			default: false,
-		},
-		isReviewing: {
-			type: Boolean
-		},
-		isOnHold: {
-			type: Boolean,
-			default: false,
+		status: {
+			type: String,
 		}
 	},
 	// {

@@ -6,15 +6,18 @@ const taskRoutes = express.Router();
 
 taskRoutes.get("/tasks", taskController.getIndex);
 taskRoutes.get("/tasks/all", taskController.getTasks);
-taskRoutes.get("/tasks/mine", taskController.getCurrentUsersTasks);
-taskRoutes.get("/task/in-progress", taskController.getInProgressTasks);
-taskRoutes.post("/task/set-in-progress", taskController.postSetTaskInProgress);
-taskRoutes.get("/task/on-hold", taskController.getOnHoldTasks);
-taskRoutes.post("/task/set-on-hold", taskController.postSetTaskOnHold);
-taskRoutes.get("/tasks/complete", taskController.getCompletedTasks);
-taskRoutes.get("/task/:id", taskController.getTask);
 taskRoutes.get("/create-task", taskController.getCreateTask);
 taskRoutes.post("/create-task", taskController.postCreateTask);
+taskRoutes.post("/assign-task", taskController.postAssignTask);
+
+
+taskRoutes.get("/tasks/mine", taskController.getCurrentUsersTasks);
+taskRoutes.get("/task/active", taskController.getActiveTasks);
+taskRoutes.post("/task/set-active", taskController.postActiveTask);
+taskRoutes.get("/task/on-hold", taskController.getHoldTasks);
+taskRoutes.post("/task/set-on-hold", taskController.postHoldTask);
+taskRoutes.get("/tasks/complete", taskController.getCompletedTasks);
+taskRoutes.get("/task/:id", taskController.getTask);
 taskRoutes.get("/edit-task/:id", taskController.getEditTask);
 taskRoutes.post("/edit-task", taskController.postEditTask)
 taskRoutes.post("/delete-task", taskController.postDeleteTask);
