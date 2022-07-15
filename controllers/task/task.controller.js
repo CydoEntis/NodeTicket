@@ -172,9 +172,8 @@ function getCompletedTasks(req, res, next) {
 
 function getTask(req, res, next) {
 	const taskId = req.params.id;
-
 	Task.findById(taskId)
-		.then((task) => {
+	.then((task) => {
 			const formattedDate = formatDate(task.createdAt);
 			const foundTask = {
 				...task,
@@ -247,6 +246,7 @@ function getEditTask(req, res, next) {
 				res.render('tasks/edit-task', {
 					task: foundTask,
 					users: users,
+					user: req.user,
 				});
 			});
 		})

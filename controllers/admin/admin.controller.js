@@ -20,70 +20,78 @@ async function getAdminPanel(req, res, next) {
 	});
 }
 
-async function getPendingTasks(req, res, next) {
+async function getActiveTasks(req, res, next) {
 	const formattedTasks = [];
-	const tasks = await Task.find({pending: true}).sort({createdAt: -1});
+	const tasks = await Task.find({status: 'active'}).sort({createdAt: -1});
 	for (let task of tasks) {
-		const user = await User.find({ _id: task.createdBy });
 
 		const formattedDate = formatDate(task.createdAt);
 
 		const formattedTask = {
 			...task,
 			createdAt: formattedDate,
-			createdBy: user[0].username,
 		};
 		formattedTasks.push(formattedTask);
 	}
 
-	res.render('admin/admin-task-review', {
+	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
-		title: "Pending"
+		title: "Active"
 	});
 }
 
-async function getAssignedTasks(req, res, next) {
+async function getHoldTasks(req, res, next) {
 	const formattedTasks = [];
-	const tasks = await Task.find({pending: false}).sort({createdAt: -1});
+	const tasks = await Task.find({status: "hold"}).sort({createdAt: -1});
 	for (let task of tasks) {
-		const createdBy = await User.find({ _id: task.createdBy });
-		const assignedTo = await User.find({ _id: task.assignedTo });
 		const formattedDate = formatDate(task.createdAt);
 
 		const formattedTask = {
 			...task,
 			createdAt: formattedDate,
-			createdBy: createdBy[0].username,
-			assingedTo: assignedTo[0].username,
 		};
 		formattedTasks.push(formattedTask);
 	}
 
-	res.render('admin/admin-task-review', {
+	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
-		title: "Assigned"
+		title: "Hold"
+	});
+}
+
+async function getReviewingTasks(req, res, next) {
+	const formattedTasks = [];
+	const tasks = await Task.find({status: "reviewing"}).sort({createdAt: -1});
+	for (let task of tasks) {
+		const formattedDate = formatDate(task.createdAt);
+
+		const formattedTask = {
+			...task,
+			createdAt: formattedDate,
+		};
+		formattedTasks.push(formattedTask);
+	}
+
+	res.render('admin/admin-panel', {
+		tasks: formattedTasks,
+		title: "Review"
 	});
 }
 
 async function getCompletedTasks(req, res, next) {
 	const formattedTasks = [];
-	const tasks = await Task.find({completed: true}).sort({createdAt: -1});
+	const tasks = await Task.find({status: "complete"}).sort({createdAt: -1});
 	for (let task of tasks) {
-		const createdBy = await User.find({ _id: task.createdBy });
-		const assignedTo = await User.find({ _id: task.assignedTo });
-
 		const formattedDate = formatDate(task.createdAt);
 
 		const formattedTask = {
 			...task,
 			createdAt: formattedDate,
-			createdBy: createdBy[0].username,
-			assingedTo: assignedTo[0].username,
 		};
 		formattedTasks.push(formattedTask);
 	}
 
-	res.render('admin/admin-task-review', {
+	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
 		title: "Completed"
 	});
@@ -91,7 +99,8 @@ async function getCompletedTasks(req, res, next) {
 
 module.exports = {
 	getAdminPanel,
-	getPendingTasks,
-	getAssignedTasks,
+	getActiveTasks,
+	getHoldTasks,
+	getReviewingTasks,
 	getCompletedTasks
 };

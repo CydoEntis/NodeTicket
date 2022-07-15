@@ -112,22 +112,12 @@ body {
 }
 
 
-.indicator {
-
+.edit {
+	font-size: 2rem;
+	color: var(--txt-secondary);
+	transition: all 300ms ease-in-out;
 }
 
-.indicator-success {
-	color: var(--color-green);
-}
-
-.indicator-warning {
-	color: var(--color-orange);
-}
-
-.indicator-ok {
-	color: var(--color-blue);
-}
-
-.indicator-error {
-	color: var(--color-red);
+.edit:hover {
+	opacity: .85;
 }
