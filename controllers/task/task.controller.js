@@ -12,7 +12,7 @@ function getIndex(req, res, next) {
 	let holdTasks = 0;
 	let completedTasks = 0;
 	// Task.find({ 'assignedTo.userId': ObjectId(req.user._id) } )
-	Task.find()
+	Task.find({ status: { '$ne': 'pending' }})
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			console.log(tasks);
@@ -53,7 +53,7 @@ function getIndex(req, res, next) {
 
 function getTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ status: 'active' })
+	Task.find({ status: { '$ne': 'pending' }})
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -86,9 +86,14 @@ function getActiveTasks(req, res, next) {
 		.then((tasks) => {
 			for (let task of tasks) {
 				const formattedDate = formatDate(task.createdAt);
+				let formattedDesc = task.description.substring(0, 50);
+				if (formattedDesc.length >= 50) {
+					formattedDesc += '...';
+				}
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
+					description: formattedDesc,
 				};
 				formattedTasks.push(formattedTask);
 			}
@@ -96,7 +101,7 @@ function getActiveTasks(req, res, next) {
 		.then((result) => {
 			res.render('tasks/tasks-view', {
 				tasks: formattedTasks,
-				title: 'In Progress',
+				title: 'Active',
 				userId: req.user.userId,
 			});
 		});
@@ -120,9 +125,14 @@ function getHoldTasks(req, res, next) {
 		.then((tasks) => {
 			for (let task of tasks) {
 				const formattedDate = formatDate(task.createdAt);
+				let formattedDesc = task.description.substring(0, 50);
+				if (formattedDesc.length >= 50) {
+					formattedDesc += '...';
+				}
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
+					description: formattedDesc,
 				};
 				formattedTasks.push(formattedTask);
 			}
@@ -154,9 +164,14 @@ function getCompletedTasks(req, res, next) {
 		.then((tasks) => {
 			for (let task of tasks) {
 				const formattedDate = formatDate(task.createdAt);
+				let formattedDesc = task.description.substring(0, 50);
+				if (formattedDesc.length >= 50) {
+					formattedDesc += '...';
+				}
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
+					description: formattedDesc,
 				};
 				formattedTasks.push(formattedTask);
 			}
