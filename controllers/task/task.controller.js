@@ -173,22 +173,31 @@ function getCompletedTasks(req, res, next) {
 async function getTask(req, res, next) {
 	const taskId = req.params.id;
 	const task = await Task.findById(taskId);
-	const comments = await Comment.find({taskId: taskId});
+	const comments = await Comment.find({taskId: taskId}).sort({ createdAt: -1 });
 
 	const formattedDate = formatDate(task.createdAt);
+	
 	const foundTask = {
 		...task,
 		// ...task.dataValues,
 		createdAt: formattedDate,
 	};
 
-	// console.log(comments);
-	console.log(foundTask);
+	const formattedComments = [];
+
+	for(let comment of comments) {
+		commentDate = formatDate(comment.createdAt);
+		const formattedComment = {
+			...comment,
+			createdAt: commentDate,
+		}
+		formattedComments.push(formattedComment);
+	}
 
 	res.render('tasks/task', {
 		task: foundTask,
 		user: req.user,
-		comments: comments,
+		comments: formattedComments
 	});
 }
 

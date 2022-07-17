@@ -1,6 +1,5 @@
 const Comment = require("../../models/comment/comment.model");
 
-
 async function postComment(req, res, next) {
 	const comment = new Comment({
 		comment: req.body.comment,
@@ -12,7 +11,7 @@ async function postComment(req, res, next) {
 	});
 
 	comment.save().then((result) => {
-		res.redirect('/tasks');
+		res.redirect('/task/' + req.body.id);
 	});
 }
 

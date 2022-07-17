@@ -39,6 +39,10 @@ select {
     border: 2px solid var(--accent);
 }
 
+.form-control button {
+    margin: 1rem 0;
+}
+
 .search-bar {
     border: none;
     width: 200px;

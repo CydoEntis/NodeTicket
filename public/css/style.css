@@ -13,6 +13,7 @@
 @import "./badges/badge.css";
 @import "./tasks/tasks.css";
 @import "./panels/panels.css";
+@import "./comment/comment.css";
 
 * {
 	margin: 0;
