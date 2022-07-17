@@ -122,3 +122,24 @@ body {
 .edit:hover {
 	opacity: .85;
 }
+
+.cta {
+	width: 950px;
+	margin: 150px auto;
+	text-align: center;
+	min-height: 300px;
+}
+
+.cta h1 {
+	font-size: 5rem;
+	color: var(--accent);
+}
+
+.cta p {
+	font-size: 1.75rem;
+	color: var(--txt-secondary);
+}
+
+.cta-btns {
+	margin-top: 1rem;
+}

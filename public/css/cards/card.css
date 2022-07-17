@@ -42,7 +42,7 @@
 
 .card-active:hover {
   border-top: 2px solid var(--color-orange);
-  background: #fff1e1
+  background: #fff6ec
 }
 
 .card-active:hover .card-title {
@@ -68,7 +68,7 @@
 
 .card-reviewing:hover {
   border-top: 2px solid var(--color-grey);
-  background: #eeeeee
+  background: #f6f6f6
 }
 
 .card-reviewing:hover .card-title {
