@@ -56,7 +56,29 @@
                                 <button class="btn" type="submit">Set To Active</button>
                             </form>
                         <% } %>
-
+                    <% } %>
+                </div>
+                <form action="/post-comment" method="POST">
+                    <label for="comment">Leave A Comment</label>
+                    <input type="text" name="comment">
+                    <input type="hidden" value="<%= task._doc._id %>" name="id">
+                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                    <button class="btn" type="submit">Post Comment</button>
+                </form>
+                <div class="comments">
+                    <% if(comments.length > 0) { %>
+                        <% for(let comment of comments) { %>
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <h3><%= comment._doc.createdBy.username %></h3>
+                                </div>
+                                <div class="comment-body">
+                                    <p><%= comment._doc.comment %></p>
+                                </div>
+                            </div>
+                        <% } %>    
+                    <% } else { %>
+                        <p>No comments yet...</p>
                     <% } %>
                 </div>
             </div>

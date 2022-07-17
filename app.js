@@ -14,6 +14,7 @@ const User = require("./models/user/user.model");
 const taskRoutes = require('./routes/task.routes');
 const homeRoutes = require('./routes/home.routes');
 const adminRoutes = require('./routes/admin.routes');
+const commentRoutes = require('./routes/comment.routes');
 
 const MONGODB_URI =
 	'mongodb+srv://admin:Gt6MNcd63yKs4HTr@trackr.senitct.mongodb.net/tickets';
@@ -76,6 +77,7 @@ app.use('/', homeRoutes);
 app.use('/', adminRoutes);
 app.use('/', dashboardRoutes);
 app.use('/', taskRoutes);
+app.use('/', commentRoutes);
 
 
 mongoose

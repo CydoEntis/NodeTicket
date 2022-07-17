@@ -1,8 +1,9 @@
-const ObjectId = require('mongodb').ObjectId; 
+const ObjectId = require('mongodb').ObjectId;
 
 const taskModel = require('../../models/task/task.model');
 const Task = require('../../models/task/task.model');
 const User = require('../../models/user/user.model');
+const Comment = require("../../models/comment/comment.model");
 const { formatDate } = require('../../utils/util');
 
 function getIndex(req, res, next) {
@@ -18,21 +19,21 @@ function getIndex(req, res, next) {
 			for (let task of tasks) {
 				const formattedDate = formatDate(task.createdAt);
 				let formattedDesc = task.description.substring(0, 50);
-				if(formattedDesc.length >= 50) {
-					formattedDesc += "...";
+				if (formattedDesc.length >= 50) {
+					formattedDesc += '...';
 				}
 
-				if(task.status === "active") {
+				if (task.status === 'active') {
 					activeTasks += 1;
-				} else if (task.status === "hold") {
+				} else if (task.status === 'hold') {
 					holdTasks += 1;
-				} else if (task.status === "complete") {
+				} else if (task.status === 'complete') {
 					completedTasks += 1;
 				}
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
-					description: formattedDesc
+					description: formattedDesc,
 				};
 
 				formattedTasks.push(formattedTask);
@@ -52,19 +53,19 @@ function getIndex(req, res, next) {
 
 function getTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ status: "active" })
+	Task.find({ status: 'active' })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
 				const formattedDate = formatDate(task.createdAt);
 				let formattedDesc = task.description.substring(0, 50);
-				if(formattedDesc.length >= 50) {
-					formattedDesc += "...";
+				if (formattedDesc.length >= 50) {
+					formattedDesc += '...';
 				}
 				const formattedTask = {
 					...task,
 					createdAt: formattedDate,
-					description: formattedDesc
+					description: formattedDesc,
 				};
 				formattedTasks.push(formattedTask);
 			}
@@ -78,10 +79,9 @@ function getTasks(req, res, next) {
 		});
 }
 
-
 function getActiveTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ status: "active"  })
+	Task.find({ status: 'active' })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -105,8 +105,8 @@ function getActiveTasks(req, res, next) {
 async function postActiveTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
-	
-	task.status = "active"
+
+	task.status = 'active';
 
 	await task.save();
 
@@ -115,7 +115,7 @@ async function postActiveTask(req, res, next) {
 
 function getHoldTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ status: "hold"  })
+	Task.find({ status: 'hold' })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -139,8 +139,8 @@ function getHoldTasks(req, res, next) {
 async function postHoldTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
-	
-	task.status = "hold"
+
+	task.status = 'hold';
 
 	await task.save();
 
@@ -149,7 +149,7 @@ async function postHoldTask(req, res, next) {
 
 function getCompletedTasks(req, res, next) {
 	const formattedTasks = [];
-	Task.find({ status: "complete"  })
+	Task.find({ status: 'complete' })
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
 			for (let task of tasks) {
@@ -170,22 +170,26 @@ function getCompletedTasks(req, res, next) {
 		});
 }
 
-function getTask(req, res, next) {
+async function getTask(req, res, next) {
 	const taskId = req.params.id;
-	Task.findById(taskId)
-	.then((task) => {
-			const formattedDate = formatDate(task.createdAt);
-			const foundTask = {
-				...task,
-				// ...task.dataValues,
-				createdAt: formattedDate,
-			};
-			res.render('tasks/task', {
-				task: foundTask,
-				user: req.user,
-			});
-		})
-		.catch((err) => console.error(err));
+	const task = await Task.findById(taskId);
+	const comments = await Comment.find({taskId: taskId});
+
+	const formattedDate = formatDate(task.createdAt);
+	const foundTask = {
+		...task,
+		// ...task.dataValues,
+		createdAt: formattedDate,
+	};
+
+	// console.log(comments);
+	console.log(foundTask);
+
+	res.render('tasks/task', {
+		task: foundTask,
+		user: req.user,
+		comments: comments,
+	});
 }
 
 function getCreateTask(req, res, next) {
@@ -201,9 +205,9 @@ function postCreateTask(req, res, next) {
 		description: description,
 		createdBy: {
 			username: req.user.username,
-			userId: req.user
+			userId: req.user,
 		},
-		status: "pending"
+		status: 'pending',
 	});
 
 	task.save().then((result) => {
@@ -215,17 +219,17 @@ async function postAssignTask(req, res, next) {
 	const taskId = req.body.id;
 	const priority = req.body.priority;
 
-	const userData = req.body.userInfo.split("+");
+	const userData = req.body.userInfo.split('+');
 	const assignedTo = {
 		username: userData[0],
-		userId: userData[1]
-	}
+		userId: userData[1],
+	};
 
 	const task = await Task.findById(taskId);
 
 	task.priority = priority;
 	task.assignedTo = assignedTo;
-	task.status = "active";
+	task.status = 'active';
 
 	await task.save();
 
@@ -272,11 +276,9 @@ async function postEditTask(req, res, next) {
 	task.severity = severity;
 	// task.assignedTo = assignedTo;
 
-
 	await task.save();
 
 	res.redirect('/admin');
-
 }
 
 function postDeleteTask(req, res, next) {
@@ -294,7 +296,7 @@ async function postCompleteTask(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 
-	task.status = "completed"
+	task.status = 'completed';
 
 	await task.save();
 
@@ -305,7 +307,7 @@ async function postTaskForReview(req, res, next) {
 	const taskId = req.body.id;
 	const task = await Task.findById(taskId);
 
-	task.status = "reviewing"
+	task.status = 'reviewing';
 
 	await task.save();
 
@@ -328,5 +330,5 @@ module.exports = {
 	postEditTask,
 	postDeleteTask,
 	postCompleteTask,
-	postTaskForReview
+	postTaskForReview,
 };
