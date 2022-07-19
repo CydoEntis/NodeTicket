@@ -14,7 +14,7 @@ authRoutes.post(
 			.isEmail()
 			.withMessage('Please enter a valid email')
 			.normalizeEmail(),
-		body('password', 'Please enter a valid password')
+		body('password', 'Please enter a valid password - 5 or more characters')
 			.isLength({ min: 5 })
 			.isAlphanumeric()
 			.trim(),

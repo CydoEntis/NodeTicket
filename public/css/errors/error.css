@@ -6,3 +6,9 @@
   color: var(--secondary-text);
   padding: 15px 5px;
 }
+
+.invalid {
+  background: #F8D7DA;
+  color: var(--color-red);
+  padding: 1rem;
+}

@@ -1,125 +1,25 @@
 <%- include("../includes/header.ejs")%>
-</head>
-<body>
-    <%- include("../includes/side-navigation.ejs")%>
-    <main class="wrapper">
-        <section class="container">
-            <% if(task._doc.status === "pending") { %> 
-                <h2 class="page-title"><a class="btn btn-back" href="/task/<%= task._doc._id %>"><i class='bx bx-arrow-back'></i></a>Assign Task</h2>
-                <div class="task-detail">
-                    <p class="task-submission">Submitted by <%= task._doc.createdBy.username %> on <%= task.createdAt %></p>
-                    <h3 class="task-title"><%= task._doc.title %></h3>
-                    <p class="task-description"><%= task._doc.description %></p>
-                    <div class="task-images">
-                        <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
-                        <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
-                        <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
-                    </div>
-                    <form action="/assign-task" method="POST">
-                        <div class="form-control">
-                            <label for="priority">Assign Priority</label>
-                            <select name="priority">
-                                <option value="critical">Critical</option>
-                                <option value="important">Important</option>
-                                <option value="normal" >Normal</option>
-                                <option value="low" >Low</option>
-                            </select>
-                        </div>
-                        <div class="form-control">
-                            <label for="user">Assign to</label>
-                            <select name="userInfo">
-                                <% for(let user of users) {%>
-                                    <option value="<%= user.username %>+<%= user._id %>" for="userInfo"><%= user.username %></option>
-                                <% } %>
-                            </select>
-                        </div>
-                        <div class="form-control">
-                            <input type="hidden" value="<%= task._doc._id %>" name="id">
-                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                            <button class="btn" type="submit">Assign Task</button>
-                        </div>
-                    </form>
-                </div>
-                
-            <% } else if(isAdmin) {%>
-                <div class="task-detail">
-                    <p class="task-submission">Submitted by <%= task._doc.createdBy.username %> on <%= task.createdAt %></p>
-                    <h3 class="task-title"><%= task._doc.title %></h3>
-                    <p class="task-description"><%= task._doc.description %></p>
-                    <div class="task-images">
-                        <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
-                        <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
-                        <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
-                    </div>
-                    <% if(isAdmin) { %>
-                        <% if(task._doc.status === "active") { %>
-                            <form action="/task/set-on-hold" method="POST">
-                                <input type="hidden" value="<%= task._doc._id %>" name="id">
-                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                                <button class="btn" type="submit">Set To Hold</button>
-                            </form>
-                        <% } else if (task._doc.status === "hold") {%>
-                            <form action="/task/set-active" method="POST">
-                                <input type="hidden" value="<%= task._doc._id %>" name="id">
-                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                                <button class="btn" type="submit">Set To Active</button>
-                            </form>
-                        <% } else if(task._doc.status === "reviewing") { %>
-                            <form action="/task/complete-task" method="POST">
-                                <input type="hidden" value="<%= task._doc._id %>" name="id">
-                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                                <button class="btn" type="submit">Mark Completed</button>
-                            </form>
-                        <% } %>
-                    <% } %>
-                    <form action="/assign-task" method="POST">
-                        <div class="form-control">
-                            <label for="priority">Assign Priority</label>
-                            <select name="priority">
-                                <option value="critical">Critical</option>
-                                <option value="important">Important</option>
-                                <option value="normal" >Normal</option>
-                                <option value="low" >Low</option>
-                            </select>
-                        </div>
-                        <div class="form-control">
-                            <label for="user">Assign to</label>
-                            <select name="userInfo">
-                                <% for(let user of users) {%>
-                                    <option value="<%= user.username %>+<%= user._id %>" for="userInfo"><%= user.username %></option>
-                                <% } %>
-                            </select>
-                        </div>
-                        <div class="form-control">
-                            <input type="hidden" value="<%= task._doc._id %>" name="id">
-                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                            <button class="btn" type="submit">Edit Task</button>
-                        </div>
-                    </form>
-                </div>
-            <% } else { %>
-                <h2 class="page-title"><a class="btn btn-back" href="/task/<%= task._doc._id %>"><i class='bx bx-arrow-back'></i></a> Edit Task</h2>
-                <form action="/edit-task" method="POST">
-    
-                    <div class="form-control">
-                        <label for="title">Title</label>
-                        <input type="text" value="<%= task._doc.title %>" id="title" name="title">
-                    </div>
+    </head>
 
-                    <div class="form-control">
-                        <label for="description">Description</label>
-                        <textarea name="description"><%= task._doc.description %></textarea>
-                    </div>
-                    <div class="task-controls">
-                        <% if(isAdmin || isAuthenticated) { %>
-                            <!-- <div class="task-uploads">
-                                <form action="">
-                                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                                    <input type="file" id="imgUpload" name="img" accept="image/*" hidden>
-                                    <label class="btn" for="imgUpload">Select image:</label>
-                                    <input class="btn" type="submit" value="Upload">
-                                </form>
-                            </div> -->
+    <body>
+        <%- include("../includes/side-navigation.ejs")%>
+            <main class="wrapper">
+                <section class="container">
+                    <h2 class="page-title"><a class="btn btn-back" href="/task/<%= task._doc._id %>"><i class='bx bx-arrow-back'></i></a> Edit Task</h2>
+                    <% if(errorMessage) { %>
+                        <div class="invalid"><%= errorMessage %></div>
+                    <% } %>
+                    <form action="/edit-task" method="POST">
+                        <div class="form-control">
+                            <label for="title">Title</label>
+                            <input type="text" value="<%= task._doc.title %>" id="title" name="title">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="description">Description</label>
+                            <textarea name="description"><%= task._doc.description %></textarea>
+                        </div>
+                        <div class="task-controls">
                             <div class="task-submit">
                                 <% if(task._doc.createdBy.userId.toString() === user._id.toString()) {%>
                                     <form action="/task/edit-task" method="POST">
@@ -134,12 +34,8 @@
                                     </form>
                                 <% } %>
                             </div>
-                        <% } %>
-                    </div>
-                </form>
-            <% } %>
-
-            
-        </section>
-    </main>
-<%- include("../includes/footer.ejs")%>
+                        </div>
+                    </form>
+                </section>
+            </main>
+            <%- include("../includes/footer.ejs")%>

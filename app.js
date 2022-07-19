@@ -72,12 +72,12 @@ app.use((req, res, next) => {
 		});
 });
 
-app.use('/', authRoutes);
-app.use('/', homeRoutes);
-app.use('/', adminRoutes);
-app.use('/', dashboardRoutes);
-app.use('/', taskRoutes);
-app.use('/', commentRoutes);
+app.use(authRoutes);
+app.use(homeRoutes);
+app.use(adminRoutes);
+app.use(dashboardRoutes);
+app.use(taskRoutes);
+app.use(commentRoutes);
 
 
 mongoose

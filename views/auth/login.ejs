@@ -5,7 +5,7 @@
     <main class="wrapper">
         <section class="container">
             <% if(errorMessage) { %>
-                <div class="validation__error"><%= errorMessage %></div>
+                <div class="invalid"><%= errorMessage %></div>
             <% } %>
             <form class="auth-form" action="/login" method="POST">
                 <h1 class="form-title">Log In</h1>

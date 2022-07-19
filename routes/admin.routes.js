@@ -1,6 +1,7 @@
 const express = require('express');
 
 const adminController = require('../controllers/admin/admin.controller');
+const { isAuth } = require('../middleware/auth.middleware');
 
 const adminRoutes = express.Router();
 
@@ -13,10 +14,15 @@ function isAdmin(req, res, next) {
     }
 }
 
-adminRoutes.get('/admin', isAdmin, adminController.getAdminPanel);
-adminRoutes.get('/admin/active-tasks', isAdmin, adminController.getActiveTasks);
-adminRoutes.get('/admin/hold-tasks', isAdmin, adminController.getHoldTasks);
-adminRoutes.get('/admin/review-tasks', isAdmin, adminController.getReviewingTasks);
-adminRoutes.get('/admin/completed-tasks', isAdmin, adminController.getCompletedTasks);
+// adminRoutes.use(isAuth);
+// adminRoutes.use(isAdmin);
+
+adminRoutes.get('/admin', adminController.getAdminPanel);
+adminRoutes.get('/admin/active-tasks', adminController.getActiveTasks);
+adminRoutes.get('/admin/hold-tasks', adminController.getHoldTasks);
+adminRoutes.get('/admin/review-tasks', adminController.getReviewingTasks);
+adminRoutes.get('/admin/completed-tasks', adminController.getCompletedTasks);
+adminRoutes.get('/admin/admin-edit/:id', adminController.getAdminEditTask);
+adminRoutes.get('/admin/admin-edit', adminController.postAdminEditTask);
 
 module.exports = adminRoutes;

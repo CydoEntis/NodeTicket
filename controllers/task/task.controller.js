@@ -5,6 +5,7 @@ const Task = require('../../models/task/task.model');
 const User = require('../../models/user/user.model');
 const Comment = require("../../models/comment/comment.model");
 const { formatDate } = require('../../utils/util');
+const { validationResult } = require('express-validator');
 
 function getIndex(req, res, next) {
 	const formattedTasks = [];
@@ -217,12 +218,36 @@ async function getTask(req, res, next) {
 }
 
 function getCreateTask(req, res, next) {
-	res.render('tasks/create-task');
+
+
+	res.render('tasks/create-task' , {
+		pageTitle: 'Create Task',
+		errorMessage: null,
+		validationErrors: []
+	});
 }
 
 function postCreateTask(req, res, next) {
 	const title = req.body.title;
 	const description = req.body.description;
+	const errors = validationResult(req);
+
+	if(!errors.isEmpty()) {
+		return res.status(422).render('tasks/create-task', {
+			pageTitle: 'Create Task',
+			title: title,
+			severity: undefined,
+			description: description,
+			createdBy: {
+				username: req.user.username,
+				userId: req.user,
+			},
+			status: 'pending',
+			errorMessage: errors.array()[0].msg,
+			validationErrors: errors.array()
+		})
+	}
+
 	const task = new Task({
 		title: title,
 		severity: undefined,
@@ -260,49 +285,70 @@ async function postAssignTask(req, res, next) {
 	res.redirect('/admin');
 }
 
-function getEditTask(req, res, next) {
+async function getUserEditTask(req, res, next) {
 	const taskId = req.params.id;
 
-	Task.findById(taskId)
-		.then((task) => {
-			const formattedDate = formatDate(task.createdAt);
-			const foundTask = {
-				...task,
-				createdAt: formattedDate,
-			};
-			User.find({ role: 'user' }).then((users) => {
-				res.render('tasks/edit-task', {
-					task: foundTask,
-					users: users,
-					user: req.user,
-				});
-			});
-		})
-		.catch((err) => console.error(err));
+	let foundTask = {};
+	try {
+		const task = await Task.findById(taskId);
+		const formattedDate = formatDate(task.createdAt);
+
+		foundTask = {
+			...task,
+			createdAt: formattedDate,
+		};
+
+		console.log(foundTask)
+
+		res.render('tasks/edit-task', {
+			task: foundTask,
+			user: req.user,
+			errorMessage: null,
+			validationErrors: []
+		});
+
+	} catch(e) {
+		console.log(e);
+	}
 }
 
-async function postEditTask(req, res, next) {
+async function postUserEditTask(req, res, next) {
 	const taskId = req.body.id;
 	const updatedTitle = req.body.title;
 	const updatedDescription = req.body.description;
-	const severity = req.body.severity;
+	const errors = validationResult(req);
 
-	// const userData = req.body.userInfo.split("+");
-	// const assignedTo = {
-	// 	username: userData[0],
-	// 	userId: userData[1]
-	// }
+	try {
+		const task = await Task.findById(taskId);
 
-	const task = await Task.findById(taskId);
+		if(!errors.isEmpty()) {
+			return res.status(422).render('tasks/edit-task', {
+				pageTitle: 'Edit Task',
+				task: {
+					_doc: {
+						title: updatedTitle,
+						description: updatedDescription,
+						status: "edited",
+						createdBy: task.createdBy,
+						_id: task._id
+					}
+				},
+				user: req.user,
+				taskId: taskId,
+				errorMessage: errors.array()[0].msg,
+				validationErrors: errors.array()
+			})
+		}
 
-	task.title = updatedTitle;
-	task.description = updatedDescription;
-	task.severity = severity;
-	// task.assignedTo = assignedTo;
+		task.title = updatedTitle;
+		task.description = updatedDescription;
 
-	await task.save();
+		await task.save();
 
-	res.redirect('/admin');
+		res.redirect('/tasks');
+	} catch(e) {
+		console.log(e)
+	}
 }
 
 function postDeleteTask(req, res, next) {
@@ -350,8 +396,8 @@ module.exports = {
 	getCreateTask,
 	postCreateTask,
 	postAssignTask,
-	getEditTask,
-	postEditTask,
+	getUserEditTask,
+	postUserEditTask,
 	postDeleteTask,
 	postCompleteTask,
 	postTaskForReview,

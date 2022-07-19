@@ -46,7 +46,7 @@
                         <% } else if(task._doc.status === "reviewing") {%>
                             <td><span class="badge badge-blue">Needs Review</span></td>
                         <% } %>
-                        <td><a class="admin-link" href="/edit-task/<%= task._doc._id %>">View</a></td>
+                        <td><a class="admin-link" href="/admin/admin-edit/<%= task._doc._id %>">View</a></td>
                     </tr>
                     <% } %>
                 </table>
