@@ -1,9 +1,11 @@
 @import "../variables.css";
 
 .card {
+  width: 100%;
   max-width: 400px;
-  min-width: 400px;
-  min-height: 200px;
+  /* max-width: 400px; */
+  /* min-width: 400px; */
+  /* min-height: 200px; */
   color: var(--txt-secondary);
   padding: 1.5rem 2rem;
   border-top: 2px solid var(--txt-primary);

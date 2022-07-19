@@ -8,6 +8,7 @@
 	width: 200px;
 	height: 100vh;
 	z-index: 99;
+	display: none;
 }
 
 .nav__controls {
