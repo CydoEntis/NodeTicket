@@ -21,6 +21,7 @@ function getLogin(req, res, next) {
 			password: '',
 		},
 		errors: [],
+		activePage: 'login'
 	});
 }
 
@@ -97,6 +98,7 @@ function getSignUp(req, res, next) {
 			confirmPassword: '',
 		},
 		errors: [],
+		activePage: 'signup'
 	});
 }
 

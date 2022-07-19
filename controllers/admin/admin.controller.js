@@ -17,6 +17,7 @@ async function getAdminPanel(req, res, next) {
 	}
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
+		activePage: 'admin',
 	});
 }
 
@@ -36,7 +37,8 @@ async function getActiveTasks(req, res, next) {
 
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
-		title: "Active"
+		title: "Active",
+		activePage: 'admin',
 	});
 }
 
@@ -55,7 +57,8 @@ async function getHoldTasks(req, res, next) {
 
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
-		title: "Hold"
+		title: "Hold",
+		activePage: 'admin'
 	});
 }
 
@@ -74,7 +77,8 @@ async function getReviewingTasks(req, res, next) {
 
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
-		title: "Review"
+		title: "Review",
+		activePage: 'admin'
 	});
 }
 
@@ -93,7 +97,8 @@ async function getCompletedTasks(req, res, next) {
 
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
-		title: "Completed"
+		title: "Completed",
+		activePage: 'admin',
 	});
 }
 
@@ -111,13 +116,13 @@ async function getAdminEditTask(req, res, next) {
 			createdAt: formattedDate,
 		};
 
-		console.log(foundTask);
 		res.render('admin/admin-edit', {
 			task: foundTask,
 			user: req.user,
 			users: users,
 			errorMessage: null,
-			validationErrors: []
+			validationErrors: [],
+			activePage: 'admin'
 		});
 
 	} catch(e) {
@@ -150,7 +155,8 @@ async function postAdminEditTask(req, res, next) {
 				user: req.user,
 				taskId: taskId,
 				errorMessage: errors.array()[0].msg,
-				validationErrors: errors.array()
+				validationErrors: errors.array(),
+				activePage: 'admin'
 			})
 		}
 

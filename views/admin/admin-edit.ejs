@@ -43,7 +43,7 @@
                         </div>
                     </form>
                 </div>
-            <% } %>
+            <% } else { %>
                 <div class="task-detail">
                     <p class="task-submission">Submitted by <%= task._doc.createdBy.username %> on <%= task.createdAt %></p>
                     <h3 class="task-title"><%= task._doc.title %></h3>
@@ -118,6 +118,7 @@
                         </div>
                     </form>
                 </div>
+                <% } %>
         </section>
     </main>
 <%- include("../includes/footer.ejs")%>

@@ -1,5 +1,7 @@
 @import "../variables.css";
 
+
+
 .logo {
 	color: var(--accent);
 	font-size: 2rem;
@@ -39,4 +41,8 @@
 .nav-section i {
 	font-size: 1.5rem;
 	margin: 0 5px;
+}
+
+.active {
+	color: var(--accent) !important;
 }

@@ -16,7 +16,6 @@ function getIndex(req, res, next) {
 	Task.find({ status: { '$ne': 'pending' }})
 		.sort({ createdAt: -1 })
 		.then((tasks) => {
-			console.log(tasks);
 			for (let task of tasks) {
 				const formattedDate = formatDate(task.createdAt);
 				let formattedDesc = task.description.substring(0, 50);
@@ -48,6 +47,7 @@ function getIndex(req, res, next) {
 				activeTasks: activeTasks,
 				holdTasks: holdTasks,
 				completedTasks: completedTasks,
+				activePage: 'tasks'
 			});
 		});
 }
@@ -76,6 +76,7 @@ function getTasks(req, res, next) {
 				tasks: formattedTasks,
 				title: 'All Tasks',
 				userId: req.user._id,
+				activePage: 'tasks'
 			});
 		});
 }
@@ -104,6 +105,7 @@ function getActiveTasks(req, res, next) {
 				tasks: formattedTasks,
 				title: 'Active',
 				userId: req.user.userId,
+				activePage: 'tasks'
 			});
 		});
 }
@@ -143,6 +145,7 @@ function getHoldTasks(req, res, next) {
 				tasks: formattedTasks,
 				title: 'On Hold',
 				userId: req.user._id,
+				activePage: 'tasks'
 			});
 		});
 }
@@ -182,6 +185,7 @@ function getCompletedTasks(req, res, next) {
 				tasks: formattedTasks,
 				title: 'Completed',
 				userId: req.user._id,
+				activePage: 'tasks'
 			});
 		});
 }
@@ -213,7 +217,8 @@ async function getTask(req, res, next) {
 	res.render('tasks/task', {
 		task: foundTask,
 		user: req.user,
-		comments: formattedComments
+		comments: formattedComments,
+		activePage: 'tasks'
 	});
 }
 
@@ -223,7 +228,8 @@ function getCreateTask(req, res, next) {
 	res.render('tasks/create-task' , {
 		pageTitle: 'Create Task',
 		errorMessage: null,
-		validationErrors: []
+		validationErrors: [],
+		activePage: 'tasks'
 	});
 }
 
@@ -304,7 +310,8 @@ async function getUserEditTask(req, res, next) {
 			task: foundTask,
 			user: req.user,
 			errorMessage: null,
-			validationErrors: []
+			validationErrors: [],
+			activePage: 'tasks'
 		});
 
 	} catch(e) {

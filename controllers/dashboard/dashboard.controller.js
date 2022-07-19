@@ -25,7 +25,8 @@ function getDashboard(req, res, next) {
 			res.render('dashboard/dashboard', {
 				tickets: formattedTickets,
 				user: user,
-				myTicketCount: myTicketCount
+				myTicketCount: myTicketCount,
+				activePage: 'dashboard'
 			});
 		});
 }

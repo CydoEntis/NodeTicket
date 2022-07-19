@@ -3,12 +3,12 @@
         <h2 class="logo"><a href="/">Tasketeer</a></h2>
         <ul class="nav__admin">
             <% if(isAdmin) {%>
-                <li><a href="/admin"><i class='bx bx-shield-alt-2' ></i> Admin</a></li>
+                <li><a class="<%= activePage === 'admin' ? 'active' : '' %>" href="/admin"><i class='bx bx-shield-alt-2'></i> Admin</a></li>
             <% } %>
-                <li><a href="/dashboard"><i class='bx bxs-dashboard' ></i> Dashboard</a></li>
-                <li><a href="/tasks"><i class='bx bx-task' ></i> Tasks</a></li>
-                <li><a href="/profile"><i class='bx bx-user' ></i> Profile</a></li>
-                <li><a href="/settings"><i class='bx bx-cog' ></i> Settings</a></li>
+                <li><a class="<%= activePage === 'dashboard' ? 'active' : '' %>" href="/dashboard"><i class='bx bxs-dashboard' ></i> Dashboard</a></li>
+                <li><a class="<%= activePage === 'tasks' ? 'active' : '' %>" href="/tasks"><i class='bx bx-task' ></i> Tasks</a></li>
+                <li><a class="<%= activePage === 'user' ? 'active' : '' %>" href="/profile"><i class='bx bx-user' ></i> Profile</a></li>
+                <li><a class="<%= activePage === 'settings' ? 'active' : '' %>" href="/settings"><i class='bx bx-cog' ></i> Settings</a></li>
             </ul>
         
             <% if(isAuthenticated) {%>

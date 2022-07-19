@@ -4,8 +4,8 @@
 			<h3 class="logo">Tasketeer</h3>
 		</div>
 		<div class="nav-section">
-			<li><a href="/login">Log In</a></li>
-			<li><a href="/signup">Sign Up</a></li>
+			<li><a class="<%= activePage === 'login' ? 'active' : '' %>" href="/login">Log In</a></li>
+			<li><a class="<%= activePage === 'signup' ? 'active' : '' %>" href="/signup">Sign Up</a></li>
 		</div>
 	</ul>
 </nav>
