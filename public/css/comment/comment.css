@@ -1,24 +1,25 @@
 @import "../variables.css";
 
 .comment {
-  border-left: 8px solid var(--border-grey);
-  padding: 1rem;
+  border-left: 8px solid var(--accent);
+  padding: .5rem;
   background-color: var(--highlight);
   margin: 10px 0;
 }
 
 .comment-header {
   text-transform: capitalize;
-  font-size: 1.55rem;
+  font-size: 1.15rem;
 }
 
 .comment-body {
   color: var(--txt-secondary);
+  font-size: .95rem;
 }
 
 .comment-date {
   color: var(--txt-secondary);
   font-style: italic;
-  font-size: .85rem;
+  font-size: .65rem;
   text-align: right;
 }

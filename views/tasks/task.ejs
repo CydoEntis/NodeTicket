@@ -8,10 +8,11 @@
             <h2 class="page-title"><a class="btn btn-back" href="/tasks"><i class='bx bx-arrow-back'></i></a> View Task</h2>
             <div class="task-detail">
                 <% if(task._doc.createdBy.userId.toString() === user._id.toString()) { %>
-                    <a href="/edit-task/<%= task._doc._id %>"><i class='edit bx bx-edit'></i></a>
+                    <a class="btn-mobile" href="/edit-task/<%= task._doc._id %>"><i class='bx bx-edit'></i></a>
+                    <a class="btn btn-desktop" href="/edit-task/<%= task._doc._id %>">Edit Task</a>
                 <% } %>
                 <div class="task-header">
-                    <h1 class="task-title"><%= task._doc.title %></h1>
+                    <h2 class="task-title"><%= task._doc.title %></h2>
                     <div class="task-priority">
                         <% if(task._doc.priority === 'critical') { %>
                             <span class="badge badge-red"><%= task._doc.priority %></span>
@@ -27,13 +28,13 @@
                     </div>
                 </div>
                 <h3 class="task-date"><%= task.createdAt %></h3>
-
-                <p class="task-description"><%= task._doc.description %></p>
                 <div class="task-images">
                     <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
                     <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
                     <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" alt="">
                 </div>
+                <p class="task-description"><%= task._doc.description %></p>
+
                 <div class="task-btns">
                     <% if(isAuthenticated) { %>
                         <% if(task._doc.status === "active") { %>

@@ -31,8 +31,8 @@ body {
 }
 
 .wrapper {
-	width: 100vw;
-	padding: 1rem;
+	width: 100%;
+	padding: .5rem;
 	/* padding: 50px 100px;
 	margin-left: 300px;
 	width: calc(100% - 300px);
@@ -44,18 +44,7 @@ body {
 	flex-wrap: wrap;
 }
 
-.column {
-	height: 100%;
-	margin: 1rem 0;
-	/* display: flex; */
-	/* flex-direction: column;
-	justify-content: center;
-	align-items: center; */
-	margin: 0 auto;
-	/* margin-right: 3rem;
-	width: 425px;
-	height: 80vh; */
-}
+
 
 .page-header {
 	width: 100%;
@@ -65,6 +54,27 @@ body {
 	flex-direction: column;
 	margin-bottom: 2.5rem;
 }
+
+.auth {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 95%;
+	max-width: 500px;
+}
+
+.app-title {
+	text-align: center;
+	color: var(--accent);
+}
+
+.page-title {
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+}
+
 
 .align-center {
 	align-items: center;
@@ -80,9 +90,7 @@ body {
 
 
 
-.column-header {
-	margin-bottom: 1.75rem;
-}
+
 
 .column-title {
 
@@ -94,13 +102,11 @@ body {
 
 
 
-
-
-.page-title {
+/* .page-title {
 	font-size: 2.5rem;
 	display: flex;
 	align-items: center;
-}
+} */
 
 .page-description {
 	font-size: 1.15rem;
@@ -164,4 +170,13 @@ body {
 
 .cta-btns {
 	margin-top: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+	.wrapper {
+		padding: 30px 1rem;
+		margin-left: 200px;
+		width: calc(100% - 200px);
+		height: 900px;
+	}
 }

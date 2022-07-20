@@ -6,21 +6,15 @@
     <!-- <%- include("../includes/navigation.ejs")%> -->
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
-        <section class="page-header">
-                <h2 class="page-title">Tasks</h2>
-                <p class="page-description">Here are all current tasks. You will find information for each task as well as who submitted it.</p>
-                <div class="search-control">
-                    <label for="search"><i class='bx bx-search'></i></label>
-                    <input class="search-bar" type="text" id="search" name="search">
-                </div>
-                <a class="btn" href="/create-task">Create Task</a>
-        </section>
-        <section class="flex">
-            <div class="column">
-                <div class="column-header">
+        <h1>Tasks</h1>
+        <a class="btn-mobile" href="/create-task"><i class='bx bx-plus' ></i></a>
+        <a class="btn btn-desktop" href="/create-task">Create Task</a>
+        <section class="tasks">
+            <div class="task-column">
+                <div class="task-column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">All Tasks <span class="circle tasks-all"></span></h3><a class="badge badge-blue" href="/tasks/all">View All Tasks</a>
+                            <h3 class="task-column-title flex align-center">All Tasks <span class="circle tasks-all"></span></h3><a class="badge badge-blue" href="/tasks/all">View All Tasks</a>
                         </div>
                         <p class="count"><%= tasks.length %> tasks</p>
                     </div>
@@ -114,11 +108,11 @@
                 <% } %>
             </div>
 
-            <div class="column">
-                <div class="column-header">
+            <div class="task-column">
+                <div class="task-column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">Active <span class="circle tasks-progress"></span></h3><a class="badge badge-orange" href="/tasks/active">View All Active</a>
+                            <h3 class="task-column-title flex align-center">Active <span class="circle tasks-progress"></span></h3><a class="badge badge-orange" href="/tasks/active">View All Active</a>
                         </div>
                         <p class="count"><%= activeTasks %> tasks</p>
                     </div>
@@ -150,11 +144,11 @@
                 <% } %>
             </div>
 
-            <div class="column">
-                <div class="column-header">
+            <div class="task-column">
+                <div class="task-column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">On Hold <span class="circle tasks-hold"></span></h3><a class="badge badge-red" href="/tasks/on-hold">View All On Hold</a>
+                            <h3 class="task-column-title flex align-center">On Hold <span class="circle tasks-hold"></span></h3><a class="badge badge-red" href="/tasks/on-hold">View All On Hold</a>
                         </div>
                         <p class="count"><%= holdTasks %> tasks</p>
                     </div>
@@ -186,11 +180,11 @@
                 <% } %>
             </div>
 
-            <div class="column">
-                <div class="column-header">
+            <div class="task-column">
+                <div class="task-column-header">
                     <div class="header-section">
                         <div class="flex align-center">
-                            <h3 class="column-title flex align-center">Complete<span class="circle tasks-complete"></span></h3><a class="badge badge-green" href="/tasks/complete">View All Completed</a>
+                            <h3 class="task-column-title flex align-center">Complete<span class="circle tasks-complete"></span></h3><a class="badge badge-green" href="/tasks/complete">View All Completed</a>
                         </div>
                         <p class="count"><%= completedTasks %> tasks</p>
                     </div>

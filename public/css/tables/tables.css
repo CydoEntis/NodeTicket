@@ -1,36 +1,128 @@
-.admin-table{
-  width: 80%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  /* margin-top: 50px; */
+.admin-table {
+	width: 100%;
+	border-collapse: collapse;
 }
 
 .admin-table th {
-  text-align: left;
+	text-align: left;
 }
 
 .admin-table th:first-child {
-  padding: 10px;
+	padding: 10px;
 }
 
 .admin-table tr td {
-  padding: 0 10px;
-}
-
-.admin-table tr:first-of-type {
-  background: var(--txt-primary);
-  color: var(--bg-light);
-}
-
-.admin-table tr {
-  background: var(--bg-light);
-}
-
-.admin-table tr:nth-child(even) {
-  background: var(--highlight);
+	padding: 0 10px;
 }
 
 .admin-controls {
-  margin: 0 auto;
-  width: 80%;
+	width: 100%;
+}
+
+.admin-table tr:first-of-type {
+	background: var(--txt-primary);
+	color: var(--bg-light);
+}
+
+.admin-table tr {
+	background: var(--bg-light);
+	padding: 0.85rem;
+}
+
+.admin-table tr:nth-child(even) {
+	background: var(--highlight);
+}
+
+@media screen and (max-width: 1024px) {
+	table,
+	thead,
+	tbody,
+	th,
+	td,
+	tr {
+		display: block;
+		font-size: 0.85rem;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	.admin-table tr td {
+    padding: 0.25rem 0;
+		padding-left: 45%;
+	}
+
+	td {
+		/* Behave  like a "row" */
+		border: none;
+		position: relative;
+		padding: 0.25rem 0;
+		padding-left: 45%;
+	}
+
+	td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 30%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+
+	.admin-table {
+		width: 100%;
+		border-collapse: collapse;
+		/* margin-top: 50px; */
+	}
+
+	.admin-table tr:first-of-type {
+		display: none;
+		background: var(--txt-primary);
+		color: var(--bg-light);
+	}
+
+	.admin-table tr {
+		background: var(--bg-light);
+		padding: 0.85rem;
+	}
+
+	.admin-table tr:nth-child(even) {
+		background: var(--highlight);
+	}
+
+	.admin-controls {
+		display: inline-block;
+		width: 100%;
+		margin: 0.5rem 0;
+	}
+
+	.admin-controls a {
+		font-size: 0.75rem;
+		margin: 0.25rem;
+	}
+
+	.admin-table td:nth-of-type(1):before {
+		content: 'Date';
+	}
+	.admin-table td:nth-of-type(2):before {
+		content: 'Title';
+	}
+	.admin-table td:nth-of-type(3):before {
+		content: 'Submitted By';
+	}
+	.admin-table td:nth-of-type(4):before {
+		content: 'Assigned To';
+	}
+	.admin-table td:nth-of-type(5):before {
+		content: 'Status';
+	}
+	.admin-table td:nth-of-type(6):before {
+		content: '';
+	}
 }

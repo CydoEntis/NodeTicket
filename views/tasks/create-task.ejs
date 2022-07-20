@@ -5,7 +5,7 @@
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="container">
-            <h2 class="page-title"><a class="btn btn-back" href="/tasks"><i class='bx bx-arrow-back'></i></a><%= pageTitle %></h2>
+            <h1 class="page-title"><a class="btn btn-back" href="/tasks"><i class='bx bx-arrow-back'></i></a><%= pageTitle %></h1>
             <% if(errorMessage) { %>
                 <div class="invalid"><%= errorMessage %></div>
             <% } %>
@@ -28,8 +28,7 @@
                                 <input class="btn" type="submit" value="Upload">
                             </form>
                         </div>
-                                <button type="submit" class="btn btn__cta">Submit Ticket</button>
-                        </div>
+                        <button type="submit" class="btn btn-submit">Submit Ticket</button>
                     <% } %>
                 </div>
             </form>

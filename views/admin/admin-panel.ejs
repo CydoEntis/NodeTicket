@@ -3,11 +3,8 @@
 <body>
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
-        <section class="panel">
-            <div class="panel-header">
-                <a href="/admin"><div class="btn btn-back"><i class='bx bx-arrow-back'></i></div></a><h1>Admin Panel</h1>
-            </div>
-            <section class="">
+        <section class="admin">
+            <h2 class="page-title"><a class="btn btn-back" href="/admin"><i class='bx bx-arrow-back'></i></a> Admin Panel</h2>
                 <table class="admin-table">
                     <div class="admin-controls">
                         <a class="badge badge-blue" href="/admin">All Tasks</a>
@@ -50,7 +47,6 @@
                     </tr>
                     <% } %>
                 </table>
-            </section>
         </section>
     </main>
 <%- include("../includes/footer.ejs")%>`

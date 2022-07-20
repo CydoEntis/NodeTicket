@@ -7,10 +7,45 @@
 	text-decoration: none;
 	transition: ease-in-out 300ms all;
 	cursor: pointer;
+	outline: none;
+	border: none;
+	font-size: 1rem;
 }
 
 .btn:hover {
 	opacity: 0.75;
+}
+
+.btn-submit {
+	width: 100%;
+}
+
+.btn-mobile {
+	background-color: var(--accent);
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+	position: fixed;
+	bottom: 2%;
+	right: 3%;
+}
+
+.btn-desktop {
+	display: none;
+}
+
+.btn-mobile i {
+	color: var(--bg-light);
+	font-size: 1.5rem;
+}
+
+.btn-mobile:hover {
+	opacity: .85;
 }
 
 .btn-logout {
@@ -26,8 +61,28 @@
 
 .admin-link {
 	color: var(--color-blue);
+	border: 1px solid var(--color-blue);
+	padding: 5px 10px;
+	transition: all ease-in-out 300ms;
+	cursor: pointer;
 }
 
 .admin-link:hover {
 	opacity: .85;
+	color: var(--bg-light);
+	border: 1px solid var(--bg-light);
+	background: var(--color-blue);
+}
+
+@media screen and (min-width: 1024px) {
+  .btn-mobile {
+		display: none;
+	}
+
+	.btn-desktop {
+		display: block;
+		position: fixed;
+		top: 1%;
+		right: 2%;
+	}
 }

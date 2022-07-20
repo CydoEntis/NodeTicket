@@ -8,7 +8,7 @@
             <div class="invalid"><%= errorMessage %></div>
           <% } %>
             <% if(task._doc.status === "pending") { %> 
-                <h2 class="page-title"><a class="btn btn-back" href="/task/<%= task._doc._id %>"><i class='bx bx-arrow-back'></i></a>Assign Task</h2>
+                <h2 class="page-title"><a class="btn btn-back" href="/admin"><i class='bx bx-arrow-back'></i></a>Assign Task</h2>
                 <div class="task-detail">
                     <p class="task-submission">Submitted by <%= task._doc.createdBy.username %> on <%= task.createdAt %></p>
                     <h3 class="task-title"><%= task._doc.title %></h3>

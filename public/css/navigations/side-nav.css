@@ -68,3 +68,9 @@
 .nav-controls form {
 	width: 200px;
 }
+
+@media screen and (min-width: 1024px) {
+	.nav__side {
+		display: block;
+	}
+}
