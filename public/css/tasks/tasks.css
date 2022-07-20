@@ -126,7 +126,7 @@
 } */
 
 @media screen and (min-width: 800px) {
-  .tasks {
+  .tasks-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;

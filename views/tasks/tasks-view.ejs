@@ -7,18 +7,9 @@
     <%- include("../includes/side-navigation.ejs")%>
     <main class="wrapper">
         <section class="page-header flex align-items space-between">
-            <div>
-                <h2 class="page-title"><a class="btn btn-back" href="/tasks"><i class='bx bx-arrow-back'></i></a> <%= title %></h2>
-            </div>
-            <div>
-                <div class="search-control">
-                    <label for="search"><i class='bx bx-search'></i></label>
-                    <input class="search-bar" type="text" id="search" name="search">
-                </div>
-            </div>
-            <div>
-                <a class="btn"href="/create-task">Create Task</a>
-            </div>
+            <h2 class="page-title"><a class="btn btn-back" href="/tasks"><i class='bx bx-arrow-back'></i></a> All Tasks</h2>
+            <a class="btn-mobile" href="/create-task"><i class='bx bx-plus' ></i></a>
+            <a class="btn btn-desktop" href="/create-task">Create Task</a>
         </section>
         <section>
                 <div class="header-section">
