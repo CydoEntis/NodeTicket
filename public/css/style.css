@@ -26,6 +26,16 @@ body {
 	font-family: var(--primary-font);
 }
 
+.dark {
+  /* background: var(--txt-primary); */
+	background: #292929;
+  color: var(--bg-light);
+}
+
+.dark-txt {
+	color: rgb(167, 167, 167);
+}
+
 .wrapper {
 	width: 100%;
 	padding: .5rem;

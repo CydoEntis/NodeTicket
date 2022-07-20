@@ -1,7 +1,9 @@
-<nav class="nav__side">
-    <div class="nav__controls">
+<nav class="nav-side">
+    <div class="nav-items">
         <h2 class="logo"><a href="/">Tasketeer</a></h2>
-        <ul class="nav__admin">
+        <button id="darkMode" type="button">Dark Mode</button>
+
+        <ul class="nav-admin">
             <% if(isAdmin) {%>
                 <li><a class="<%= activePage === 'admin' ? 'active' : '' %>" href="/admin"><i class='bx bx-shield-alt-2'></i> Admin</a></li>
             <% } %>
@@ -10,7 +12,8 @@
                 <li><a class="<%= activePage === 'user' ? 'active' : '' %>" href="/profile"><i class='bx bx-user' ></i> Profile</a></li>
                 <li><a class="<%= activePage === 'settings' ? 'active' : '' %>" href="/settings"><i class='bx bx-cog' ></i> Settings</a></li>
             </ul>
-        
+            
+
             <% if(isAuthenticated) {%>
             <div class="nav-controls">
                 <form action="/logout" method="POST">
