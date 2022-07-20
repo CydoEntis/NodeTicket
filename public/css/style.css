@@ -1,10 +1,7 @@
-@import "./navigations/landing-nav.css";
-@import "./navigations/main-nav.css";
 @import "./navigations/side-nav.css";
 @import "./bubbles/bubbles.css";
 @import "./cards/card.css";
 @import "./dashboard/dashboard.css";
-@import "./tickets/tickets.css";
 @import "./forms/form.css";
 @import "./buttons/buttons.css";
 @import "./controls.css";
@@ -12,7 +9,6 @@
 @import "./tables/tables.css";
 @import "./badges/badge.css";
 @import "./tasks/tasks.css";
-@import "./panels/panels.css";
 @import "./comment/comment.css";
 
 
