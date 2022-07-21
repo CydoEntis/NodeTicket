@@ -69,6 +69,11 @@
 	width: 200px;
 }
 
+.dark-nav {
+	background-color: #1e1e1e;
+	border: none;
+}
+
 @media screen and (min-width: 1024px) {
 	.nav-side {
 		display: block;

@@ -75,6 +75,16 @@
 	background: var(--color-blue);
 }
 
+.btn-dark {
+	background-color: #f5f5f5;
+	color: #333;
+}
+
+.btn-dark:hover {
+	background: var(--bg-light);
+	color: var(--txt-primary);
+}
+
 @media screen and (min-width: 1024px) {
   .btn-mobile {
 		display: none;
