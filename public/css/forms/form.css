@@ -29,6 +29,7 @@ select {
     height: 50px;
     font-size: 1.25rem;
     padding-left: 15px;
+    border-radius: .4rem;
 }
 
 .form-control textarea {

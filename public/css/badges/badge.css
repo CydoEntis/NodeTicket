@@ -12,6 +12,7 @@
   color: var(--bg-light);
   margin: 1rem 0;
   transition: all 250ms ease-in-out;
+  border-radius: .4rem;
 }
 
 .badge:hover {

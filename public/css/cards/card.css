@@ -4,10 +4,10 @@
   width: 100%;
   color: var(--txt-secondary);
   padding: 1.5rem 2rem;
-  border-top: 2px solid var(--txt-primary);
+  /* border-top: 2px solid var(--txt-primary); */
   margin: 1rem 0;
-
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  border-radius: .4rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
   transition: all ease-in-out 350ms;
   cursor: pointer;
@@ -27,7 +27,7 @@
 }
 
 .card-completed:hover {
-  border-top: 2px solid var(--color-green);
+  /* border-top: 2px solid var(--color-green); */
   background: #dff7ec;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .card-active:hover {
-  border-top: 2px solid var(--color-orange);
+  /* border-top: 2px solid var(--color-orange); */
   background: #fff6ec
 }
 
@@ -53,7 +53,7 @@
 }
 
 .card-hold:hover {
-  border-top: 2px solid var(--color-red);
+  /* border-top: 2px solid var(--color-red); */
   background: #ffebed;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .card-reviewing:hover {
-  border-top: 2px solid var(--color-grey);
+  /* border-top: 2px solid var(--color-grey); */
   background: #f6f6f6
 }
 
