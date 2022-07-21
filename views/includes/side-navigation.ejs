@@ -1,8 +1,8 @@
-<nav class="nav-side">
+<nav id="sideNav" class="nav-side">
     <div class="nav-items">
         <h2 class="logo"><a href="/">Tasketeer</a></h2>
-        <button id="darkMode" type="button">Dark Mode</button>
 
+        <i id="mobileClose" class='bx bx-x close'></i>
         <ul class="nav-admin">
             <% if(isAdmin) {%>
                 <li><a class="<%= activePage === 'admin' ? 'active' : '' %>" href="/admin"><i class='bx bx-shield-alt-2'></i> Admin</a></li>
@@ -11,6 +11,7 @@
                 <li><a class="<%= activePage === 'tasks' ? 'active' : '' %>" href="/tasks"><i class='bx bx-task' ></i> Tasks</a></li>
                 <li><a class="<%= activePage === 'user' ? 'active' : '' %>" href="/profile"><i class='bx bx-user' ></i> Profile</a></li>
                 <li><a class="<%= activePage === 'settings' ? 'active' : '' %>" href="/settings"><i class='bx bx-cog' ></i> Settings</a></li>
+                <button id="darkMode" type="button"><i class='bx bx-moon' ></i></button>
             </ul>
             
 

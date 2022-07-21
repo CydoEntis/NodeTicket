@@ -85,6 +85,20 @@
 	color: var(--txt-primary);
 }
 
+#darkMode {
+	background: transparent;
+	font-size: 1.85rem;
+	color: var(--accent);
+	border: none;
+	outline: none;
+	transition: ease-in-out all 300ms;
+	cursor: pointer;
+}
+
+#darkMode:hover {
+	opacity: .75;
+}
+
 @media screen and (min-width: 1024px) {
   .btn-mobile {
 		display: none;

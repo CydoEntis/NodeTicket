@@ -2,13 +2,13 @@
 
 .nav-side {
 	position: fixed;
-	min-width: 100px;
-	/* background: #20212C; */
 	border-right: 2px solid var(--border-grey);
-	width: 200px;
+	width: 100%;
 	height: 100vh;
 	z-index: 99;
 	display: none;
+	text-align: center;
+	background: var(--bg-light);
 }
 
 .nav-items {
@@ -74,8 +74,34 @@
 	border: none;
 }
 
+.hamburger,
+.close {
+	color: var(--accent);
+	font-size: 3rem;
+	position: fixed;
+	top: .5%;
+	right: 2%;
+	transition: ease-in-out all 300ms;
+	cursor: pointer;
+}
+
+
+.hamburger:hover {
+	opacity: .85;
+}
+
 @media screen and (min-width: 1024px) {
 	.nav-side {
 		display: block;
+		min-width: 100px;
+		width: 200px;
+		height: 100vh;
+		z-index: 99;
 	}
+
+	.hamburger,
+	.close {
+		display: none;
+	}
+
 }

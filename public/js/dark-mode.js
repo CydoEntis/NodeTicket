@@ -74,8 +74,10 @@ darkModeBtn.addEventListener("click", () => {
   if(isDarkMode) {
     localStorage.setItem("darkMode", false);
     darkModeOff();
+    darkModeBtn.innerHTML = "<i class='bx bx-moon' ></i>"
   } else {
     localStorage.setItem("darkMode", true);
     darkModeOn();
+    darkModeBtn.innerHTML = "<i class='bx bx-sun' ></i>"
   }
 })
