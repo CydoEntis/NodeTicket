@@ -50,8 +50,6 @@ body {
 	flex-wrap: wrap;
 }
 
-
-
 .page-header {
 	width: 100%;
 	display: flex;
@@ -81,27 +79,6 @@ body {
 	align-items: center;
 }
 
-
-.align-center {
-	align-items: center;
-}
-
-.space-between {
-	justify-content: space-between;
-}
-
-.space-evenly {
-	justify-content: space-evenly;
-}
-
-
-
-
-
-.column-title {
-
-}
-
 .count {
 	font-size: .95rem;
 }
@@ -120,15 +97,6 @@ body {
 
 .centered {
 	margin: 0 auto;
-}
-
-.container__flex {
-	display: flex;
-}
-
-.container__flex-center {
-	justify-content: center;
-	align-items: center;
 }
 
 #btnLogout {
@@ -184,5 +152,10 @@ body {
 		margin-left: 200px;
 		width: calc(100% - 200px);
 		height: 900px;
+	}
+
+	.container {
+		max-width: 900px;
+		margin: 0 auto;
 	}
 }

@@ -62,13 +62,25 @@
   max-width: 950px;
 }
 
-.task-uploads,
+.task-uploads {
+  width: 100%;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-edit-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .task-uploads,
 .task-controls {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
-}
+} */
 
 .task-btns {
   display: flex;

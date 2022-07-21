@@ -19,7 +19,7 @@
                             <label for="description">Description</label>
                             <textarea name="description"><%= task._doc.description %></textarea>
                         </div>
-                        <div class="task-controls">
+                        <div class="task-edit-controls">
                             <% if(task._doc.createdBy.userId.toString() === user._id.toString()) {%>
                                 <form action="/task/edit-task" method="POST">
                                     <input type="hidden" value="<%= task._doc._id %>"name="id">
