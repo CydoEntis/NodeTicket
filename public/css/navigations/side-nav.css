@@ -18,16 +18,12 @@
 
 .logo {
 	font-size: 1.75rem;
-	padding: 10px;
 }
 
 .logo a {
 	color: var(--accent);
-}
-
-
-.nav-side ul:first-of-type {
-	margin-top: 50px;
+	margin: 0;
+	padding: 0;
 }
 
 .nav-side ul {
@@ -44,7 +40,7 @@
 .nav-side ul li a {
 	text-decoration: none;
 	color: var(--primary-text);
-	font-size: 1.10rem;
+	font-size: 1rem;
 
 	transition: all 300ms ease-in-out;
 }
@@ -61,13 +57,14 @@
 	height: 10%;
 }
 
-.nav-controls {
-	position: absolute;
-	bottom: 5%;
-}
-
 .nav-controls form {
-	width: 200px;
+	/* width: 200px; */
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	bottom: 1%;
+	right: 1%;
+
 }
 
 .dark-nav {
@@ -92,14 +89,33 @@
 }
 
 .category {
-	margin: 1.5rem 0;
+	margin: .25rem 0;
 	padding: .5rem 0;
 }
 
 .category-title {
-	margin-top: .75rem;
 	text-align: left;
 	font-size: 1.5rem;
+}
+
+@media screen and (min-width: 425px) {
+	.nav-side ul li a {
+		font-size: 1.5rem;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.logo {
+		font-size: 3rem;
+	}
+
+	.nav-side ul li a {
+		font-size: 1.5rem;
+	}
+
+	.category-title {
+		font-size: 2.25rem;
+	}
 }
 
 @media screen and (min-width: 1024px) {
@@ -116,4 +132,15 @@
 		display: none;
 	}
 
+	.logo {
+		font-size: 2rem;
+	}
+
+	.nav-side ul li a {
+		font-size: 1.25rem;
+	}
+
+	.category-title {
+		font-size: 1.5rem;
+	}
 }
