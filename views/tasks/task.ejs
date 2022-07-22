@@ -71,11 +71,19 @@
                 <div class="comments">
                     <% if(comments.length > 0) { %>
                         <% for(let comment of comments) { %>
-                            <div class="comment">
-                                <h3 class="comment-header"><%= comment._doc.createdBy.username %></h3>
-                                <p class="comment-body"><%= comment._doc.comment %></p>
-                                <p class="comment-date"><%= comment.createdAt %></p>
-                            </div>
+                            <% if(comment._doc.createdBy.userId.toString() === user._id.toString()) { %>
+                                <div class="comment">
+                                    <h3 class="comment-header"><%= comment._doc.createdBy.username %><span class="current-user"> (You)</span></h3>
+                                    <p class="comment-body"><%= comment._doc.comment %></p>
+                                    <p class="comment-date"><%= comment.createdAt %></p>
+                                </div>
+                            <% } else { %>
+                                <div class="comment comment-right">
+                                    <h3 class="comment-header"><%= comment._doc.createdBy.username %></h3>
+                                    <p class="comment-body"><%= comment._doc.comment %></p>
+                                    <p class="comment-date"><%= comment.createdAt %></p>
+                                </div>
+                            <% } %>
                         <% } %>    
                     <% } else { %>
                         <p>No comments yet...</p>
