@@ -80,7 +80,7 @@ select {
 }
 
 .input-dark {
-	background-color: #333;
+	/* background-color: #333; */
     border: 1px solid var(--bg-light) !important;
-    color: var(--bg-light);
+    color: var(--txt-primary);
 }
