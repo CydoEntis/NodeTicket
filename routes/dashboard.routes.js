@@ -6,5 +6,6 @@ const { isAuth } = require("../middleware/auth.middleware");
 const dashboardRoutes = express.Router();
 
 dashboardRoutes.get("/dashboard", isAuth, dashboardController.getDashboard);
+dashboardRoutes.get("/weeklyTasks", isAuth, dashboardController.getWeeklyTasks);
 
 module.exports = dashboardRoutes;

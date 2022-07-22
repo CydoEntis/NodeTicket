@@ -1,56 +1,61 @@
-const Ticket = require('../../models/task/task.model');
+const Task = require('../../models/task/task.model');
 
 const { formatDate } = require('../../utils/util');
 
 async function getDashboard(req, res, next) {
 	const user = req.user;
-	const formattedTickets = [];
-	let myTicketCount = 0;
+	let activeTasks = 0;
+	let onHoldTasks = 0;
+	let completedTasks = 0;
+
+	const tasks = await Task.find({ assingedTo: req.user._id });
+
+	for (let task of tasks) {
+		if(task.status === "complete") {
+			completedTasks++;
+		} else if (task.status === "hold") {
+			onHoldTasks++;
+		} else if (task.status === "active") {
+			activeTasks++;
+		}
+	}
+
+	res.render('dashboard/dashboard', {
+		tasks: tasks,
+		user: user,
+		activeTasks: activeTasks,
+		onHoldTasks: onHoldTasks,
+		completedTasks: completedTasks,
+		activePage: '/dashboard'
+	});
+}
+
+async function getWeeklyTasks(req, res, next) {
 	const today = new Date();
 	const day = today.getDate();
 	const year = today.getFullYear();
 	const month = today.getMonth() + 1;
 
-	const weeklyTickets = await Ticket.find({ assingedTo: req.user._id,  createdAt: {$gte: new Date(`${year}-${month}-${day - 7}`).toISOString(), $lte: new Date(`${year}-${month}-${day}`).toISOString()}});
+	const pastWeeksTasks = await Task.find({ assingedTo: req.user._id,  createdAt: {$gte: new Date(`${year}-${month}-${day - 7}`).toISOString(), $lte: new Date(`${year}-${month}-${day}`).toISOString()}});
 
-	const weeklyTicketCounts = [];
-
-
-	// const pastDays = [];
-	// for(let i = 7; i >= 0; i--) {
-	// 	let day = date - i;
-	// 	pastDays.push(month + "/" + day + "/" + year);
-	// }
-
-	// for(let ticket of weeklyTickets) {
-	// 	for(let day of pastDays) {
-	// 		if()
-	// 	}
-	// }
-
-	const tickets = await Ticket.find({ assingedTo: req.user._id });
-
-
-	for (let ticket of tickets) {
-		if(ticket._doc._id === user._id) {
-			myTicketCount += 1;
-		}
-		const formattedDate = formatDate(ticket.createdAt);
-		const formattedTicket = {
-			...ticket,
-			createdAt: formattedDate,
-		};
-		formattedTickets.push(formattedTicket);
+	const weeklyTasks = {};
+	for(let i = 7; i >= 0; i--) {
+		weeklyTasks[day - i] = 0;
 	}
 
-	res.render('dashboard/dashboard', {
-		tickets: formattedTickets,
-		user: user,
-		myTicketCount: myTicketCount,
-		activePage: 'dashboard'
-	});
+	for(let task of pastWeeksTasks) {
+		let taskDate = new Date(task.createdAt);
+		let taskDateDay = taskDate.getDate();
+		for(let day in weeklyTasks) {
+			if(taskDateDay === +day) {
+				weeklyTasks[day] += 1;
+			}
+		}
+	}
+	res.json(weeklyTasks);
 }
 
 module.exports = {
 	getDashboard,
+	getWeeklyTasks
 };

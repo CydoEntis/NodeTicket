@@ -33,6 +33,15 @@
 	background: var(--highlight);
 }
 
+.admin-table-dark tr {
+	background: #333 !important;
+	padding: 0.85rem;
+}
+
+.admin-table-dark tr:nth-child(even) {
+	background: #1e1e1e !important;
+}
+
 @media screen and (max-width: 1024px) {
 	table,
 	thead,

@@ -7,6 +7,7 @@ const inputs = document.getElementsByTagName("input");
 const comments = document.querySelectorAll(".comment");
 const commentBodies = document.querySelectorAll(".comment-body");
 const textareas = document.getElementsByTagName('textarea');
+const table = document.querySelector('.admin-table');
 
 
 const darkModeOn = () => {
@@ -32,6 +33,8 @@ const darkModeOn = () => {
   for(let textarea of textareas) {
     textarea.classList.add("input-dark");
   }
+
+  table.classList.add("admin-table-dark");
 }
 
 const darkModeOff = () => {
@@ -57,6 +60,8 @@ const darkModeOff = () => {
   for(let textarea of textareas) {
     textarea.classList.remove("input-dark");
   }
+
+  table.classList.remove("admin-table-dark");
 }
 
 window.onload = function() {
