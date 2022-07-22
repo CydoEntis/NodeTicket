@@ -17,7 +17,7 @@ async function getAdminPanel(req, res, next) {
 	}
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
-		activePage: 'admin',
+		activePage: '/admin',
 	});
 }
 
@@ -38,7 +38,7 @@ async function getActiveTasks(req, res, next) {
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
 		title: "Active",
-		activePage: 'admin',
+		activePage: '/admin/active-tasks',
 	});
 }
 
@@ -58,7 +58,7 @@ async function getHoldTasks(req, res, next) {
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
 		title: "Hold",
-		activePage: 'admin'
+		activePage: '/admin/hold-tasks'
 	});
 }
 
@@ -78,7 +78,7 @@ async function getReviewingTasks(req, res, next) {
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
 		title: "Review",
-		activePage: 'admin'
+		activePage: '/admin/review-tasks'
 	});
 }
 
@@ -98,7 +98,7 @@ async function getCompletedTasks(req, res, next) {
 	res.render('admin/admin-panel', {
 		tasks: formattedTasks,
 		title: "Completed",
-		activePage: 'admin',
+		activePage: '/admin/completed-tasks',
 	});
 }
 

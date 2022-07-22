@@ -5,12 +5,27 @@
         <i id="mobileClose" class='bx bx-x close'></i>
         <ul class="nav-admin">
             <% if(isAdmin) {%>
-                <li><a class="<%= activePage === 'admin' ? 'active' : '' %>" href="/admin"><i class='bx bx-shield-alt-2'></i> Admin</a></li>
+                <div class="category">
+                    <h2 class="category-title"><i class='bx bx-shield-alt-2'></i> Admin</h2>
+                    <li><a class="<%= activePage === '/admin' ? 'active' : '' %>" href="/admin">Overview</a></li>
+                    <li><a class="<%= activePage === '/admin/active-tasks' ? 'active' : '' %>" href="/admin/active-tasks"> Active</a></li>
+                    <li><a class="<%= activePage === '/admin/hold-tasks' ? 'active' : '' %>" href="/admin/hold-tasks"> On Hold</a></li>
+                    <li><a class="<%= activePage === '/admin/review-tasks' ? 'active' : '' %>" href="/admin/review-tasks"> Review</a></li>
+                    <li><a class="<%= activePage === '/admin/completed-tasks' ? 'active' : '' %>" href="/admin/completed-tasks"> Completed</a></li>
+                </div>
             <% } %>
-                <li><a class="<%= activePage === 'dashboard' ? 'active' : '' %>" href="/dashboard"><i class='bx bxs-dashboard' ></i> Dashboard</a></li>
-                <li><a class="<%= activePage === 'tasks' ? 'active' : '' %>" href="/tasks"><i class='bx bx-task' ></i> Tasks</a></li>
-                <li><a class="<%= activePage === 'user' ? 'active' : '' %>" href="/profile"><i class='bx bx-user' ></i> Profile</a></li>
-                <li><a class="<%= activePage === 'settings' ? 'active' : '' %>" href="/settings"><i class='bx bx-cog' ></i> Settings</a></li>
+                <div class="category">
+                    <h2 class="category-title"><i class='bx bxs-dashboard' ></i> Dashboard</h2>
+                    <li><a class="<%= activePage === 'path' ? 'active' : '' %>" href="/dashboard"> Dashboard</a></li>
+                </div>
+                <div class="category">
+                    <h2 class="category-title"><i class='bx bx-task' ></i> Tasks</h2>
+                    <li><a class="<%= activePage === '/tasks' ? 'active' : '' %>" href="/tasks"> Overview</a></li>
+                    <li><a class="<%= activePage === '/tasks/all' ? 'active' : '' %>" href="/tasks/all"> Tasks</a></li>
+                    <li><a class="<%= activePage === '/tasks/active' ? 'active' : '' %>" href="/tasks/active"> Active</a></li>
+                    <li><a class="<%= activePage === '/tasks/on-hold' ? 'active' : '' %>" href="/tasks/on-hold"> On Hold</a></li>
+                    <li><a class="<%= activePage === '/tasks/complete' ? 'active' : '' %>" href="/tasks/complete"> Completed</a></li>
+                </div>
                 <button id="darkMode" type="button"><i class='bx bx-moon' ></i></button>
             </ul>
             

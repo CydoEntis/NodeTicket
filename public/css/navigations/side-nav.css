@@ -32,18 +32,19 @@
 
 .nav-side ul {
 	padding: 0 20px;
+	text-align: left;
 }
 
 .nav-side ul li {
 	list-style: none;
 	margin-bottom: 10px;
-	margin: 50px 0;
+	margin: 10px 0;
 }
 
 .nav-side ul li a {
 	text-decoration: none;
 	color: var(--primary-text);
-	font-size: 1.25rem;
+	font-size: 1.10rem;
 
 	transition: all 300ms ease-in-out;
 }
@@ -90,11 +91,22 @@
 	opacity: .85;
 }
 
+.category {
+	margin: 1.5rem 0;
+	padding: .5rem 0;
+}
+
+.category-title {
+	margin-top: .75rem;
+	text-align: left;
+	font-size: 1.5rem;
+}
+
 @media screen and (min-width: 1024px) {
 	.nav-side {
 		display: block;
 		min-width: 100px;
-		width: 200px;
+		width: 250px;
 		height: 100vh;
 		z-index: 99;
 	}

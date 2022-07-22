@@ -90,6 +90,7 @@
 
 .task-btns .btn {
   display: inline-block;
+  padding: 10px 20px;
 }
 
 .circle {

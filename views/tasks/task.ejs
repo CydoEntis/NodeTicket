@@ -6,6 +6,7 @@
     <main class="wrapper">
         <section class="container">
             <h2 class="page-title"><a class="btn btn-back" href="/tasks"><i class='bx bx-arrow-back'></i></a> View Task</h2>
+            <i id="mobileNav" class='bx bx-menu hamburger'></i>
             <div class="task-detail">
                 <% if(task._doc.createdBy.userId.toString() === user._id.toString()) { %>
                     <a class="btn-mobile" href="/edit-task/<%= task._doc._id %>"><i class='bx bx-edit'></i></a>

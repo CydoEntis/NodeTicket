@@ -47,7 +47,7 @@ function getIndex(req, res, next) {
 				activeTasks: activeTasks,
 				holdTasks: holdTasks,
 				completedTasks: completedTasks,
-				activePage: 'tasks'
+				activePage: '/tasks'
 			});
 		});
 }
@@ -76,7 +76,7 @@ function getTasks(req, res, next) {
 				tasks: formattedTasks,
 				title: 'All Tasks',
 				userId: req.user._id,
-				activePage: 'tasks'
+				activePage: '/tasks/all'
 			});
 		});
 }
@@ -105,7 +105,7 @@ function getActiveTasks(req, res, next) {
 				tasks: formattedTasks,
 				title: 'Active',
 				userId: req.user.userId,
-				activePage: 'tasks'
+				activePage: '/tasks/active'
 			});
 		});
 }
@@ -158,7 +158,7 @@ async function postHoldTask(req, res, next) {
 
 	await task.save();
 
-	res.redirect('/tasks');
+	res.redirect('/tasks/on-hold');
 }
 
 function getCompletedTasks(req, res, next) {
@@ -185,7 +185,7 @@ function getCompletedTasks(req, res, next) {
 				tasks: formattedTasks,
 				title: 'Completed',
 				userId: req.user._id,
-				activePage: 'tasks'
+				activePage: '/tasks/complete'
 			});
 		});
 }
